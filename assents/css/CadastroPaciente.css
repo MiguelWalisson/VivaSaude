@@ -16,12 +16,12 @@
   gap: 40px;
 }
 .cabeçalho {
-  position: fixed;     /* fixa o cabeçalho no topo da janela */
-  top: 0;              /* fixa no topo */
+  position: fixed;     
+  top: 0;             
   left: 0; 
   width: 100%;
   height: 150px;
-  background-color: rgb(0, 168, 168);
+  background: linear-gradient(90deg, #00b4d8, #00c9a7);
   display: flex;
   align-items: center;
   justify-content: center;
