@@ -5,50 +5,54 @@ const limparFormulario = () => {
 
 }
 
-const preencherEndereco = (endereco) =>{
-    document.getElementById('enderco').value = endereco.logradouro.endereco.bairro.endereco.localidade.endereco.uf;
-
-};
-
-const buscarCep = async()=>{
-    try{
-        const cep = document.getElementById('CEP').value;
-        const url = `https://viacep.com.br/ws/${cep}/json/`
-        const regexcep = /^[0-9]{8}$/;
-
-        if(!regexcep.test(cep)){
-            document.getElementById('CEP').value = 'Formato invalido!'
-            console.error("CEP não encontrado!")
-            limparFormulario();
-            return;
-        }
-        const dados = await fetch(url);
-        const endereco = await dados.json();
+ document.getElementById('CEP').addEventListener('focusout', consultarCEP);
+ document.getElementById('btcadastro').addEventListener('click',preencherCadastro);
         
-        if(endereco.hasOwnProperty('erro')){
-            document.getElementById('CEP').value = 'CEP não encontrado!'
-            console.error("CEP não encontrado!")
-            limparFormulario();
-            return;
+        function consultarCEP() {
+            
+            const cep = document.getElementById('CEP').value.replace(/\D/g, '');
+            
+            
+            if (cep.length !== 8) {
+                alert('CEP inválido! Digite um CEP com 8 dígitos.');
+                return;
+            }
+            
+            
+            fetch(`https://viacep.com.br/ws/${cep}/json/`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('CEP não encontrado');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (data.erro) {
+                        throw new Error('CEP não encontrado');
+                    }
+                    const resultadoFormatado = `
+                        ${data.logradouro || ''},
+                        ${data.bairro || ''},
+                        ${data.localidade || ''},
+                        ${data.uf || ''}
+            
+                    `.replace(/^\s+/gm, '');
+                    
+                    
+                    document.getElementById('endereco').value = resultadoFormatado;
+                })
+                .catch(error => {
+                    document.getElementById('endereco').value = '';
+                    alert(error.message);
+                });
         }
-        preencherEndereco(endereco);
-        console.log(endereco);
-    }catch(error){
-        console.error("Erro ao buscar cep:",error);
-        limparFormulario();
-    }
-};
-document.getElementById('CEP')
-.addEventListener('focusout',buscarCep);
-
-const CadastroPaciente =async(event) => {
-    event.preventDefault();
+async function preencherCadastro (event){
     try{
 
     
     const nome = document.getElementById('Nome Completo').value;
-    const cpf = document.getElementById('CPF').value = '';
-    const dataNascimento = document.getElementById('Data de Nascimento').value;
+    const cpf = document.getElementById('CPF').value;
+    const dataNascimento = document.getElementById('Datadenascimento').value;
     const genero = document.getElementById('Gênero').value;
     const telefone = document.getElementById('Telefone').value;
     const cep = document.getElementById('CEP').value;
@@ -78,15 +82,72 @@ console.log('Enviando dados para API:', DadosPaciente);
         body: JSON.stringify(DadosPaciente)
     })
      if (responsePaciente.ok){
-             CadastroPaciente = await apiresposta.json();
-            alert("Funcionario Cadastrado!");
+             CadastroPaciente = await preencherCadastro();
+            alert('Funcionario Cadastrado!');
             document.getElementById('formcadastroFuncionario').reset();
+            return;
         } else{
             const erroTexto = await apiresposta.text();
             alert("Erro ao cadastrar funcionário :" + erroTexto);
+            return;
         }
 }catch (error) {
-        console.error('Erro error');
+        console.error('Erro', error);
 }
+event.preventDefault();
 };
+document.getElementById('Telefone').addEventListener('input', function(e) {
+    let value = e.target.value.replace(/\D/g, '');
+    
+    
+    if (!value.startsWith('55')) {
+        value = '55' + value.replace(/^55/, '');
+    }
+    
+    
+    value = value.substring(0, 13);
+    
+    
+    let formatted = '+55';
+    
+    if (value.length > 2) {
+        formatted += ` (${value.substring(2, 4)}`;
+    }
+    if (value.length > 4) {
+        formatted += `) ${value.substring(4, 9)}`;
+    }
+    if (value.length > 9) {
+        formatted += `-${value.substring(9, 13)}`;
+    }
+    
+    e.target.value = formatted;
+});
+document.getElementById('CEP').addEventListener('input', function(e) {
+    
+    let value = e.target.value.replace(/\D/g, '');
+    
+    
+    value = value.substring(0, 8);
+    
+    
+    if (value.length > 5) {
+        value = value.replace(/(\d{5})(\d)/, '$1-$2');
+    }
+    
+    e.target.value = value;
+});
+document.getElementById('CPF').addEventListener('input', function(e) {
+    
+    let value = e.target.value.replace(/\D/g, '');
+    
+    
+    value = value.substring(0, 11);
+    
+    
+    value = value.replace(/(\d{3})(\d)/, '$1.$2');
+    value = value.replace(/(\d{3})(\d)/, '$1.$2');
+    value = value.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+    
+    e.target.value = value;
+});
 
