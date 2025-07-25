@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Clínica MAD - Área do Paciente</title>
+  <link rel="stylesheet" href="/assents/css/TelaPaciente.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <div class="hover-zone"></div>
+
+  <div class="header-container" id="headerContainer">
+    <header class="topbar">
+      <div class="logo">Clínica MAD</div>
+      <nav>
+        <a href="#historico-medico">Consulta paciente</a>
+        <a href="#">Editar informações</a>
+      </nav>
+    </header>
+
+    <div class="subheader">
+      <nav>
+        <a href="#historico-medico">Histórico Médico</a>
+        <a href="#proximas-consultas">Próximas Consultas</a>
+        <a href="#exames">Exames</a>
+      </nav>
+    </div>
+  </div>
+
+  <section class="banner">
+    <div class="banner-texto">
+      <h1>Área do Paciente</h1>
+    </div>
+    <img src="/assents/images/medica-cuidando-do-paciente.png.jpg" alt="Paciente e médica sorrindo">
+  </section>
+
+  <section class="boas-vindas">
+    <p><strong>Olá, Maria!</strong></p>
+    <p>Bem-vindo(a) ao seu espaço de saúde. Aqui você acompanha seus atendimentos, exames e agendamentos com facilidade e segurança.</p>
+  </section>
+
+  <section id="historico-medico" class="historico">
+    <h2>Histórico Médico</h2>
+    <div class="card-container">
+      <div class="card">
+        <h3>Consulta</h3>
+        <p><strong>Data:</strong> 04/06/2025</p>
+        <p><strong>Descrição:</strong> Sutura de ferimento.</p>
+        <button>Mais informações</button>
+      </div>
+      <div class="card">
+        <h3>Consulta</h3>
+        <p><strong>Data:</strong> 20/07/2025</p>
+        <p><strong>Descrição:</strong> Realização de exame físico.</p>
+        <button>Mais informações</button>
+      </div>
+      <div class="card">
+        <h3>Consulta</h3>
+        <p><strong>Data:</strong> 15/08/2025</p>
+        <p><strong>Descrição:</strong> Administração oral de solução de reidratação (SRO) em pequenos volumes e com frequência.</p>
+        <button>Mais informações</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="proximas-consultas" class="consultas">
+    <h2>Próximas Consultas</h2>
+
+    <div class="appointment">
+      <p><span>Consulta ginecológica</span></p>
+      <p><strong>Dia:</strong> 10/09/2025</p>
+      <p><strong>Horário:</strong> 09:00 às 10:00</p>
+      <p><strong>Médico:</strong> Juliana Regina de Souza</p>
+      <button>Ver Mais</button>
+    </div>
+
+    <div class="appointment">
+      <p><span>Consulta odontológica</span></p>
+      <p><strong>Dia:</strong> 25/11/2025</p>
+      <p><strong>Horário:</strong> 16:00 às 17:00</p>
+      <p><strong>Médico:</strong> Wellerson Júnior Pereira</p>
+      <button>Ver Mais</button>
+    </div>
+  </section>
+
+ 
+<footer class="footer">
+  <p>Central de Atendimentos: (31) 4002-8922</p>
+  <p>E-mail: atendimento@clinicamad.com.br</p>
+  <p>Endereço: Rua da Saúde, 987 - Bairro Esperança, Belo Horizonte - MG</p>
+  <p>Redes sociais: @clinicamadoficial 📱 💬</p>
+  <div>© 2025 CLÍNICA MAD - Todos os direitos reservados.</div>
+</footer>
+
+
+  <script>
+    const header = document.getElementById('headerContainer');
+    const hoverZone = document.querySelector('.hover-zone');
+
+    let lastScroll = window.scrollY;
+
+    window.addEventListener('scroll', () => {
+      const currentScroll = window.scrollY;
+
+      if (currentScroll > lastScroll && currentScroll > 100) {
+        header.classList.add('hidden');
+      } else if (currentScroll < lastScroll) {
+        header.classList.remove('hidden');
+      }
+
+      lastScroll = currentScroll;
+    });
+
+    hoverZone.addEventListener('mouseenter', () => {
+      header.classList.remove('hidden');
+    });
+  </script>
+
+</body>
+</html>
