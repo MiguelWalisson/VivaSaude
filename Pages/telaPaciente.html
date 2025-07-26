@@ -14,17 +14,13 @@
   <div class="header-container" id="headerContainer">
     <header class="topbar">
       <div class="logo">Clínica MAD</div>
-      <nav>
-        <a href="#historico-medico">Consulta paciente</a>
-        <a href="#">Editar informações</a>
-      </nav>
     </header>
 
     <div class="subheader">
       <nav>
-        <a href="#historico-medico">Histórico Médico</a>
-        <a href="#proximas-consultas">Próximas Consultas</a>
+        <a href="#consultas">Consultas</a>
         <a href="#exames">Exames</a>
+        <a href="/Pages/editarInfos.html">Editar Informações</a>
       </nav>
     </div>
   </div>
@@ -41,49 +37,71 @@
     <p>Bem-vindo(a) ao seu espaço de saúde. Aqui você acompanha seus atendimentos, exames e agendamentos com facilidade e segurança.</p>
   </section>
 
-  <section id="historico-medico" class="historico">
-    <h2>Histórico Médico</h2>
-    <div class="card-container">
-      <div class="card">
-        <h3>Consulta</h3>
-        <p><strong>Data:</strong> 04/06/2025</p>
-        <p><strong>Descrição:</strong> Sutura de ferimento.</p>
-        <button>Mais informações</button>
-      </div>
-      <div class="card">
-        <h3>Consulta</h3>
-        <p><strong>Data:</strong> 20/07/2025</p>
-        <p><strong>Descrição:</strong> Realização de exame físico.</p>
-        <button>Mais informações</button>
-      </div>
-      <div class="card">
-        <h3>Consulta</h3>
-        <p><strong>Data:</strong> 15/08/2025</p>
-        <p><strong>Descrição:</strong> Administração oral de solução de reidratação (SRO) em pequenos volumes e com frequência.</p>
-        <button>Mais informações</button>
-      </div>
+ <section id="consultas" class="historico">
+  <h2 class="titulo-centralizado">Consultas</h2>
+  <div class="card-container centralizado">
+    <div class="card">
+      <h3>Agendar Consulta</h3>
+      <p>Marque sua próxima consulta com facilidade.</p>
+      <a href="agendar.html">
+        <button>Agendar</button>
+      </a>
     </div>
-  </section>
-
-  <section id="proximas-consultas" class="consultas">
-    <h2>Próximas Consultas</h2>
-
-    <div class="appointment">
-      <p><span>Consulta ginecológica</span></p>
-      <p><strong>Dia:</strong> 10/09/2025</p>
-      <p><strong>Horário:</strong> 09:00 às 10:00</p>
-      <p><strong>Médico:</strong> Juliana Regina de Souza</p>
-      <button>Ver Mais</button>
+    <div class="card">
+      <h3>Histórico Médico</h3>
+      <p>Veja todas as consultas que você já realizou.</p>
+      <a href="historico.html">
+        <button>Ver Histórico</button>
+      </a>
     </div>
-
-    <div class="appointment">
-      <p><span>Consulta odontológica</span></p>
-      <p><strong>Dia:</strong> 25/11/2025</p>
-      <p><strong>Horário:</strong> 16:00 às 17:00</p>
-      <p><strong>Médico:</strong> Wellerson Júnior Pereira</p>
-      <button>Ver Mais</button>
+    <div class="card">
+      <h3>Próximas Consultas</h3>
+      <p>Consulte seus próximos agendamentos.</p>
+      <a href="proximas.html">
+        <button>Ver Consultas</button>
+      </a>
     </div>
-  </section>
+  </div>
+</section>
+<section class="mensagem">
+  <blockquote>"Cuidar da sua saúde é o nosso maior compromisso."</blockquote>
+</section>
+
+<section id="exames" class="exames-section">
+  <h2 class="titulo-centralizado">Exames</h2>
+  <div class="card-container exames-grid">
+    <div class="card">
+      <h3>Agendar Exame</h3>
+      <p>Agende exames laboratoriais ou de imagem.</p>
+      <a href="agendar-exame.html">
+        <button>Agendar</button>
+      </a>
+    </div>
+    <div class="card">
+      <h3>Meus Exames</h3>
+      <p>Veja o histórico de exames já realizados.</p>
+      <a href="exames.html">
+        <button>Visualizar</button>
+      </a>
+    </div>
+    <div class="card">
+      <h3>Exames Futuros</h3>
+      <p>Acompanhe os exames já agendados.</p>
+      <a href="futuros.html">
+        <button>Ver Agenda</button>
+      </a>
+    </div>
+    <div class="card">
+      <h3>Resultados</h3>
+      <p>Acesse os resultados e laudos disponíveis.</p>
+      <a href="resultados.html">
+        <button>Ver Resultados</button>
+      </a>
+    </div>
+  </div>
+</section>
+
+
 
  
 <footer class="footer">
