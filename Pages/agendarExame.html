@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agendamento</title>
+  <link rel="stylesheet" href="/assents/css/AgendarConsulta.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+  <header class="cabecalho">
+    <h1>Clínica Viva Saúde</h1>
+    <nav>
+ <a href="telaPaciente.html">Voltar</a>
+      <a href="examesFuturos.html">Exames Futuros</a>
+      <a href="historicoExames.html">Histórico Exames</a>
+       <a href="resultadosExames.html">Resultado Exames</a>
+
+    </nav>
+  </header>
+
+  <main class="container">
+    <div class="conteudo">
+      <div class="coluna-esquerda">
+        <p class="label">Exame particular ou de convênio?</p>
+        <div class="radio-grupo">
+          <label><input type="radio" name="tipo" checked> Particular</label>
+          <label><input type="radio" name="tipo"> Convênio</label>
+        </div>
+
+<p class="label">Selecione o convênio:</p>
+
+<div id="campo-convenio" style="display: none;">
+  <select name="convenio" id="select-convenio">
+    <option value="" disabled selected>Selecione</option>
+  </select>
+</div>
+
+<a href="cadastrarConvenio.html" class="add-convenio">
+  <i data-lucide="plus-circle" class="icon"></i> Adicionar convênio
+</a>
+
+        <button class="btn-agendar">Agendar</button>
+      </div>
+
+      <div class="coluna-direita">
+        <div class="campo">
+          <label>Especialidade do Exame</label>
+<select name="exame">
+  <option value="" disabled selected>Selecione um exame</option>
+
+  <optgroup label="Psicologia">
+    <option value="avaliacao-neuropsicologica">Avaliação Neuropsicológica</option>
+    <option value="escala-beck">Escala Beck de Depressão</option>
+    <option value="teste-stai">Inventário de Ansiedade (STAI)</option>
+    <option value="teste-palográfico">Teste Palográfico</option>
+    <option value="teste-bender">Teste de Bender</option>
+    <option value="entrevista-clinica">Entrevista Clínica Psicológica</option>
+    <option value="wisc">Escala Wechsler (WISC/WAIS)</option>
+    <option value="teste-das-figuras-complexas">Teste das Figuras Complexas de Rey</option>
+    <option value="inventario-millon">Inventário Millon de Estilos de Personalidade</option>
+  </optgroup>
+
+  <optgroup label="Ginecologia">
+    <option value="papanicolau">Papanicolau (Preventivo)</option>
+    <option value="colposcopia">Colposcopia</option>
+    <option value="ultrassonografia-transvaginal">Ultrassonografia Transvaginal</option>
+    <option value="ultrassom-mamas">Ultrassonografia das Mamas</option>
+    <option value="tipagem-hpv">Tipagem para HPV</option>
+    <option value="exame-microbiologico">Exame Microbiológico Vaginal</option>
+    <option value="avaliacao-hormonal">Avaliação Hormonal Feminina</option>
+    <option value="histerossalpingografia">Histerossalpingografia</option>
+  </optgroup>
+
+  <optgroup label="Geriatria">
+    <option value="mini-exame-estado-mental">Mini Exame do Estado Mental (MEEM)</option>
+    <option value="avaliacao-funcional">Avaliação da Capacidade Funcional</option>
+    <option value="teste-marcha">Teste da Marcha e Equilíbrio</option>
+    <option value="avaliacao-cognitiva">Avaliação Cognitiva Global</option>
+    <option value="teste-katz">Índice de Katz</option>
+    <option value="exame-nutricao-idoso">Triagem Nutricional para Idosos</option>
+    <option value="teste-fraqueza-gripal">Avaliação de Fragilidade</option>
+    <option value="avaliação-depressao-geriatrica">Escala de Depressão Geriátrica (GDS)</option>
+  </optgroup>
+
+  <optgroup label="Nutrição">
+    <option value="bioimpedancia">Bioimpedância Corporal</option>
+    <option value="avaliacao-nutricional">Avaliação Nutricional Completa</option>
+    <option value="recordatorio-24h">Recordatório Alimentar de 24h</option>
+    <option value="anamnese-alimentar">Anamnese Alimentar</option>
+    <option value="avaliacao-antropometrica">Avaliação Antropométrica</option>
+    <option value="circunferencia-abdominal">Medição de Circunferência Abdominal</option>
+    <option value="avaliacao-taxas-metabolicas">Avaliação de Taxas Metabólicas</option>
+    <option value="plano-alimentar-individualizado">Plano Alimentar Individualizado</option>
+  </optgroup>
+</select>
+        </div>
+
+        <div class="campo">
+          <label>Data</label>
+          <input type="date">
+        </div>
+
+        <div class="campo">
+          <label>Horário</label>
+          <input type="time">
+        </div>
+      </div>
+    </div>
+  </main>
+  <script>
+  lucide.createIcons();
+
+  const radios = document.querySelectorAll('input[name="tipo"]');
+  const campoConvenio = document.getElementById('campo-convenio');
+  const cartaoConvenio = document.getElementById('cartao-convenio');
+
+  radios.forEach(radio => {
+    radio.addEventListener('change', () => {
+      if (radio.checked && radio.parentElement.textContent.includes("Convênio")) {
+        campoConvenio.style.display = 'block';
+        cartaoConvenio.style.display = 'block';
+      } else {
+        campoConvenio.style.display = 'none';
+        cartaoConvenio.style.display = 'none';
+      }
+    });
+  });
+</script>
+</body>
+</html>

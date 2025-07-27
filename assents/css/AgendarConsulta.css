@@ -1,0 +1,141 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #ffffff;
+  color: #333;
+}
+
+.cabecalho {
+  background-color: #00A8A8;
+  color: white;
+  padding: 20px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cabecalho h1 {
+  font-size: 20px;
+}
+
+.cabecalho nav a {
+  margin-left: 30px;
+  text-decoration: none;
+  color: white;
+  font-weight: 500;
+  font-size: 14px;
+}
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 30px;
+}
+
+.conteudo {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 60px;
+}
+
+.coluna-esquerda,
+.coluna-direita {
+  flex: 1;
+  min-width: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.label {
+  font-weight: 500;
+  font-size: 15px;
+}
+
+.radio-grupo {
+  display: flex;
+  gap: 20px;
+}
+
+.radio-grupo label {
+  font-size: 14px;
+}
+
+.add-convenio {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  text-decoration: none;
+  color: rgb(0, 168, 168);
+  font-weight: 500;
+}
+.icon {
+  width: 18px;
+  height: 18px;
+  color: rgb(0, 168, 168);
+}
+
+.card-convenio {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  padding: 16px 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  font-size: 14px;
+}
+
+.btn-agendar {
+  margin-top: 10px;
+  padding: 14px 0;
+  width: 180px;
+  background-color: rgb(0, 168, 168);
+  color: #fff;
+  font-weight: 500;
+  font-size: 16px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+}
+
+.btn-agendar:hover {
+  background-color: rgb(0, 168, 168);
+}
+
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-family: 'Poppins', sans-serif;
+}
+
+.campo label {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+select,
+input[type="date"],
+input[type="time"] {
+  background-color: #f0f0f0;
+  border: none;
+  border-radius: 10px;
+  padding: 12px;
+  font-size: 14px;
+  width: 100%;
+}
+#campo-convenio select {
+  background-color: #f0f0f0;
+  border: none;
+  border-radius: 10px;
+  padding: 12px;
+  font-size: 14px;
+  width: 100%;
+}
+

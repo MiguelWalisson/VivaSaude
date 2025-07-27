@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agendamento</title>
+  <link rel="stylesheet" href="/assents/css/AgendarConsulta.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+  <header class="cabecalho">
+    <h1>Clínica Viva Saúde</h1>
+    <nav>
+      <a href="telaPaciente.html">Voltar</a>
+      <a href="consultasFuturas.html">Consultas Futuras</a>
+      <a href="historicoMedico.html">Histórico Médico</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <div class="conteudo">
+      <div class="coluna-esquerda">
+        <p class="label">Consulta particular ou de convênio?</p>
+        <div class="radio-grupo">
+          <label><input type="radio" name="tipo" checked> Particular</label>
+          <label><input type="radio" name="tipo"> Convênio</label>
+        </div>
+
+<p class="label">Selecione o convênio:</p>
+
+<div id="campo-convenio" style="display: none;">
+  <select name="convenio" id="select-convenio">
+    <option value="" disabled selected>Selecione</option>
+  </select>
+</div>
+
+<a href="cadastrarConvenio.html" class="add-convenio">
+  <i data-lucide="plus-circle" class="icon"></i> Adicionar convênio
+</a>
+        <button class="btn-agendar">Agendar</button>
+      </div>
+
+      <div class="coluna-direita">
+        <div class="campo">
+          <label>Especialidade da consulta</label>
+         <select name="especialidade">
+  <option value="" disabled selected>Selecione</option>
+  <option value="psicologia">Psicologia</option>
+  <option value="geriatria">Geriatria</option>
+  <option value="nutrição">Nutrição</option>
+  <option value="ginecologia">Ginecologia</option>
+</select>
+
+        </div>
+
+        <div class="campo">
+          <label>Data</label>
+          <input type="date">
+        </div>
+
+        <div class="campo">
+          <label>Horário</label>
+          <input type="time">
+        </div>
+
+        <div class="campo">
+          <label>Médicos disponíveis</label>
+         <select name="medicos-disponiveis">
+  <option value="" disabled selected>Selecione</option>
+  <option value="Dr-Joao">Dr. João</option>
+  <option value="Dr-Marluce">Dr Marluce</option>
+</select>
+
+        </div>
+      </div>
+    </div>
+  </main>
+<script>
+  lucide.createIcons();
+
+  const radios = document.querySelectorAll('input[name="tipo"]');
+  const campoConvenio = document.getElementById('campo-convenio');
+  const cartaoConvenio = document.getElementById('cartao-convenio');
+
+  radios.forEach(radio => {
+    radio.addEventListener('change', () => {
+      if (radio.checked && radio.parentElement.textContent.includes("Convênio")) {
+        campoConvenio.style.display = 'block';
+        cartaoConvenio.style.display = 'block';
+      } else {
+        campoConvenio.style.display = 'none';
+        cartaoConvenio.style.display = 'none';
+      }
+    });
+  });
+</script>
+</body>
+</html>
