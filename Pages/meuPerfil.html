@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Meu Perfil</title>
+  <link rel="stylesheet" href="/assents/css/MeuPerfil.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+    <a href="telaPaciente.html" class="voltar">
+  <i data-lucide="arrow-left" class="voltar-icon"></i>
+  <span>Voltar</span>
+</a>
+
+  <div class="container">
+    <div class="perfil">
+      <div class="avatar">
+        <i data-lucide="user" class="icon-grande"></i>
+      </div>
+      <p class="nome"><span>Olá, Maria!</span></p>
+      <hr class="linha" />
+    </div>
+
+    <div class="menu">
+      <a href="editarInfos.html" class="item">
+        <div class="esquerda">
+          <i data-lucide="clipboard" class="icon"></i>
+          <span>Seus Dados</span>
+        </div>
+        <i data-lucide="chevron-right" class="seta"></i>
+      </a>
+
+      <a href="convenio.html" class="item">
+        <div class="esquerda">
+          <i data-lucide="credit-card" class="icon"></i>
+          <span>Convênio médico</span>
+        </div>
+        <i data-lucide="chevron-right" class="seta"></i>
+      </a>
+
+      <a href="preferencias.html" class="item">
+        <div class="esquerda">
+          <i data-lucide="star" class="icon"></i>
+          <span>Suas preferências</span>
+        </div>
+        <i data-lucide="chevron-right" class="seta"></i>
+      </a>
+
+      <a href="#" class="item" onclick="confirmarSaida(event)">
+        <div class="esquerda">
+          <i data-lucide="log-out" class="icon"></i>
+          <span>Sair/Logout</span>
+        </div>
+        <i data-lucide="chevron-right" class="seta"></i>
+      </a>
+    </div>
+
+    <div class="deletar-conta">
+      <button onclick="alert('Função de deletar conta ainda não implementada')">
+        <span class="texto">Deletar Conta</span>
+        <i data-lucide="trash-2" class="icon vermelho"></i>
+      </button>
+    </div>
+  </div>
+
+  <script>
+    lucide.createIcons();
+
+    function confirmarSaida(event) {
+      event.preventDefault();
+      const confirmar = confirm("Tem certeza que deseja sair?");
+      if (confirmar) {
+        window.location.href = "login.html";
+      }
+    }
+  </script>
+</body>
+</html>
