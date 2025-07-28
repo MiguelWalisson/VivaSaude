@@ -86,7 +86,7 @@ html {
 .banner {
   margin-top: 150px;
   background-color: #00a8a8;
-  padding: 70px 70px;
+  padding: 30px 40px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -102,15 +102,15 @@ html {
 }
 
 .banner-texto h1 {
-  font-size: 50px;
+  font-size: 36px;
   font-weight: 700;
   color: white;
-  margin-left: 100px;
+  margin-left: 60px;
 }
 
 .banner img {
-  width: 400px;
-  height: 400px;
+  width: 250px;
+  height: 250px;
   border-radius: 50%;
   object-fit: cover;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
