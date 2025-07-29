@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Exames - Clínica Médica</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+    }
+    header, footer {
+      background-color: rgb(0,168,168);
+      color: white;
+      text-align: center;
+      padding: 15px 0;
+    }
+    main {
+      max-width: 600px;
+      margin: 20px auto;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #ccc;
+    }
+    label {
+      display: block;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+    input, select {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+    }
+    button {
+      background-color: rgb(0,168,168);
+      color: white;
+      border: none;
+      padding: 12px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 20px;
+      width: 100%;
+      font-size: 16px;
+    }
+    button:hover {
+      background-color: #0e8f8f;
+    }
+    .message {
+      margin-top: 15px;
+      color: green;
+      font-weight: bold;
+      text-align: center;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    th, td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+    th {
+      background-color: #f2f2f2;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Agendamento de Exames</h1>
+  </header>
+
+  <main>
+    <form id="exameForm">
+      <label>Paciente:</label>
+      <select name="id_paciente" required>
+        <option value="">Selecione o paciente</option>
+      </select>
+
+      <label>Data do Exame:</label>
+      <input type="date" name="data_exame" required />
+
+      <label>Tipo de Exame:</label>
+      <input type="text" name="tipo_exame" required />
+
+      <label>Local:</label>
+      <input type="text" name="local_exame" required />
+
+      <label>Status:</label>
+      <select name="status_exame" required>
+        <option value="Agendado">Agendado</option>
+        <option value="Realizado">Realizado</option>
+        <option value="Cancelado">Cancelado</option>
+      </select>
+
+      <button type="submit">Agendar Exame</button>
+    </form>
+
+    <h2>Exames Agendados</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Paciente</th>
+          <th>Tipo</th>
+          <th>Data</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Clínica Médica Mad</p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Histórico - Clínica Médica</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+    }
+    header, footer {
+      background-color: rgb(0,168,168);
+      color: white;
+      text-align: center;
+      padding: 15px 0;
+    }
+    main {
+      max-width: 600px;
+      margin: 20px auto;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #ccc;
+    }
+    label {
+      display: block;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+    input, select {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+    }
+    button {
+      background-color: rgb(0,168,168);
+      color: white;
+      border: none;
+      padding: 12px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 20px;
+      width: 100%;
+      font-size: 16px;
+    }
+    button:hover {
+      background-color: #0e8f8f;
+    }
+    .message {
+      margin-top: 15px;
+      color: green;
+      font-weight: bold;
+      text-align: center;
+    }
+    
+    .historico-item {
+      background-color: #f9f9f9;
+      padding: 15px;
+      border-radius: 5px;
+      margin-bottom: 15px;
+      border: 1px solid #e0e0e0;
+    }
+    .historico-data {
+      color: rgb(0,168,168);
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    #selectPaciente {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Histórico Médico</h1>
+  </header>
+
+  <main>
+    <label>Paciente:</label>
+    <select id="selectPaciente">
+      <option value="">Selecione um paciente</option>
+    </select>
+
+    <div id="historicoContainer">
+      <div class="historico-item">
+        <div class="historico-data">15/06/2025 - Cardiologia</div>
+        <p><strong>Procedimento:</strong> Consulta de rotina</p>
+        <p><strong>Diagnóstico:</strong> Hipertensão controlada</p>
+        <p><strong>Prescrição:</strong> Manter medicamento X</p>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Clínica Médica Mad</p>
+  </footer>
+</body>
+</html>

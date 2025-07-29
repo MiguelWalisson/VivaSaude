@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Clínica Médica - Painel</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+    }
+
+    header {
+      background-color: rgb(0,168,168);
+      color: white;
+      padding: 15px 0;
+      text-align: center;
+    }
+
+    nav ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      text-align: center;
+    }
+
+    nav ul li {
+      display: inline-block;
+      margin: 0 15px;
+    }
+
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .hero {
+      background-color: #e7f3fe;
+      padding: 30px;
+      text-align: center;
+    }
+
+    .hero h2 {
+      margin-bottom: 10px;
+    }
+
+    .dashboard {
+      padding: 20px;
+      text-align: center;
+    }
+
+    .dashboard h3 {
+      margin-bottom: 20px;
+    }
+
+    .cards {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #ccc;
+      padding: 20px;
+      width: 150px;
+      text-align: center;
+      transition: transform 0.3s;
+    }
+
+    .card:hover {
+      transform: scale(1.05);
+    }
+
+    .card i {
+      font-size: 2em;
+      color: rgb(0,168,168);
+    }
+
+    .card p {
+      margin-top: 10px;
+      font-weight: bold;
+    }
+
+    .card a {
+      color: inherit;
+      text-decoration: none;
+      display: block;
+    }
+
+    footer {
+      background-color: #333;
+      color: white;
+      text-align: center;
+      padding: 10px 0;
+      position: relative;
+      bottom: 0;
+      width: 100%;
+    }
+
+    footer p {
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Clínica Médica - Sistema Interno</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html">Início</a></li>
+        <li><a href="pacientes.html">Pacientes</a></li>
+        <li><a href="medicos.html">Médicos</a></li>
+        <li><a href="consultas.html">Consultas</a></li>
+        <li><a href="exames.html">Exames</a></li>
+        <li><a href="prontuario.html">Prontuário</a></li>
+        <li><a href="historico.html">Histórico Médico</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <h2>Bem-vindo ao Painel da Clínica</h2>
+      <p>Gerencie pacientes, médicos, exames e muito mais.</p>
+    </section>
+
+    <section class="dashboard">
+      <h3>Acesso Rápido</h3>
+      <div class="cards">
+        <div class="card">
+          <a href="pacientes.html">
+            <i class="fas fa-user-injured"></i>
+            <p>Pacientes</p>
+          </a>
+        </div>
+        <div class="card">
+          <a href="medicos.html">
+            <i class="fas fa-user-md"></i>
+            <p>Médicos</p>
+          </a>
+        </div>
+        <div class="card">
+          <a href="consultas.html">
+            <i class="fas fa-calendar-check"></i>
+            <p>Consultas</p>
+          </a>
+        </div>
+        <div class="card">
+          <a href="exames.html">
+            <i class="fas fa-vials"></i>
+            <p>Exames</p>
+          </a>
+        </div>
+        <div class="card">
+          <a href="prontuario.html">
+            <i class="fas fa-file-medical"></i>
+            <p>Prontuário</p>
+          </a>
+        </div>
+        <div class="card">
+          <a href="historico.html">
+            <i class="fas fa-notes-medical"></i>
+            <p>Histórico</p>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Clínica Médica Mad. Todos os direitos reservados.</p>
+  </footer>
+
+  <script src="Telainicial.js"></script>
+</body>
+</html>

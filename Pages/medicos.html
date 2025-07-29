@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cadastro de Médico</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
+  <style>
+    body { font-family: Arial, sans-serif; background-color: #f4f4f4; margin: 0; }
+    header, footer { background-color: rgb(0,168,168); color: white; text-align: center; padding: 15px 0; }
+    main { max-width: 600px; margin: 20px auto; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px #ccc; }
+    label { display: block; margin-top: 10px; font-weight: bold; }
+    input, select { width: 100%; padding: 8px; margin-top: 5px; border-radius: 5px; border: 1px solid #ccc; }
+    button { background-color: rgb(0,168,168); color: white; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer; margin-top: 15px; }
+    button:hover { background-color: #0e8f8f; }
+    .message { margin-top: 15px; color: green; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Cadastro de Médico</h1>
+  </header>
+
+  <main>
+    <form id="medicoForm">
+      <label>Nome:</label>
+      <input type="text" name="nome" required />
+
+      <label>CRM (ex: CRM/SP 123456):</label>
+      <input type="text" name="crm" required />
+
+      <label>Especialidade:</label>
+      <input type="text" name="especialidade" required />
+
+      <label>Email:</label>
+      <input type="email" name="email" required />
+
+      <label>Telefone:</label>
+      <input type="text" name="telefone" required />
+
+      <label>Senha:</label>
+      <input type="password" name="senha" required />
+
+
+      <button type="submit">Cadastrar</button>
+      <div class="message" id="mensagem"></div>
+    </form>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Clínica Médica Mad</p>
+  </footer>
+
+  <script src="medicos.js"></script>
+</body>
+</html>
