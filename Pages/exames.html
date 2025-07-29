@@ -31,26 +31,38 @@
     }
     main {
       flex: 1;
-      max-width: 600px;
+      max-width: 1000px;
       margin: 20px auto;
       background: white;
-      padding: 20px;
+      padding: 30px;
       border-radius: 10px;
       box-shadow: 0 0 10px #ccc;
     }
+
+    form {
+      display: grid;
+      grid-template-columns: 1fr 1fr; 
+      gap: 20px;
+    }
+
+    form .full-width {
+      grid-column: 1 / 3; 
+    }
+
     label {
       display: block;
-      margin-top: 10px;
+      margin-bottom: 5px;
       font-weight: bold;
     }
+
     input, select {
       width: 100%;
       padding: 10px;
-      margin-top: 5px;
       border-radius: 5px;
       border: 1px solid #ccc;
       font-size: 16px;
     }
+
     button {
       background-color: rgb(0,168,168);
       color: white;
@@ -58,29 +70,26 @@
       padding: 12px 15px;
       border-radius: 5px;
       cursor: pointer;
-      margin-top: 20px;
-      width: 100%;
       font-size: 16px;
+      grid-column: 1 / 3; 
     }
+
     button:hover {
       background-color: #0e8f8f;
     }
-    .message {
-      margin-top: 15px;
-      color: green;
-      font-weight: bold;
-      text-align: center;
-    }
+
     table {
       width: 100%;
       border-collapse: collapse;
-      margin-top: 20px;
+      margin-top: 40px;
     }
+
     th, td {
       padding: 12px;
       text-align: left;
       border-bottom: 1px solid #ddd;
     }
+
     th {
       background-color: #f2f2f2;
     }
@@ -93,26 +102,36 @@
 
   <main>
     <form id="exameForm">
-      <label>Paciente:</label>
-      <select name="id_paciente" required>
-        <option value="">Selecione o paciente</option>
-      </select>
+      <div>
+        <label>Paciente:</label>
+        <select name="id_paciente" required>
+          <option value="">Selecione o paciente</option>
+        </select>
+      </div>
 
-      <label>Data do Exame:</label>
-      <input type="date" name="data_exame" required />
+      <div>
+        <label>Data do Exame:</label>
+        <input type="date" name="data_exame" required />
+      </div>
 
-      <label>Tipo de Exame:</label>
-      <input type="text" name="tipo_exame" required />
+      <div>
+        <label>Tipo de Exame:</label>
+        <input type="text" name="tipo_exame" required />
+      </div>
 
-      <label>Local:</label>
-      <input type="text" name="local_exame" required />
+      <div>
+        <label>Local:</label>
+        <input type="text" name="local_exame" required />
+      </div>
 
-      <label>Status:</label>
-      <select name="status_exame" required>
-        <option value="Agendado">Agendado</option>
-        <option value="Realizado">Realizado</option>
-        <option value="Cancelado">Cancelado</option>
-      </select>
+      <div class="full-width">
+        <label>Status:</label>
+        <select name="status_exame" required>
+          <option value="Agendado">Agendado</option>
+          <option value="Realizado">Realizado</option>
+          <option value="Cancelado">Cancelado</option>
+        </select>
+      </div>
 
       <button type="submit">Agendar Exame</button>
     </form>
@@ -128,6 +147,7 @@
         </tr>
       </thead>
       <tbody>
+        <!-- Dados dos exames vão aqui -->
       </tbody>
     </table>
   </main>
