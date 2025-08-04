@@ -35,4 +35,29 @@ function carregarPacientes() {
       const select = document.querySelector('[name="id_paciente"]');
       select.innerHTML = '<option value="">Selecione o paciente</option>';
       pacientes.forEach(pac => {
-        select.innerHTML += `<
+        select.innerHTML += `<option value="${pac.id}">${pac.nome}</option>`;
+      });
+    }) 
+    .catch(error => console.error('Erro ao carregar pacientes:', error));
+}
+function carregarExames() {     
+fetch('/api/exames')
+    .then(response => response.json())
+    .then(exames => {
+      const tbody = document.querySelector('#examesTable tbody');
+      tbody.innerHTML = '';
+      exames.forEach(exame => {
+        tbody.innerHTML += `
+          <tr>
+            <td>${exame.id}</td>
+            <td>${exame.id_paciente}</td>
+            <td>${exame.data_exame}</td>
+            <td>${exame.tipo_exame}</td>
+            <td>${exame.local_exame}</td>
+            <td>${exame.status_exame}</td>
+          </tr>
+        `;
+      });
+    })
+    .catch(error => console.error('Erro ao carregar exames:', error));
+}
