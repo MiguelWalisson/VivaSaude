@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Detalhes do Exame</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #fff;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 20px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .back-button {
+      font-size: 20px;
+      color: #555;
+      text-decoration: none;
+    }
+
+    .avatar {
+      width: 32px;
+      height: 32px;
+      background-color: #00897b;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 20px auto;
+      padding: 0 20px;
+    }
+
+    .info-block {
+      margin-bottom: 30px;
+    }
+
+    .info-block h2 {
+      font-size: 18px;
+      color: #00796b;
+      margin-bottom: 10px;
+    }
+
+    .info-block p {
+      margin: 4px 0;
+      font-size: 14px;
+      color: #333;
+    }
+
+    .label {
+      font-weight: bold;
+      color: #666;
+    }
+
+    .highlight {
+      color: #00796b;
+      font-weight: bold;
+    }
+
+    .subsection-title {
+      font-weight: bold;
+      margin-bottom: 10px;
+      font-size: 15px;
+      color: #444;
+    }
+
+    .exam-button {
+      display: flex;
+      align-items: center;
+      padding: 10px 15px;
+      margin-bottom: 10px;
+      border: 1px solid #00a297;
+      border-radius: 6px;
+      color: #00796b;
+      background-color: #f9fdfc;
+      cursor: pointer;
+      text-decoration: none;
+      font-size: 14px;
+      transition: background-color 0.3s;
+    }
+
+    .exam-button:hover {
+      background-color: #e2f6f3;
+    }
+
+    .icon {
+      width: 20px;
+      height: 20px;
+      margin-right: 10px;
+    }
+
+    .pdf-icon {
+      color: red;
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    .img-icon {
+      color: #00796b;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <a href="resultadosExames.html" class="back-button">&#8592;</a>
+    <div class="avatar">
+      <span style="color:white;">👤</span>
+    </div>
+  </header>
+
+  <div class="container">
+    <!-- Informações principais -->
+    <div class="info-block">
+      <h2>Número do atendimento: <span class="highlight">XXXXXXX</span></h2>
+      <p><span class="label">Exame:</span> Nome genérico do exame</p>
+      <p><span class="label">Paciente:</span> Nome do paciente</p>
+      <p><span class="label">Data do exame:</span> DD/MM/AAAA</p>
+      <p><span class="label">Situação:</span> Resultado Liberado</p>
+    </div>
+
+    <!-- Resultados Individuais -->
+    <div>
+      <p class="subsection-title">Resultados individuais</p>
+      <p style="margin-bottom: 15px;">Visualize cada exame de forma individual</p>
+
+      <!-- Botões -->
+      <a href="#" class="exam-button">
+        <span class="pdf-icon">📄</span> Colonoscopia Com Biopsia E/Ou Citologia
+      </a>
+
+      <a href="#" class="exam-button">
+        <span class="img-icon">🖼️</span> Imagem - Colonoscopia Com Biopsia E/Ou Citologia
+      </a>
+
+      <a href="#" class="exam-button">
+        <span class="pdf-icon">📄</span> Endoscopia Digestiva Alta Com Biopsia E Teste De Urease
+      </a>
+
+      <a href="#" class="exam-button">
+        <span class="img-icon">🖼️</span> Imagem - Endoscopia Digestiva Alta Com Biopsia E Teste De Urease
+      </a>
+    </div>
+  </div>
+
+</body>
+</html>

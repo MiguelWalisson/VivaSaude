@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Resultados de Exames</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f3f3f3;
+      margin: 0;
+      padding: 0;
+    }
+
+    .cabecalho {
+      background-color: #00A8A8;
+      color: white;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    
+    .cabecalho h1 {
+      font-size: 18px;
+      margin: 0;
+      color: white ;
+    }
+
+    .cabecalho nav a {
+      margin-left: 20px;
+      text-decoration: none;
+      color: white;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 0 20px;
+    }
+
+    h1 {
+      color: #00A8A8;
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+
+    .paciente {
+      font-weight: bold;
+      color: #444;
+      margin-bottom: 20px;
+      font-size: 14px;
+    }
+
+    .card {
+      background-color: white;
+      border-radius: 6px;
+      padding: 15px;
+      margin-bottom: 15px;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+
+    .card-header p {
+      margin: 0;
+      font-size: 13px;
+      color: #00A8A8;
+    }
+
+    .card-header .value {
+      font-weight: bold;
+      color: #333;
+      font-size: 14px;
+    }
+
+    .procedimentos {
+      font-size: 13px;
+      color: #333;
+      margin-bottom: 10px;
+    }
+
+    .btn-ver-resultado {
+      display: inline-block;
+      padding: 6px 12px;
+      background-color: #00A8A8;
+      color: white;
+      font-size: 13px;
+      text-decoration: none;
+      border-radius: 4px;
+      transition: background-color 0.2s;
+    }
+
+    .btn-ver-resultado:hover {
+      background-color: #008080;
+    }
+  </style>
+</head>
+<body>
+
+  <header class="cabecalho">
+    <h1>Viva Saúde</h1>
+    <nav>
+      <a href="telaPaciente.html">Voltar</a>
+      <a href="examesFuturos.html">Exames Futuros</a>
+      <a href="historicoExames.html">Histórico Exames</a>
+      <a href="agendarExame.html">Resultado Exames</a>
+    </nav>
+  </header>
+
+  <div class="container">
+    <h1>Resultados de exames</h1>
+    <p class="paciente">Paciente: Nome do Paciente</p>
+
+    <!-- Cartão 1 -->
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <p>Número do pedido</p>
+          <p class="value">XXXXXXX</p>
+        </div>
+        <div>
+          <p>Data do atendimento</p>
+          <p class="value">DD/MM/AAAA</p>
+        </div>
+      </div>
+      <div class="procedimentos">
+        Descrição dos procedimentos realizados neste atendimento.
+      </div>
+      <a href="detalheExame.html" class="btn-ver-resultado">Ver Resultado</a>
+    </div>
+
+    <!-- Cartão 2 -->
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <p>Número do pedido</p>
+          <p class="value">XXXXXXX</p>
+        </div>
+        <div>
+          <p>Data do atendimento</p>
+          <p class="value">DD/MM/AAAA</p>
+        </div>
+      </div>
+      <div class="procedimentos">
+        Outro exame ou descrição de procedimento detalhado aqui.
+      </div>
+      <a href="detalheExame.html" class="btn-ver-resultado">Ver Resultado</a>
+    </div>
+
+  </div>
+
+</body>
+</html>
