@@ -23,35 +23,37 @@
       <div class="coluna-esquerda">
         <p class="label">Consulta particular ou de convênio?</p>
         <div class="radio-grupo">
-          <label><input type="radio" name="tipo" checked> Particular</label>
+          <label><input type="radio" name="tipo"> Particular</label>
           <label><input type="radio" name="tipo"> Convênio</label>
         </div>
 
-<p class="label">Selecione o convênio:</p>
+        <p class="label">Selecione o convênio:</p>
+        <div id="campo-convenio" style="display: none;">
+          <select name="convenio" id="select-convenio">
+            <option value="" disabled selected>Selecione</option>
+            <option value="Unimed">Unimed</option>
+            <option value="Amil">Amil</option>
+            <option value="Bradesco">Bradesco</option>
+          </select>
+        </div>
 
-<div id="campo-convenio" style="display: none;">
-  <select name="convenio" id="select-convenio">
-    <option value="" disabled selected>Selecione</option>
-  </select>
-</div>
+        <a href="cadastrarConvenio.html" class="add-convenio">
+          <i data-lucide="plus-circle" class="icon"></i> Adicionar convênio
+        </a>
 
-<a href="cadastrarConvenio.html" class="add-convenio">
-  <i data-lucide="plus-circle" class="icon"></i> Adicionar convênio
-</a>
         <button class="btn-agendar">Agendar</button>
       </div>
 
       <div class="coluna-direita">
         <div class="campo">
           <label>Especialidade da consulta</label>
-         <select name="especialidade">
-  <option value="" disabled selected>Selecione</option>
-  <option value="psicologia">Psicologia</option>
-  <option value="geriatria">Geriatria</option>
-  <option value="nutrição">Nutrição</option>
-  <option value="ginecologia">Ginecologia</option>
-</select>
-
+          <select name="especialidade">
+            <option value="" disabled selected>Selecione</option>
+            <option value="psicologia">Psicologia</option>
+            <option value="geriatria">Geriatria</option>
+            <option value="nutricao">Nutrição</option>
+            <option value="ginecologia">Ginecologia</option>
+          </select>
         </div>
 
         <div class="campo">
@@ -66,35 +68,148 @@
 
         <div class="campo">
           <label>Médicos disponíveis</label>
-         <select name="medicos-disponiveis">
-  <option value="" disabled selected>Selecione</option>
-  <option value="Dr-Joao">Dr. João</option>
-  <option value="Dr-Marluce">Dr Marluce</option>
-</select>
-
+          <select name="medicos-disponiveis">
+            <option value="" disabled selected>Selecione</option>
+            <option value="Dr-Joao">Dr. João</option>
+            <option value="Dr-Marluce">Dr. Marluce</option>
+          </select>
         </div>
       </div>
     </div>
+
+    <section>
+      <h2>Consultas Agendadas</h2>
+      <table id="tabela-agendamentos">
+        <thead>
+          <tr>
+            <th>Tipo</th>
+            <th>Convênio</th>
+            <th>Especialidade</th>
+            <th>Data</th>
+            <th>Horário</th>
+            <th>Médico</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+        
+        </tbody>
+      </table>
+    </section>
   </main>
-<script>
-  lucide.createIcons();
 
-  const radios = document.querySelectorAll('input[name="tipo"]');
-  const campoConvenio = document.getElementById('campo-convenio');
-  const cartaoConvenio = document.getElementById('cartao-convenio');
+  <script>
+    lucide.createIcons();
 
-  radios.forEach(radio => {
-    radio.addEventListener('change', () => {
-      if (radio.checked && radio.parentElement.textContent.includes("Convênio")) {
-        campoConvenio.style.display = 'block';
-        cartaoConvenio.style.display = 'block';
-      } else {
-        campoConvenio.style.display = 'none';
-        cartaoConvenio.style.display = 'none';
-      }
+    const radios = document.querySelectorAll('input[name="tipo"]');
+    const campoConvenio = document.getElementById('campo-convenio');
+    const tabela = document.getElementById('tabela-agendamentos').querySelector('tbody');
+    const btnAgendar = document.querySelector('.btn-agendar');
+    let indexEditando = null;
+
+    radios.forEach(radio => {
+      radio.addEventListener('change', () => {
+        if (radio.checked && radio.parentElement.textContent.includes("Convênio")) {
+          campoConvenio.style.display = 'block';
+        } else {
+          campoConvenio.style.display = 'none';
+        }
+      });
     });
-  });
-</script>
-<script src="/assents/js/agendarConsulta.js"></script>
+
+    btnAgendar.addEventListener('click', () => {
+      const tipo = document.querySelector('input[name="tipo"]:checked')?.parentElement.textContent.trim();
+      const convenio = document.getElementById('select-convenio').value || '-';
+      const especialidade = document.querySelector('select[name="especialidade"]').value;
+      const data = document.querySelector('input[type="date"]').value;
+      const hora = document.querySelector('input[type="time"]').value;
+      const medico = document.querySelector('select[name="medicos-disponiveis"]').value;
+
+      if (!tipo || !especialidade || !data || !hora || !medico) {
+        alert("Preencha todos os campos obrigatórios!");
+        return;
+      }
+
+      const agendamento = { tipo, convenio, especialidade, data, hora, medico };
+
+      if (indexEditando === null) {
+        adicionarAgendamentoNaTabela(agendamento);
+      } else {
+        atualizarAgendamentoNaTabela(agendamento);
+      }
+
+      limparFormulario();
+    });
+
+    function adicionarAgendamentoNaTabela({ tipo, convenio, especialidade, data, hora, medico }) {
+      const linha = document.createElement('tr');
+      linha.innerHTML = `
+        <td>${tipo}</td>
+        <td>${convenio}</td>
+        <td>${especialidade}</td>
+        <td>${data}</td>
+        <td>${hora}</td>
+        <td>${medico}</td>
+        <td>
+          <button onclick="editarAgendamento(this)">Editar</button>
+          <button onclick="excluirAgendamento(this)">Excluir</button>
+        </td>
+      `;
+      tabela.appendChild(linha);
+    }
+
+    function editarAgendamento(botao) {
+      const linha = botao.parentElement.parentElement;
+      indexEditando = Array.from(tabela.children).indexOf(linha);
+      const [tipo, convenio, especialidade, data, hora, medico] = Array.from(linha.children).map(td => td.textContent);
+
+      document.querySelectorAll('input[name="tipo"]').forEach(r => {
+        r.checked = r.parentElement.textContent.includes(tipo);
+      });
+
+      campoConvenio.style.display = tipo === 'Convênio' ? 'block' : 'none';
+
+      document.getElementById('select-convenio').value = convenio !== '-' ? convenio : '';
+      document.querySelector('select[name="especialidade"]').value = especialidade;
+      document.querySelector('input[type="date"]').value = data;
+      document.querySelector('input[type="time"]').value = hora;
+      document.querySelector('select[name="medicos-disponiveis"]').value = medico;
+
+      btnAgendar.textContent = 'Salvar Alterações';
+    }
+
+    function atualizarAgendamentoNaTabela({ tipo, convenio, especialidade, data, hora, medico }) {
+      const linha = tabela.children[indexEditando];
+      linha.children[0].textContent = tipo;
+      linha.children[1].textContent = convenio;
+      linha.children[2].textContent = especialidade;
+      linha.children[3].textContent = data;
+      linha.children[4].textContent = hora;
+      linha.children[5].textContent = medico;
+
+      indexEditando = null;
+      btnAgendar.textContent = 'Agendar';
+    }
+
+    function excluirAgendamento(botao) {
+      if (confirm('Tem certeza que deseja excluir este agendamento?')) {
+        const linha = botao.parentElement.parentElement;
+        tabela.removeChild(linha);
+        limparFormulario();
+      }
+    }
+
+    function limparFormulario() {
+      document.querySelectorAll('input[name="tipo"]').forEach(r => r.checked = false);
+      campoConvenio.style.display = 'none';
+      document.getElementById('select-convenio').value = '';
+      document.querySelector('select[name="especialidade"]').value = '';
+      document.querySelector('input[type="date"]').value = '';
+      document.querySelector('input[type="time"]').value = '';
+      document.querySelector('select[name="medicos-disponiveis"]').value = '';
+      btnAgendar.textContent = 'Agendar';
+      indexEditando = null;
+    }
+  </script>
 </body>
 </html>

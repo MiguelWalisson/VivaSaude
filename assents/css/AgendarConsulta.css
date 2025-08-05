@@ -8,6 +8,9 @@ body {
   font-family: 'Poppins', sans-serif;
   background-color: #ffffff;
   color: #333;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 .cabecalho {
@@ -30,10 +33,12 @@ body {
   font-weight: 500;
   font-size: 14px;
 }
+
 .container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 40px 30px;
+  flex: 1; /* Faz o conteúdo crescer */
 }
 
 .conteudo {
@@ -75,6 +80,7 @@ body {
   color: rgb(0, 168, 168);
   font-weight: 500;
 }
+
 .icon {
   width: 18px;
   height: 18px;
@@ -130,6 +136,7 @@ input[type="time"] {
   font-size: 14px;
   width: 100%;
 }
+
 #campo-convenio select {
   background-color: #f0f0f0;
   border: none;
@@ -138,3 +145,72 @@ input[type="time"] {
   font-size: 14px;
   width: 100%;
 }
+
+footer {
+  background-color: #00A8A8;
+  color: white;
+  text-align: center;
+  padding: 15px 0;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 40px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  background-color: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+table thead {
+  background-color: #00A8A8;
+  color: #fff;
+}
+
+table th,
+table td {
+  padding: 14px 16px;
+  text-align: left;
+}
+
+table tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+table tbody tr:hover {
+  background-color: #eefafc;
+}
+
+table td button {
+  margin-right: 8px;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 8px;
+  font-size: 13px;
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+}
+
+
+table td button:nth-child(1) {
+  background-color: #00A8A8;
+  color: white;
+}
+
+table td button:nth-child(1):hover {
+  background-color: #008c8c;
+}
+
+table td button:nth-child(2) {
+  background-color: #e74c3c;
+  color: white;
+}
+
+table td button:nth-child(2):hover {
+  background-color: #c0392b;
+}
+
