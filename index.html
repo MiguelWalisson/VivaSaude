@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Viva Saúde</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
 
     * {
       margin: 0;
@@ -14,16 +14,19 @@
       font-family: 'Poppins', sans-serif;
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
-      background: url('/assents/images/foto-esteto.jpg') no-repeat center center fixed;
-      background-size: cover;
+      background: white;
       color: #333;
     }
 
     .topbar {
       background: linear-gradient(90deg, #00B4D8, #00C9A7);
       color: white;
-      padding: 40px;
+      padding: 20px 40px;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -32,6 +35,19 @@
       top: 0;
       left: 0;
       z-index: 1000;
+      transition: top 1.0s ease-in-out;
+    }
+
+    .topbar.hidden {
+      top: -100px;
+    }
+
+    .topbar:hover {
+      top: 0 !important;
+    }
+
+    .logo img {
+      height: 50px;
     }
 
     .topbar nav a {
@@ -41,253 +57,353 @@
       font-weight: 500;
     }
 
-    .logo {
-      font-size: 28px;
-      font-weight: bold;
+    .topbar nav a.botao-paciente {
+      background-color: white;
+      color: #00c9a7;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-weight: 600;
+      transition: background 0.3s;
     }
 
-    .boas-vindas {
-      padding: 200px 60px 80px;
-      font-size: 18px;
-      background-color: rgba(255,255,255,0.85);
-      border-radius: 10px;
-      margin: 40px;
-      line-height: 1.8;
+    .topbar nav a.botao-paciente:hover {
+      background-color: #f0f0f0;
     }
 
-    .titulo-centralizado {
+    .hero {
+      padding-top: 140px;
+      padding-bottom: 160px;
+      background: linear-gradient(rgba(0, 180, 216, 0.4), rgba(0, 180, 216, 0.4)), url('/assents/images/foto-esteto.jpg') no-repeat center;
+      background-size: cover;
       text-align: center;
+      color: white;
+    }
+
+    .hero h2 {
+      font-size: 36px;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    .hero p {
+      font-size: 18px;
+      max-width: 700px;
+      margin: 0 auto 30px;
+    }
+
+    .btn {
+      padding: 12px 24px;
+      background-color: white;
       color: #00a8a8;
-      font-size: 30px;
-      margin-bottom: 30px;
+      border: none;
+      border-radius: 5px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background-color 0.3s;
+    }
+
+    .btn:hover {
+      background-color: #f0f0f0;
     }
 
     .section {
-      padding: 80px 60px;
-      background-color: rgba(245,245,245,0.95);
-      margin: 40px;
-      border-radius: 10px;
+      max-width: 900px;
+      margin: 80px auto;
+      padding: 0 20px;
+      text-align: center;
+    }
+
+    .section h2 {
+      font-size: 26px;
+      color: #007f7f;
+      margin-bottom: 20px;
+    }
+
+    .section p {
+      font-size: 17px;
+      line-height: 1.8;
+      margin-bottom: 30px;
     }
 
     .carousel-wrapper {
-      position: relative;
       overflow: hidden;
-      max-width: 1000px;
-      margin: 0 auto;
+      max-width: 100%;
+      margin: 80px auto;
     }
 
     .carousel {
       display: flex;
       transition: transform 0.8s ease-in-out;
       width: fit-content;
+      gap: 40px;
+      padding: 0 20px;
     }
 
     .carousel-item {
-      flex: 0 0 300px;
+      flex: 0 0 280px;
+      border-radius: 12px;
+      box-shadow: 0 0 12px rgba(0, 0, 0, 0.08);
       background-color: #fff;
-      border-radius: 20px;
-      margin: 0 20px;
-      width: 300px;
-      height: 300px;
-      box-shadow: 2px 4px 20px rgba(0, 0, 0, 0.15);
       overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
+      text-align: center;
     }
 
     .carousel-item img {
       width: 100%;
-      height: 100%;
+      height: 200px;
       object-fit: cover;
-      opacity: 0.7;
-      position: absolute;
-      top: 0;
-      left: 0;
-      z-index: 1;
     }
 
     .carousel-item p {
-      position: relative;
-      z-index: 2;
-      background-color: white;
+      font-size: 18px;
       font-weight: 600;
-      color: #007f7f;
-      font-size: 18px;
-      padding: 10px;
+      color: #00a8a8;
+      padding: 12px;
+    }
+
+    .footer {
+      background-color: #1c7e81;
+      color: white;
       text-align: center;
+      padding: 60px 20px;
+      font-size: 16px;
     }
-
-    .carousel-item::before {
-      content: "";
-      display: block;
-      padding-top: 100%;
-    }
-
-    .carousel-item > *:not(p) {
-      position: relative;
-      z-index: 2;
-    }
-
-    .historico {
-      background-color: rgba(229,229,229,0.9);
-      padding: 80px 60px;
-      font-size: 18px;
-      color: #333;
-      margin: 40px;
-      border-radius: 10px;
-      line-height: 1.8;
-    }
-
-.footer {
-  background-color: #1c7e81;
-  color: white;
-  text-align: center;
-  padding: 80px;
-  font-size: 16px;
-}
 
     @media (max-width: 768px) {
-      .carousel-item {
-        flex: 0 0 260px;
-        width: 260px;
-        height: auto;
+      .topbar {
+        flex-direction: column;
+        align-items: flex-start;
       }
 
-      .boas-vindas, .historico, .section {
-        padding: 100px 20px 60px;
-        margin: 20px;
+      .topbar nav {
+        margin-top: 10px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .topbar nav a {
+        margin-left: 0;
+      }
+
+      .hero h2 {
+        font-size: 24px;
+      }
+
+      .carousel-item {
+        flex: 0 0 240px;
       }
     }
-
-html {
-  scroll-behavior: smooth;
+    .medicos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 30px;
+  margin-top: 40px;
 }
 
-.topbar {
-  transition: top 1.0s ease-in-out;
+.medico-card {
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+  transition: transform 0.3s;
 }
 
-.topbar.hidden {
-  top: -100px;
+.medico-card:hover {
+  transform: translateY(-5px);
 }
 
-.topbar:hover {
-  top: 0 !important;
+.medico-card img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 15px;
 }
+
+.medico-card h3 {
+  font-size: 18px;
+  color: #007f7f;
+  margin-bottom: 5px;
+}
+
+.medico-card p {
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.medico-card span {
+  font-size: 14px;
+  color: #666;
+}
+
   </style>
 </head>
 <body>
+
+  <!-- TOPO -->
   <header class="topbar">
-    <div class="logo">Viva Saúde</div>
+    <div class="logo">
+      <img src="/assents/images/Viva.png" alt="Logo Viva Saúde" />
+    </div>
     <nav>
-      <a href="#home">Home</a>
+      <a href="#bemvindo">Home</a>
       <a href="#servicos">Serviços</a>
-      <a href="#sobre">Sobre Nós</a>
-      <a href="/Pages/loginPaciente.html">Sou Paciente</a>
-      <a href="">Conheça nossos médicos</a>
+      <a href="#sobre">Sobre</a>
+      <a href="#medicos">Conheça nossos médicos</a>
+      <a href="/Pages/loginPaciente.html" class="botao-paciente">Sou Paciente</a>
     </nav>
   </header>
 
-  <section id="home" class="boas-vindas">
-    <h2 class="titulo-centralizado">Bem-vindo(a) à Viva Saúde</h2>
+  <!-- HERO -->
+  <section class="hero" id="bemvindo">
+    <h2>Cuidando da sua saúde com excelência</h2>
+    <p>Nossa clínica oferece atendimento médico de qualidade com profissionais especializados e equipamentos modernos para garantir seu bem-estar.</p>
+    <a href="#servicos" class="btn">Agendar Consulta</a>
+  </section>
+
+  <!-- BEM-VINDO -->
+  <section class="section">
+    <h2>Bem-vindo(a) à Viva Saúde</h2>
     <p>
-      Na Viva Saúde, estamos comprometidos com o cuidado e o bem-estar de nossos pacientes. Nossa equipe é formada por profissionais qualificados e dedicados, que oferecem uma ampla gama de serviços de saúde com foco na prevenção, diagnóstico e tratamento.<br><br>
+       Na Viva Saúde, estamos comprometidos com o cuidado e o bem-estar de nossos pacientes. Nossa equipe é formada por profissionais qualificados e dedicados, que oferecem uma ampla gama de serviços de saúde com foco na prevenção, diagnóstico e tratamento.<br><br>
       Acreditamos em um atendimento humanizado, onde a escuta e a confiança são fundamentais para promover uma recuperação completa e melhorar a qualidade de vida.<br><br>
       Nosso ambiente é acolhedor e projetado para garantir a sua máxima comodidade, com tecnologias de ponta para proporcionar tratamentos eficazes e seguros. Explore os nossos serviços e agende uma consulta com nossos especialistas!
     </p>
   </section>
 
-<div class="section-divider">
-  <svg class="svg-divider" viewBox="0 0 1440 80" preserveAspectRatio="none">
-    <rect width="100%" height="80" fill="url(#grad)"/>
-    <defs>
-      <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="0%">
-        <stop offset="0%" stop-color="#00b4d8" />
-        <stop offset="100%" stop-color="#00c9a7" />
-      </linearGradient>
-    </defs>
-  </svg>
-</div>
+  <!-- SERVIÇOS -->
+  <section class="section" id="servicos">
+    <h2>Nossos Serviços</h2>
+    <div class="carousel-wrapper">
+      <div class="carousel" id="carousel">
+        <a href="/Pages/psicologia.html" class="carousel-item">
+  <img src="/assents/images/psicologia.png" alt="Psicologia">
+  <p>Psicologia</p>
+</a>
 
-<section class="servicos">
-  <h2 class="title">Nossos Serviços</h2>
-  <div class="carousel-container">
-    <div class="carousel-track">
-      <div class="card"><img src="/assents/images/ConsultaMedCard1.avif"><p>Consulta Médica</p></div>
-      <div class="card"><img src="/assents/images/ExameLabCard2.jpg"><p>Exames Laboratoriais</p></div>
-      <div class="card"><img src="/assents/images/AtendPsicoCard3.avif"><p>Psicologia</p></div>
-      <div class="card"><img src="/assents/images/GeriatriaCard5.jpg"><p>Geriatria</p></div>
-      <div class="card"><img src="/assents/images/NutricaoCard6.jpg"><p>Nutrição</p></div>
-      <div class="card"><img src="/assents/images/GinecologiaCard7.jpg"><p>Ginecologia</p></div>
-    </div>
-  </div>
-</section>
+<a href="/Pages/geriatria.html" class="carousel-item">
+  <img src="/assents/images/geriatria.png" alt="Geriatria">
+  <p>Geriatria</p>
+</a>
+
+<a href="/Pages/nutricao.html" class="carousel-item">
+  <img src="/assents/images/nutrição.png" alt="Nutrição">
+  <p>Nutrição</p>
+</a>
+
+<a href="/Pages/ginecologia.html" class="carousel-item">
+  <img src="/assents/images/ginecologia.png" alt="Ginecologia">
+  <p>Ginecologia</p>
+</a>
+
+<a href="/Pages/consulta-medica.html" class="carousel-item">
+  <img src="/assents/images/consulta-medica.png" alt="Consulta Médica">
+  <p>Consulta Médica</p>
+</a>
+
+<a href="/Pages/exames.html" class="carousel-item">
+  <img src="/assents/images/exame.png" alt="Exames">
+  <p>Exames Laboratoriais</p>
+</a>
 
       </div>
     </div>
   </section>
 
-  <section id="sobre" class="historico">
-    <h2 class="titulo-centralizado">Sobre a Viva Saúde</h2>
+  <!-- SOBRE NÓS -->
+  <section class="section" id="sobre">
+    <h2>Sobre a Viva Saúde</h2>
     <p>
-      A Viva Saúde nasceu com o propósito de oferecer atendimento médico de excelência, focado no cuidado integral de nossos pacientes. Com anos de experiência, nossa clínica se tornou referência em psicologia, geriatria, nutrição e ginecologia, sempre buscando a evolução e inovação nos tratamentos.<br><br>
-      Contamos com uma equipe multidisciplinar altamente qualificada, que trabalha com o mais alto padrão de atendimento. Além disso, investimos constantemente em tecnologias avançadas para garantir diagnósticos rápidos e precisos. Cada paciente é tratado de forma única, com soluções personalizadas que atendem às suas necessidades individuais.<br><br>
-      Acreditamos que a saúde é o nosso bem mais precioso e, por isso, trabalhamos todos os dias para proporcionar o melhor cuidado possível, promovendo a saúde, o bem-estar e a qualidade de vida de todos os nossos pacientes.
+      A Viva Saúde nasceu com o propósito de oferecer atendimento médico de excelência, focado no cuidado integral de nossos pacientes. Com anos de experiência, nossa clínica se tornou referência em diversas especialidades e investe constantemente em tecnologias modernas para garantir diagnósticos rápidos e seguros.
+    </p>
+    <p>
+      Nosso atendimento é humanizado e individualizado, sempre buscando o bem-estar e a saúde de quem mais importa: você.
     </p>
   </section>
+  <section class="section" id="medicos">
+  <h2>Conheça nossos Médicos</h2>
+  <div class="medicos-grid">
+    <div class="medico-card">
+      <img src="/assents/images/medico1.png" alt="Dr. João Carvalho">
+      <h3>Dr. João Carvalho</h3>
+      <p>Psicólogo</p>
+      <span>CRP: 04/12345</span>
+    </div>
+    <div class="medico-card">
+      <img src="/assents/images/medico2.png" alt="Dra. Marina Silva">
+      <h3>Dra. Marina Silva</h3>
+      <p>Geriatra</p>
+      <span>CRM: 123456/MG</span>
+    </div>
+    <div class="medico-card">
+      <img src="/assents/images/medico3.png" alt="Dr. Lucas Almeida">
+      <h3>Dr. Lucas Almeida</h3>
+      <p>Nutricionista</p>
+      <span>CRN: 78910</span>
+    </div>
+    <div class="medico-card">
+      <img src="/assents/images/medico4.png" alt="Dra. Fernanda Costa">
+      <h3>Dra. Fernanda Costa</h3>
+      <p>Ginecologista</p>
+      <span>CRM: 112233/MG</span>
+    </div>
+    <div class="medico-card">
+      <img src="/assents/images/medico5.png" alt="Dr. Rafael Borges">
+      <h3>Dr. Rafael Borges</h3>
+      <p>Clínico Geral</p>
+      <span>CRM: 445566/MG</span>
+    </div>
+    <div class="medico-card">
+      <img src="/assents/images/medico6.png" alt="Dra. Aline Mendes">
+      <h3>Dra. Aline Mendes</h3>
+      <p>Especialista em Exames</p>
+      <span>CRM: 998877/MG</span>
+    </div>
+  </div>
+</section>
 
-<footer class="footer">
-  <p>Central de Atendimentos: (31) 4002-8922</p>
-  <p>E-mail: atendimento@clinicavivasaude.com.br</p>
-  <p>Endereço: Rua da Saúde, 987 - Bairro Esperança, Belo Horizonte - MG</p>
-  <p>Redes sociais: @clinicavivasaudeoficial 📱 💬</p>
-  <div>© 2025 CLÍNICA VIVA SAÚDE - Todos os direitos reservados.</div>
-</footer>
 
-<script>
-  // Carrossel automático
-  const carousel = document.getElementById('carousel');
-  const totalItems = carousel.children.length;
-  let currentIndex = 0;
+  <!-- RODAPÉ -->
+  <footer class="footer">
+    <p>Central de Atendimentos: (31) 4002-8922</p>
+    <p>E-mail: atendimento@clinicavivasaude.com.br</p>
+    <p>Endereço: Rua da Saúde, 987 - Bairro Esperança, Belo Horizonte - MG</p>
+    <p>Redes sociais: @clinicavivasaudeoficial 📱 💬</p>
+    <div>© 2025 CLÍNICA VIVA SAÚDE - Todos os direitos reservados.</div>
+  </footer>
 
-  function moveSlide() {
-    const visibleCount = Math.floor(carousel.parentElement.offsetWidth / 340);
-    currentIndex = (currentIndex + 1) % (totalItems - visibleCount + 1);
-    carousel.style.transform = `translateX(-${currentIndex * 340}px)`;
-  }
+  <!-- JS do Carrossel e Cabeçalho -->
+  <script>
+    const carousel = document.getElementById('carousel');
+    const totalItems = carousel.children.length;
+    let currentIndex = 0;
 
-  setInterval(moveSlide, 4000);
-
-  // Esconder e mostrar o cabeçalho com scroll
-  const topbar = document.querySelector('.topbar');
-  let lastScrollY = window.scrollY;
-
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > lastScrollY) {
-      topbar.classList.add('hidden');
-    } else {
-      topbar.classList.remove('hidden');
+    function moveSlide() {
+      const visibleCount = Math.floor(carousel.parentElement.offsetWidth / 320);
+      currentIndex = (currentIndex + 1) % (totalItems - visibleCount + 1);
+      carousel.style.transform = `translateX(-${currentIndex * 320}px)`;
     }
-    lastScrollY = window.scrollY;
-  });
 
-  // Mostrar topbar ao passar o mouse
-  topbar.addEventListener('mouseenter', () => {
-    topbar.classList.remove('hidden');
-  });
+    setInterval(moveSlide, 4000);
 
-  // Rolagem suave para seções (links já funcionam por causa do scroll-behavior)
-  document.querySelectorAll('nav a[href^="#"]').forEach(link => {
-    link.addEventListener('click', e => {
-      e.preventDefault();
-      const target = document.querySelector(link.getAttribute('href'));
-      if (target) {
-        target.scrollIntoView({ behavior: 'smooth' });
+    const topbar = document.querySelector('.topbar');
+    let lastScrollY = window.scrollY;
+
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > lastScrollY) {
+        topbar.classList.add('hidden');
+      } else {
+        topbar.classList.remove('hidden');
       }
+      lastScrollY = window.scrollY;
     });
-  });
-</script>
 
+    topbar.addEventListener('mouseenter', () => {
+      topbar.classList.remove('hidden');
+    });
+  </script>
 </body>
 </html>
