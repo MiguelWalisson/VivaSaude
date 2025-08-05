@@ -28,8 +28,8 @@
     main {
       flex: 1;
       display: flex;
-      flex-direction: column;
-      align-items: center;
+      justify-content: center;
+      align-items: flex-start;
       padding: 40px 20px;
     }
 
@@ -80,38 +80,17 @@
       text-align: center;
     }
 
-    table {
-      margin-top: 40px;
-      width: 100%;
-      max-width: 800px;
-      border-collapse: collapse;
-      background: white;
-      box-shadow: 0 0 10px #ccc;
-    }
-
-    th, td {
-      border: 1px solid #ddd;
-      padding: 10px;
-      text-align: center;
-    }
-
-    th {
-      background-color: #00A8A8;
-      color: white;
-    }
-
-    .actions button {
-      margin: 0 5px;
-      padding: 5px 10px;
-    }
-
+    /* Responsivo para telas menores */
     @media (max-width: 600px) {
-      form, table {
-        width: 100%;
-        padding: 10px;
+      form {
+        padding: 20px;
       }
 
-      input, select, button {
+      input, select {
+        font-size: 14px;
+      }
+
+      button {
         font-size: 14px;
       }
     }
@@ -145,28 +124,26 @@
       <button type="submit">Cadastrar</button>
       <div class="message" id="mensagem"></div>
     </form>
-
-    <table id="tabela-medicos">
-      <thead>
-        <tr>
-          <th>Nome</th>
-          <th>CRM</th>
-          <th>Especialidade</th>
-          <th>Email</th>
-          <th>Telefone</th>
-          <th>Ações</th>
-        </tr>
-      </thead>
-      <tbody>
-    
-      </tbody>
-    </table>
   </main>
+  
+  <table id="tabela-medicos" style="width:100%;margin-top:30px;display:none;">
+  <thead>
+    <tr>
+      <th>Nome</th>
+      <th>CRM</th>
+      <th>Especialidade</th>
+      <th>Email</th>
+      <th>Telefone</th>
+      <th>Ações</th>
+    </tr>
+  </thead>
+  <tbody></tbody>
+</table>
 
   <footer>
     <p>&copy; 2025 Clínica Médica Mad</p>
   </footer>
 
-  <script src="/assents/js/medico.js"></script>
+  <script src="/assents/js/medicos.js"></script>
 </body>
 </html>
