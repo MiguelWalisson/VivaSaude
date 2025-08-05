@@ -1,5 +1,5 @@
 
-// Adicione o SweetAlert2 no seu HTML, não neste arquivo JS!
+
  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 document.addEventListener('DOMContentLoaded', () => {
