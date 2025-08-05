@@ -3,141 +3,438 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Clínica Médica - Painel</title>
+  <title>Clínica Viva Saúde - Painel</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
   <style>
-    body {
-      font-family: Arial, sans-serif;
+    :root {
+      --primary-color: rgb(0, 168, 168);
+      --primary-dark: rgb(0, 168, 168);
+      --secondary-color: #e7f3fe;
+      --text-color: #333;
+      --light-gray: #f8f9fa;
+      --white: #ffffff;
+      --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      --transition: all 0.3s ease;
+    }
+
+    * {
+      box-sizing: border-box;
       margin: 0;
       padding: 0;
-      background-color: #f4f4f4;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: var(--light-gray);
+      color: var(--text-color);
+      line-height: 1.6;
       display: flex;
       flex-direction: column;
       min-height: 100vh;
     }
 
-    main {
-      flex: 1;
+    header {
+      background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+      color: var(--white);
+      padding: 1rem 0;
+      box-shadow: var(--shadow);
+      position: sticky;
+      top: 0;
+      z-index: 100;
     }
 
-    header {
-      background-color: rgb(0,168,168);
-      color: white;
-      padding: 15px 0;
-      text-align: center;
+    .header-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo-img {
+      height: 60px;
+      width: 60px;
+      background: var(--primary-color);
+      border-radius: 50%;
+      padding: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      transition: var(--transition);
+    }
+
+    .logo-img:hover {
+      transform: scale(1.05);
+    }
+
+    .logo-img svg {
+      width: 36px;
+      height: 36px;
+      fill: var(--white);
+    }
+
+    .logo-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .logo-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      line-height: 1.2;
+      color: var(--white);
+      letter-spacing: 0.5px;
+    }
+
+    .logo-subtitle {
+      font-size: 0.85rem;
+      color: rgba(255, 255, 255, 0.9);
+      letter-spacing: 1.2px;
+      font-weight: 400;
+      margin-top: 2px;
+      text-transform: uppercase;
     }
 
     nav ul {
       list-style: none;
-      padding: 0;
-      margin: 0;
-      text-align: center;
+      display: flex;
+      gap: 1.5rem;
+      margin-top: 1rem;
     }
 
     nav ul li {
-      display: inline-block;
-      margin: 0 15px;
+      position: relative;
     }
 
     nav ul li a {
-      color: white;
+      color: var(--white);
       text-decoration: none;
-      font-weight: bold;
+      font-weight: 500;
+      padding: 0.5rem 0;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    nav ul li a:hover {
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    nav ul li a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background-color: var(--white);
+      transition: var(--transition);
+    }
+
+    nav ul li a:hover::after {
+      width: 100%;
     }
 
     .hero {
-      background-color: #e7f3fe;
-      padding: 30px;
+      background: linear-gradient(135deg, var(--secondary-color), var(--white));
+      padding: 4rem 1rem 3rem;
       text-align: center;
+      margin-bottom: 2rem;
     }
 
     .hero h2 {
-      margin-bottom: 10px;
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      color: var(--primary-dark);
+      font-weight: 700;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      max-width: 700px;
+      margin: 0 auto;
+      color: var(--text-color);
+      font-weight: 300;
+    }
+
+    .hero-divider {
+      width: 100px;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary-color), transparent);
+      margin: 1.5rem auto 0;
+      border-radius: 2px;
     }
 
     .dashboard {
-      padding: 20px;
-      text-align: center;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1rem;
+      flex: 1;
     }
 
     .dashboard h3 {
-      margin-bottom: 20px;
+      text-align: center;
+      margin-bottom: 2.5rem;
+      font-size: 1.8rem;
+      color: var(--primary-dark);
+      font-weight: 600;
+      position: relative;
+      padding-bottom: 10px;
+    }
+
+    .dashboard h3::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary-color), transparent);
+      border-radius: 2px;
     }
 
     .cards {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 20px;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 2rem;
+      padding: 1rem;
     }
 
     .card {
-      background: white;
-      border-radius: 10px;
-      box-shadow: 0 0 10px #ccc;
-      padding: 20px;
-      width: 100px;
-      max-width: 200px;
-      min-width: 140px;
+      background: var(--white);
+      border-radius: 12px;
+      box-shadow: var(--shadow);
+      padding: 2rem 1.5rem;
       text-align: center;
-      transition: transform 0.3s;
+      transition: var(--transition);
+      cursor: pointer;
+      border: none;
+      position: relative;
+      overflow: hidden;
+      border-top: 4px solid var(--primary-color);
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: var(--primary-color);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: var(--transition);
     }
 
     .card:hover {
-      transform: scale(1.05);
+      transform: translateY(-8px);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+    }
+
+    .card:hover::before {
+      transform: scaleX(1);
     }
 
     .card i {
-      font-size: 2em;
-      color: rgb(0,168,168);
+      font-size: 2.8rem;
+      color: var(--primary-color);
+      margin-bottom: 1.2rem;
+      transition: var(--transition);
+    }
+
+    .card:hover i {
+      transform: scale(1.15);
     }
 
     .card p {
-      margin-top: 10px;
-      font-weight: bold;
+      font-weight: 600;
+      font-size: 1.2rem;
+      margin-top: 0.5rem;
+      transition: var(--transition);
+      color: var(--primary-dark);
     }
 
     .card a {
       color: inherit;
       text-decoration: none;
       display: block;
+      height: 100%;
     }
 
-    footer {
-      background-color: #333;
-      color: white;
-      text-align: center;
-      padding: 10px 0;
+    .card-description {
+      font-size: 0.9rem;
+      color: #666;
+      margin-top: 0.8rem;
+      font-weight: 400;
+    }
+
+    .footer-container {
       position: relative;
-      bottom: 0;
       width: 100%;
+      background: transparent;
+      margin-top: auto;
     }
 
-    footer p {
+    .waves {
+      width: 100%;
+      height: 150px;
+      display: block;
       margin: 0;
+      padding: 0;
     }
+
+    .waves svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .footer-content {
+      background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+      color: var(--white);
+      text-align: center;
+      padding: 1.5rem 0;
+      margin-top: -1px;
+    }
+
+    .footer-content p {
+      margin: 0;
+      font-size: 0.9rem;
+    }
+
+    .user-info {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-left: auto;
+      padding: 0.5rem 1rem;
+      background-color: rgba(255, 255, 255, 0.2);
+      border-radius: 20px;
+      transition: var(--transition);
+    }
+
+    .user-info:hover {
+      background-color: rgba(255, 255, 255, 0.3);
+    }
+
+    .user-info i {
+      font-size: 1.2rem;
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        flex-direction: column;
+      }
+      
+      nav ul {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      
+      .user-info {
+        margin: 1rem auto 0;
+      }
+      
+      .cards {
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        gap: 1.5rem;
+      }
+
+      .logo-container {
+        flex-direction: column;
+        text-align: center;
+        margin-bottom: 1rem;
+      }
+
+      .waves {
+        height: 100px;
+      }
+
+      .hero h2 {
+        font-size: 2rem;
+      }
+
+      .hero p {
+        font-size: 1rem;
+      }
+
+      .card {
+        padding: 1.5rem 1rem;
+      }
+
+      .card i {
+        font-size: 2.2rem;
+      }
+
+      .card p {
+        font-size: 1.1rem;
+      }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .card {
+      animation: fadeIn 0.5s ease forwards;
+      opacity: 0;
+    }
+
+    .card:nth-child(1) { animation-delay: 0.1s; }
+    .card:nth-child(2) { animation-delay: 0.2s; }
+    .card:nth-child(3) { animation-delay: 0.3s; }
+    .card:nth-child(4) { animation-delay: 0.4s; }
+    .card:nth-child(5) { animation-delay: 0.5s; }
+    .card:nth-child(6) { animation-delay: 0.6s; }
   </style>
 </head>
 <body>
   <header>
-    <h1>Clínica Médica - Sistema Interno</h1>
-    <nav>
-      <ul>
-        <li><a href="index.html">Início</a></li>
-        <li><a href="pacientes.html">Pacientes</a></li>
-        <li><a href="medicos.html">Médicos</a></li>
-        <li><a href="consultas.html">Consultas</a></li>
-        <li><a href="exames.html">Exames</a></li>
-        <li><a href="prontuario.html">Prontuário</a></li>
-        <li><a href="historico.html">Histórico Médico</a></li>
-      </ul>
-    </nav>
+    <div class="header-container">
+      <nav>
+        <div class="logo-container">
+          <div class="logo-img">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/>
+              <path d="M12 6c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6zm0 10c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4z" opacity="0.3"/>
+            </svg>
+          </div>
+          <div class="logo-text">
+            <div class="logo-title">Viva Saúde </div>
+            <div class="logo-subtitle">Saúde Integrada</div>
+          </div>
+        </div>
+       
+        <div class="user-info">
+          <i class="fas fa-user-circle"></i>
+          <span>Olá, <strong>Dr. Caio Caetano de Jesus</strong> </span>
+        </div>
+      </nav>
+    </div>
   </header>
 
   <main>
     <section class="hero">
-      <h2>Bem-vindo ao Painel da Clínica</h2>
-      <p>Gerencie pacientes, médicos, exames e muito mais.</p>
+      <h2>Bem-vindo ao Painel da Clínica Viva Saúde </h2>
+      <p>Excelência em cuidados médicos e gestão de saúde integrada</p>
+      <div class="hero-divider"></div>
     </section>
 
     <section class="dashboard">
@@ -183,9 +480,16 @@
     </section>
   </main>
 
-  <footer>
-    <p>&copy; 2025 Clínica Médica Mad. Todos os direitos reservados.</p>
-  </footer>
+  <div class="footer-container">
+    <div class="waves">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" preserveAspectRatio="none">
+        <path fill="rgb(0, 168, 168)" fill-opacity="1" d="M0,192L48,186.7C96,181,192,171,288,181.3C384,192,480,224,576,218.7C672,213,768,171,864,165.3C960,160,1056,192,1152,192C1248,192,1344,160,1392,144L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+      </svg>
+    </div>
+    <div class="footer-content">
+      <p>&copy; 2025 Clínica Médica MAD. Todos os direitos reservados.</p>
+    </div>
+  </div>
 
   <script src="Telainicial.js"></script>
 </body>

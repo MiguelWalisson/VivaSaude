@@ -146,6 +146,10 @@
       box-shadow: 0 0 12px rgba(0, 0, 0, 0.08);
       background-color: #fff;
       overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      position: relative;
       text-align: center;
     }
 
@@ -162,12 +166,68 @@
       padding: 12px;
     }
 
+    .carousel-item::before {
+      content: "";
+      display: block;
+      padding-top: 100%;
+    }
+
+    .carousel-item > *:not(p) {
+      position: relative;
+      z-index: 2;
+    }
+
+    .medicos-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 30px;
+      margin-top: 40px;
+    }
+
+    .medico-card {
+      background-color: #f9f9f9;
+      border-radius: 10px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+      transition: transform 0.3s;
+    }
+
+    .medico-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .medico-card img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 15px;
+    }
+
+    .medico-card h3 {
+      font-size: 18px;
+      color: #007f7f;
+      margin-bottom: 5px;
+    }
+
+    .medico-card p {
+      margin-bottom: 8px;
+      font-weight: 500;
+    }
+
+    .medico-card span {
+      font-size: 14px;
+      color: #666;
+    }
+
     .footer {
       background-color: #1c7e81;
       color: white;
       text-align: center;
       padding: 60px 20px;
       font-size: 16px;
+      margin-top: 40px;
     }
 
     @media (max-width: 768px) {
@@ -195,50 +255,6 @@
         flex: 0 0 240px;
       }
     }
-    .medicos-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 30px;
-  margin-top: 40px;
-}
-
-.medico-card {
-  background-color: #f9f9f9;
-  border-radius: 10px;
-  padding: 20px;
-  text-align: center;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.06);
-  transition: transform 0.3s;
-}
-
-.medico-card:hover {
-  transform: translateY(-5px);
-}
-
-.medico-card img {
-  width: 100%;
-  height: 220px;
-  object-fit: cover;
-  border-radius: 10px;
-  margin-bottom: 15px;
-}
-
-.medico-card h3 {
-  font-size: 18px;
-  color: #007f7f;
-  margin-bottom: 5px;
-}
-
-.medico-card p {
-  margin-bottom: 8px;
-  font-weight: 500;
-}
-
-.medico-card span {
-  font-size: 14px;
-  color: #666;
-}
-
   </style>
 </head>
 <body>
@@ -251,8 +267,8 @@
     <nav>
       <a href="#bemvindo">Home</a>
       <a href="#servicos">Serviços</a>
-      <a href="#sobre">Sobre</a>
-      <a href="#medicos">Conheça nossos médicos</a>
+      <a href="#sobre">Sobre Nós</a>
+      <a href="#">Contato</a>
       <a href="/Pages/loginPaciente.html" class="botao-paciente">Sou Paciente</a>
     </nav>
   </header>
@@ -280,35 +296,29 @@
     <div class="carousel-wrapper">
       <div class="carousel" id="carousel">
         <a href="/Pages/psicologia.html" class="carousel-item">
-  <img src="/assents/images/psicologia.png" alt="Psicologia">
-  <p>Psicologia</p>
-</a>
-
-<a href="/Pages/geriatria.html" class="carousel-item">
-  <img src="/assents/images/geriatria.png" alt="Geriatria">
-  <p>Geriatria</p>
-</a>
-
-<a href="/Pages/nutricao.html" class="carousel-item">
-  <img src="/assents/images/nutrição.png" alt="Nutrição">
-  <p>Nutrição</p>
-</a>
-
-<a href="/Pages/ginecologia.html" class="carousel-item">
-  <img src="/assents/images/ginecologia.png" alt="Ginecologia">
-  <p>Ginecologia</p>
-</a>
-
-<a href="/Pages/consulta-medica.html" class="carousel-item">
-  <img src="/assents/images/consulta-medica.png" alt="Consulta Médica">
-  <p>Consulta Médica</p>
-</a>
-
-<a href="/Pages/exames.html" class="carousel-item">
-  <img src="/assents/images/exame.png" alt="Exames">
-  <p>Exames Laboratoriais</p>
-</a>
-
+          <img src="/assents/images/psicologia.png" alt="Psicologia" />
+          <p>Psicologia</p>
+        </a>
+        <a href="/Pages/geriatria.html" class="carousel-item">
+          <img src="/assents/images/geriatria.png" alt="Geriatria" />
+          <p>Geriatria</p>
+        </a>
+        <a href="/Pages/nutricao.html" class="carousel-item">
+          <img src="/assents/images/nutrição.png" alt="Nutrição" />
+          <p>Nutrição</p>
+        </a>
+        <a href="/Pages/ginecologia.html" class="carousel-item">
+          <img src="/assents/images/ginecologia.png" alt="Ginecologia" />
+          <p>Ginecologia</p>
+        </a>
+        <a href="/Pages/consulta-medica.html" class="carousel-item">
+          <img src="/assents/images/consulta-medica.png" alt="Consulta Médica" />
+          <p>Consulta Médica</p>
+        </a>
+        <a href="/Pages/exames.html" class="carousel-item">
+          <img src="/assents/images/exame.png" alt="Exames" />
+          <p>Exames Laboratoriais</p>
+        </a>
       </div>
     </div>
   </section>
@@ -323,48 +333,49 @@
       Nosso atendimento é humanizado e individualizado, sempre buscando o bem-estar e a saúde de quem mais importa: você.
     </p>
   </section>
-  <section class="section" id="medicos">
-  <h2>Conheça nossos Médicos</h2>
-  <div class="medicos-grid">
-    <div class="medico-card">
-      <img src="/assents/images/medico1.png" alt="Dr. João Carvalho">
-      <h3>Dr. João Carvalho</h3>
-      <p>Psicólogo</p>
-      <span>CRP: 04/12345</span>
-    </div>
-    <div class="medico-card">
-      <img src="/assents/images/medico2.png" alt="Dra. Marina Silva">
-      <h3>Dra. Marina Silva</h3>
-      <p>Geriatra</p>
-      <span>CRM: 123456/MG</span>
-    </div>
-    <div class="medico-card">
-      <img src="/assents/images/medico3.png" alt="Dr. Lucas Almeida">
-      <h3>Dr. Lucas Almeida</h3>
-      <p>Nutricionista</p>
-      <span>CRN: 78910</span>
-    </div>
-    <div class="medico-card">
-      <img src="/assents/images/medico4.png" alt="Dra. Fernanda Costa">
-      <h3>Dra. Fernanda Costa</h3>
-      <p>Ginecologista</p>
-      <span>CRM: 112233/MG</span>
-    </div>
-    <div class="medico-card">
-      <img src="/assents/images/medico5.png" alt="Dr. Rafael Borges">
-      <h3>Dr. Rafael Borges</h3>
-      <p>Clínico Geral</p>
-      <span>CRM: 445566/MG</span>
-    </div>
-    <div class="medico-card">
-      <img src="/assents/images/medico6.png" alt="Dra. Aline Mendes">
-      <h3>Dra. Aline Mendes</h3>
-      <p>Especialista em Exames</p>
-      <span>CRM: 998877/MG</span>
-    </div>
-  </div>
-</section>
 
+  <!-- MÉDICOS -->
+  <section class="section" id="medicos">
+    <h2>Conheça nossos Médicos</h2>
+    <div class="medicos-grid">
+      <div class="medico-card">
+        <img src="/assents/images/medico1.png" alt="Dr. João Carvalho" />
+        <h3>Dr. João Carvalho</h3>
+        <p>Psicólogo</p>
+        <span>CRP: 04/12345</span>
+      </div>
+      <div class="medico-card">
+        <img src="/assents/images/medico2.png" alt="Dra. Marina Silva" />
+        <h3>Dra. Marina Silva</h3>
+        <p>Geriatra</p>
+        <span>CRM: 123456/MG</span>
+      </div>
+      <div class="medico-card">
+        <img src="/assents/images/medico3.png" alt="Dr. Lucas Almeida" />
+        <h3>Dr. Lucas Almeida</h3>
+        <p>Nutricionista</p>
+        <span>CRN: 78910</span>
+      </div>
+      <div class="medico-card">
+        <img src="/assents/images/medico4.png" alt="Dra. Fernanda Costa" />
+        <h3>Dra. Fernanda Costa</h3>
+        <p>Ginecologista</p>
+        <span>CRM: 112233/MG</span>
+      </div>
+      <div class="medico-card">
+        <img src="/assents/images/medico5.png" alt="Dr. Rafael Borges" />
+        <h3>Dr. Rafael Borges</h3>
+        <p>Clínico Geral</p>
+        <span>CRM: 445566/MG</span>
+      </div>
+      <div class="medico-card">
+        <img src="/assents/images/medico6.png" alt="Dra. Aline Mendes" />
+        <h3>Dra. Aline Mendes</h3>
+        <p>Especialista em Exames</p>
+        <span>CRM: 998877/MG</span>
+      </div>
+    </div>
+  </section>
 
   <!-- RODAPÉ -->
   <footer class="footer">
@@ -377,18 +388,20 @@
 
   <!-- JS do Carrossel e Cabeçalho -->
   <script>
+    // Carrossel automático
     const carousel = document.getElementById('carousel');
     const totalItems = carousel.children.length;
     let currentIndex = 0;
 
     function moveSlide() {
-      const visibleCount = Math.floor(carousel.parentElement.offsetWidth / 320);
+      const visibleCount = Math.floor(carousel.parentElement.offsetWidth / 340);
       currentIndex = (currentIndex + 1) % (totalItems - visibleCount + 1);
-      carousel.style.transform = `translateX(-${currentIndex * 320}px)`;
+      carousel.style.transform = `translateX(-${currentIndex * 340}px)`;
     }
 
     setInterval(moveSlide, 4000);
 
+    // Esconder e mostrar o cabeçalho com scroll
     const topbar = document.querySelector('.topbar');
     let lastScrollY = window.scrollY;
 
@@ -401,8 +414,20 @@
       lastScrollY = window.scrollY;
     });
 
+    // Mostrar topbar ao passar o mouse
     topbar.addEventListener('mouseenter', () => {
       topbar.classList.remove('hidden');
+    });
+
+    // Rolagem suave para seções
+    document.querySelectorAll('nav a[href^="#"]').forEach(link => {
+      link.addEventListener('click', e => {
+        e.preventDefault();
+        const target = document.querySelector(link.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
     });
   </script>
 </body>
