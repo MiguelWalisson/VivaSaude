@@ -1,11 +1,13 @@
+
+// Adicione o SweetAlert2 no seu HTML, não neste arquivo JS!
+ <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('consultaForm');
-  const mensagem = document.getElementById('mensagem');
 
   form.addEventListener('submit', (e) => {
     e.preventDefault();
 
-    
     const dadosConsulta = {
       paciente: document.getElementById('paciente').value,
       data: document.getElementById('data').value,
@@ -15,8 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
       status: document.getElementById('status').value
     };
 
-    
-    fetch('https:/api/consultas', {
+    fetch('https://localhost:8080/consultas', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -30,13 +31,23 @@ document.addEventListener('DOMContentLoaded', () => {
       return response.json();
     })
     .then(data => {
-      mensagem.textContent = "Consulta agendada com sucesso!";
-      mensagem.style.color = "green";
+      Swal.fire({
+        icon: 'success',
+        title: 'Sucesso!',
+        text: 'Consulta agendada com sucesso!',
+        timer: 3000,
+        showConfirmButton: false,
+        timerProgressBar: true
+      });
       form.reset();
     })
     .catch(error => {
-      mensagem.textContent = "Erro ao agendar consulta. Tente novamente.";
-      mensagem.style.color = "red";
+      Swal.fire({
+        icon: 'error',
+        title: 'Erro!',
+        text: 'Erro ao agendar consulta. Tente novamente.',
+        showConfirmButton: true
+      });
       console.error(error);
     });
   });
