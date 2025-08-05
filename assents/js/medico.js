@@ -4,22 +4,20 @@ const form = document.getElementById('medicoForm');
 const mensagem = document.getElementById('mensagem');
 const tabelaCorpo = document.querySelector('#tabela-medicos tbody');
 
-let idEdicao = null; // usado para saber se é edição ou novo cadastro
+let idEdicao = null; 
 
-// Exibe mensagem no formulário
 function exibirMensagem(texto, erro = false) {
   mensagem.textContent = texto;
   mensagem.style.color = erro ? 'red' : 'green';
   setTimeout(() => mensagem.textContent = '', 3000);
 }
 
-// Limpa o formulário
+
 function limparFormulario() {
   form.reset();
   idEdicao = null;
 }
 
-// Preenche formulário para editar
 function preencherFormulario(medico) {
   form.nome.value = medico.nome;
   form.crm.value = medico.crm;
@@ -30,7 +28,6 @@ function preencherFormulario(medico) {
   idEdicao = medico.id;
 }
 
-// Cadastrar ou atualizar médico
 form.addEventListener('submit', async (e) => {
   e.preventDefault();
 
@@ -66,7 +63,7 @@ form.addEventListener('submit', async (e) => {
   }
 });
 
-// Listar médicos
+
 async function listarMedicos() {
   try {
     const resposta = await fetch('http://localhost:8080/api/medicos');
@@ -94,7 +91,7 @@ async function listarMedicos() {
   }
 }
 
-// Buscar médico e preencher formulário
+
 window.editarMedico = async function (id) {
   try {
     const resposta = await fetch(`http://localhost:8080/api/medicos/${id}`);
@@ -105,7 +102,7 @@ window.editarMedico = async function (id) {
   }
 };
 
-// Excluir médico
+
 window.excluirMedico = async function (id) {
   const confirmar = confirm('Deseja realmente excluir este médico?');
   if (!confirmar) return;
@@ -124,5 +121,4 @@ window.excluirMedico = async function (id) {
   }
 };
 
-// Inicia listagem ao carregar
 window.addEventListener('DOMContentLoaded', listarMedicos);
