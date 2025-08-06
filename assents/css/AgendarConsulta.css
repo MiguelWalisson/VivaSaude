@@ -139,3 +139,67 @@ input[type="time"] {
   width: 100%;
 }
 
+/* ====== ESTILO DA TABELA DE AGENDAMENTOS ====== */
+#tabela-agendamentos {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 30px;
+  background-color: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,168,168,0.08);
+}
+
+#tabela-agendamentos th, #tabela-agendamentos td {
+  padding: 14px 10px;
+  text-align: left;
+}
+
+#tabela-agendamentos th {
+  background-color: #00A8A8;
+  color: #fff;
+  font-weight: 600;
+  font-size: 15px;
+  border-bottom: 2px solid #e0e0e0;
+}
+
+#tabela-agendamentos tr {
+  border-bottom: 1px solid #e0e0e0;
+}
+
+#tabela-agendamentos tr:last-child {
+  border-bottom: none;
+}
+
+#tabela-agendamentos td {
+  font-size: 14px;
+  color: #333;
+}
+
+#tabela-agendamentos button {
+  background-color: #00A8A8;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 14px;
+  font-size: 13px;
+  cursor: pointer;
+  margin-right: 6px;
+  transition: background 0.2s;
+}
+
+#tabela-agendamentos button:hover {
+  background-color: #0e8f8f;
+}
+
+/* Responsivo para tabela */
+@media (max-width: 700px) {
+  #tabela-agendamentos th, #tabela-agendamentos td {
+    padding: 10px 4px;
+    font-size: 12px;
+  }
+  #tabela-agendamentos button {
+    padding: 5px 8px;
+    font-size: 11px;
+  }
+}
