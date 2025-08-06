@@ -87,7 +87,7 @@
         </tr>
       </thead>
       <tbody>
-        <!-- Linhas via JS -->
+
       </tbody>
     </table>
     <div id="sem-convenio" style="display:none;">
@@ -103,7 +103,7 @@
   <script>
     lucide.createIcons();
 
-    // Consome a API para listar convênios do usuário
+
     const API_URL = 'http://localhost:8080/api/cadastroconvenio';
     const tabela = document.getElementById('tabela-convenios');
     const tbody = tabela.querySelector('tbody');
@@ -145,5 +145,6 @@
 
     fetchConvenios();
   </script>
+  <script src="/assents/js/convenios.js"></script>
 </body>
 </html>
