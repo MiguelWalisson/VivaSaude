@@ -76,25 +76,6 @@
         </div>
       </div>
     </div>
-
-    <section>
-      <h2>Consultas Agendadas</h2>
-      <table id="tabela-agendamentos">
-        <thead>
-          <tr>
-            <th>Tipo</th>
-            <th>Convênio</th>
-            <th>Especialidade</th>
-            <th>Data</th>
-            <th>Horário</th>
-            <th>Médico</th>
-            <th>Ações</th>
-          </tr>
-        </thead>
-        <tbody>
-        </tbody>
-      </table>
-    </section>
   </main>
 
   <script>
@@ -103,9 +84,6 @@
     const radios = document.querySelectorAll('input[name="tipo"]');
     const campoConvenio = document.getElementById('campo-convenio');
     const btnAgendar = document.querySelector('.btn-agendar');
-    const tabela = document.getElementById('tabela-agendamentos').querySelector('tbody');
-    let agendamentos = [];
-    let indexEditando = null;
 
     // Exibe ou oculta o campo convênio
     radios.forEach(radio => {
@@ -114,7 +92,6 @@
       });
     });
 
-    // Adicionar ou atualizar agendamento
     btnAgendar.addEventListener('click', () => {
       const tipo = document.querySelector('input[name="tipo"]:checked')?.value;
       const convenio = document.getElementById('select-convenio').value || '-';
@@ -128,65 +105,10 @@
         return;
       }
 
-      const agendamento = { tipo, convenio: tipo === 'Convênio' ? convenio : '-', especialidade, data, hora, medico };
-
-      if (indexEditando === null) {
-        agendamentos.push(agendamento);
-      } else {
-        agendamentos[indexEditando] = agendamento;
-      }
-
-      renderTabela();
+      alert("Consulta agendada com sucesso!");
       limparFormulario();
     });
 
-    // Renderiza a tabela de agendamentos
-    function renderTabela() {
-      tabela.innerHTML = '';
-      agendamentos.forEach((agendamento, idx) => {
-        const linha = document.createElement('tr');
-        linha.innerHTML = `
-          <td>${agendamento.tipo}</td>
-          <td>${agendamento.convenio}</td>
-          <td>${agendamento.especialidade}</td>
-          <td>${agendamento.data}</td>
-          <td>${agendamento.hora}</td>
-          <td>${agendamento.medico}</td>
-          <td>
-            <button type="button" onclick="editarAgendamento(${idx})">Editar</button>
-            <button type="button" onclick="excluirAgendamento(${idx})">Excluir</button>
-          </td>
-        `;
-        tabela.appendChild(linha);
-      });
-    }
-
-    // Editar agendamento
-    window.editarAgendamento = function(idx) {
-      const agendamento = agendamentos[idx];
-      document.querySelectorAll('input[name="tipo"]').forEach(r => {
-        r.checked = r.value === agendamento.tipo;
-      });
-      campoConvenio.style.display = agendamento.tipo === 'Convênio' ? 'block' : 'none';
-      document.getElementById('select-convenio').value = agendamento.convenio !== '-' ? agendamento.convenio : '';
-      document.getElementById('especialidade').value = agendamento.especialidade;
-      document.getElementById('data-consulta').value = agendamento.data;
-      document.getElementById('hora-consulta').value = agendamento.hora;
-      document.getElementById('medicos-disponiveis').value = agendamento.medico;
-      btnAgendar.textContent = 'Salvar Alterações';
-      indexEditando = idx;
-    };
-
-    // Excluir agendamento
-    window.excluirAgendamento = function(idx) {
-      if (confirm('Tem certeza que deseja excluir este agendamento?')) {
-        agendamentos.splice(idx, 1);
-        renderTabela();
-        limparFormulario();
-      }
-    };
-
-    // Limpa o formulário
     function limparFormulario() {
       document.querySelectorAll('input[name="tipo"]').forEach(r => r.checked = false);
       campoConvenio.style.display = 'none';
@@ -196,12 +118,7 @@
       document.getElementById('hora-consulta').value = '';
       document.getElementById('medicos-disponiveis').value = '';
       btnAgendar.textContent = 'Agendar';
-      indexEditando = null;
     }
-
-    // Inicializa a tabela vazia
-    renderTabela();
   </script>
-  <script src="/assents/js/agendarConsulta.js"></script>
 </body>
 </html>
