@@ -1,9 +1,9 @@
 'use strict';
 
-// URL da sua API
+
 const API_URL = 'http://localhost:8080/api/agendaconsulta';
 
-// Seletores dos elementos
+
 const radios = document.querySelectorAll('input[name="tipo"]');
 const campoConvenio = document.getElementById('campo-convenio');
 const btnAgendar = document.querySelector('.btn-agendar');
@@ -17,14 +17,14 @@ const selectMedico = document.getElementById('medicos-disponiveis');
 let agendamentos = [];
 let indexEditando = null;
 
-// Exibe ou oculta o campo convênio
+
 radios.forEach(radio => {
   radio.addEventListener('change', () => {
     campoConvenio.style.display = radio.value === 'Convênio' ? 'block' : 'none';
   });
 });
 
-// ------------------- READ (Buscar todos) -------------------
+
 async function fetchAgendamentos() {
   try {
     const res = await fetch(API_URL);
@@ -35,7 +35,7 @@ async function fetchAgendamentos() {
   }
 }
 
-// ------------------- CREATE (Cadastrar) --------------------
+
 async function criarAgendamento(agendamento) {
   try {
     const res = await fetch(API_URL, {
@@ -49,7 +49,6 @@ async function criarAgendamento(agendamento) {
   }
 }
 
-// ------------------- UPDATE (Atualizar) --------------------
 async function atualizarAgendamento(id, agendamento) {
   try {
     const res = await fetch(`${API_URL}/${id}`, {
@@ -63,7 +62,6 @@ async function atualizarAgendamento(id, agendamento) {
   }
 }
 
-// ------------------- DELETE (Excluir) ----------------------
 async function deletarAgendamento(id) {
   try {
     await fetch(`${API_URL}/${id}`, { method: 'DELETE' });
@@ -72,7 +70,6 @@ async function deletarAgendamento(id) {
   }
 }
 
-// Renderiza a tabela de agendamentos
 function renderTabela() {
   tabela.innerHTML = '';
   if (!agendamentos || agendamentos.length === 0) {
@@ -99,7 +96,7 @@ function renderTabela() {
   });
 }
 
-// ------------------- CREATE e UPDATE -----------------------
+
 btnAgendar.addEventListener('click', async () => {
   const tipo = document.querySelector('input[name="tipo"]:checked')?.value;
   const convenio = selectConvenio.value || '-';
@@ -122,12 +119,11 @@ btnAgendar.addEventListener('click', async () => {
     medico
   };
 
-  // CREATE
   if (indexEditando === null) {
     await criarAgendamento(agendamento);
     alert('Agendamento cadastrado com sucesso!');
   } else {
-    // UPDATE
+
     await atualizarAgendamento(indexEditando, agendamento);
     alert('Agendamento atualizado com sucesso!');
   }
@@ -136,7 +132,7 @@ btnAgendar.addEventListener('click', async () => {
   fetchAgendamentos();
 });
 
-// ------------------- EDITAR e DELETE -----------------------
+
 window.editarAgendamento = function(id) {
   // Busca o agendamento pelo id
   const agendamento = agendamentos.find(a => String(a.id) === String(id));
@@ -157,13 +153,13 @@ window.editarAgendamento = function(id) {
 
 window.excluirAgendamento = async function(id) {
   if (confirm('Tem certeza que deseja excluir este agendamento?')) {
-    await deletarAgendamento(id); // DELETE
+    await deletarAgendamento(id); 
     limparFormulario();
     fetchAgendamentos();
   }
 };
 
-// Limpa o formulário
+
 function limparFormulario() {
   document.querySelectorAll('input[name="tipo"]').forEach(r => r.checked = false);
   campoConvenio.style.display = 'none';
@@ -176,5 +172,5 @@ function limparFormulario() {
   indexEditando = null;
 }
 
-// Inicializa a tabela ao carregar a página
+
 fetchAgendamentos();

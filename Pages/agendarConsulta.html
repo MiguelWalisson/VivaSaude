@@ -85,7 +85,6 @@
     const campoConvenio = document.getElementById('campo-convenio');
     const btnAgendar = document.querySelector('.btn-agendar');
 
-    // Exibe ou oculta o campo convênio
     radios.forEach(radio => {
       radio.addEventListener('change', () => {
         campoConvenio.style.display = radio.value === 'Convênio' ? 'block' : 'none';
@@ -120,5 +119,6 @@
       btnAgendar.textContent = 'Agendar';
     }
   </script>
+  <script src="/assents/js/agendarConsulta.js"></script>
 </body>
 </html>
