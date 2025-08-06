@@ -6,53 +6,57 @@ document.addEventListener('DOMContentLoaded', () => {
   let medicos = [];
   let editIndex = null;
 
-  // Funções para integração futura com API REST -----------------
-  const API_URL = 'https://sua-api.com/medicos'; // Troque para sua URL real
+  // URL da sua API
+  const API_URL = 'http://localhost:8080/api/medico';
 
+  // ------------------- READ (Buscar todos) -------------------
   async function fetchMedicos() {
-    // try {
-    //   const res = await fetch(API_URL);
-    //   medicos = await res.json();
-    //   renderTabela();
-    // } catch (e) {
-    //   exibirMensagem('Erro ao buscar médicos na API', true);
-    // }
+    try {
+      const res = await fetch(API_URL);
+      medicos = await res.json();
+      renderTabela();
+    } catch (e) {
+      exibirMensagem('Erro ao buscar médicos na API', true);
+    }
   }
 
+  // ------------------- CREATE (Cadastrar) --------------------
   async function criarMedico(medico) {
-    // try {
-    //   const res = await fetch(API_URL, {
-    //     method: 'POST',
-    //     headers: { 'Content-Type': 'application/json' },
-    //     body: JSON.stringify(medico)
-    //   });
-    //   return await res.json();
-    // } catch (e) {
-    //   exibirMensagem('Erro ao cadastrar médico na API', true);
-    // }
+    try {
+      const res = await fetch(API_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(medico)
+      });
+      return await res.json();
+    } catch (e) {
+      exibirMensagem('Erro ao cadastrar médico na API', true);
+    }
   }
 
+  // ------------------- UPDATE (Atualizar) --------------------
   async function atualizarMedico(id, medico) {
-    // try {
-    //   const res = await fetch(`${API_URL}/${id}`, {
-    //     method: 'PUT',
-    //     headers: { 'Content-Type': 'application/json' },
-    //     body: JSON.stringify(medico)
-    //   });
-    //   return await res.json();
-    // } catch (e) {
-    //   exibirMensagem('Erro ao atualizar médico na API', true);
-    // }
+    try {
+      const res = await fetch(`${API_URL}/${id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(medico)
+      });
+      return await res.json();
+    } catch (e) {
+      exibirMensagem('Erro ao atualizar médico na API', true);
+    }
   }
 
+  // ------------------- DELETE (Excluir) ----------------------
   async function deletarMedico(id) {
-    // try {
-    //   await fetch(`${API_URL}/${id}`, { method: 'DELETE' });
-    // } catch (e) {
-    //   exibirMensagem('Erro ao excluir médico na API', true);
-    // }
+    try {
+      await fetch(`${API_URL}/${id}`, { method: 'DELETE' });
+    } catch (e) {
+      exibirMensagem('Erro ao excluir médico na API', true);
+    }
   }
-  // -------------------------------------------------------------
+  // -----------------------------------------------------------
 
   function exibirMensagem(msg, erro = false) {
     mensagem.textContent = msg;
@@ -82,14 +86,15 @@ document.addEventListener('DOMContentLoaded', () => {
         <td>${medico.email}</td>
         <td>${medico.telefone}</td>
         <td>
-          <button type="button" data-edit="${idx}">Editar</button>
-          <button type="button" data-del="${idx}">Excluir</button>
+          <button type="button" data-edit="${medico.id}">Editar</button>
+          <button type="button" data-del="${medico.id}">Excluir</button>
         </td>
       `;
       tbody.appendChild(tr);
     });
   }
 
+  // ------------------- CREATE e UPDATE -----------------------
   form.addEventListener('submit', async function(e) {
     e.preventDefault();
     const medico = {
@@ -102,42 +107,41 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     if (editIndex === null) {
-      // await criarMedico(medico); // Descomente para usar API
-      medicos.push(medico);
+      await criarMedico(medico); // CREATE
       exibirMensagem('Médico cadastrado com sucesso!');
     } else {
-      // await atualizarMedico(editIndex, medico); // Descomente para usar API
-      medicos[editIndex] = medico;
+      await atualizarMedico(editIndex, medico); // UPDATE
       exibirMensagem('Médico atualizado com sucesso!');
     }
     limparFormulario();
-    renderTabela();
+    fetchMedicos(); // Atualiza a lista após criar/atualizar
   });
 
+  // ------------------- EDITAR e DELETE -----------------------
   tbody.addEventListener('click', async function(e) {
     if (e.target.hasAttribute('data-edit')) {
-      editIndex = Number(e.target.getAttribute('data-edit'));
-      const medico = medicos[editIndex];
+      const id = e.target.getAttribute('data-edit');
+      const medico = medicos.find(m => m.id == id);
+      if (!medico) return;
+      editIndex = medico.id;
       form.nome.value = medico.nome;
       form.crm.value = medico.crm;
       form.especialidade.value = medico.especialidade;
       form.email.value = medico.email;
       form.telefone.value = medico.telefone;
-      form.senha.value = medico.senha;
+      form.senha.value = medico.senha || '';
       form.querySelector('button[type="submit"]').textContent = 'Salvar';
     }
     if (e.target.hasAttribute('data-del')) {
-      const idx = Number(e.target.getAttribute('data-del'));
+      const id = e.target.getAttribute('data-del');
       if (confirm('Deseja excluir este médico?')) {
-        // await deletarMedico(idx); // Descomente para usar API
-        medicos.splice(idx, 1);
+        await deletarMedico(id); // DELETE
         exibirMensagem('Médico excluído!');
         limparFormulario();
-        renderTabela();
+        fetchMedicos(); // Atualiza a lista após excluir
       }
     }
   });
 
-  // fetchMedicos(); // Descomente para buscar da API ao carregar
-  renderTabela();
+  fetchMedicos(); // READ ao carregar a página
 });
