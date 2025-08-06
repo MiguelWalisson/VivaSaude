@@ -3,23 +3,147 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Convênio Médico</title>
+  <title>Convênios Médicos</title>
   <link rel="stylesheet" href="/assents/css/Convenios.css" />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
   <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    .convenio-container {
+      max-width: 700px;
+      margin: 40px auto;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,168,168,0.08);
+      padding: 32px 24px;
+      text-align: center;
+    }
+    #tabela-convenios {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 30px;
+      background: #fff;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,168,168,0.08);
+    }
+    #tabela-convenios th, #tabela-convenios td {
+      padding: 12px 8px;
+      text-align: left;
+    }
+    #tabela-convenios th {
+      background: #00A8A8;
+      color: #fff;
+      font-weight: 600;
+      font-size: 15px;
+    }
+    #tabela-convenios tr {
+      border-bottom: 1px solid #e0e0e0;
+    }
+    #tabela-convenios td {
+      font-size: 14px;
+      color: #333;
+    }
+    .btn-convenio {
+      background: #00A8A8;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 12px 28px;
+      font-size: 16px;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 500;
+      margin-top: 24px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .btn-convenio:hover {
+      background: #0e8f8f;
+    }
+    .icon-info {
+      width: 32px;
+      height: 32px;
+      color: #00A8A8;
+      margin: 16px 0;
+    }
+    .mensagem {
+      margin-top: 10px;
+      font-size: 14px;
+      color: green;
+      font-weight: 500;
+    }
+  </style>
 </head>
 <body>
   <div class="convenio-container">
-    <h1>Convênio Médico</h1>
-    <p>Você ainda não possui um convênio cadastrado</p>
-    <i data-lucide="info" class="icon-info"></i>
-    <button class="btn-convenio" onclick="window.location.href='cadastrarConvenio.html'">
-      Cadastrar um convênio
-    </button>
+    <h1>Convênios Médicos</h1>
+    <div id="mensagem" class="mensagem"></div>
+    <table id="tabela-convenios" style="display:none;">
+      <thead>
+        <tr>
+          <th>Convênio</th>
+          <th>Plano</th>
+          <th>Carteirinha</th>
+          <th>Validade</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Linhas via JS -->
+      </tbody>
+    </table>
+    <div id="sem-convenio" style="display:none;">
+      <p>Você ainda não possui um convênio cadastrado</p>
+      <i data-lucide="info" class="icon-info"></i>
+      <br>
+      <button class="btn-convenio" onclick="window.location.href='cadastrarConvenio.html'">
+        Cadastrar um convênio
+      </button>
+    </div>
   </div>
 
   <script>
     lucide.createIcons();
+
+    // Consome a API para listar convênios do usuário
+    const API_URL = 'http://localhost:8080/api/cadastroconvenio';
+    const tabela = document.getElementById('tabela-convenios');
+    const tbody = tabela.querySelector('tbody');
+    const semConvenio = document.getElementById('sem-convenio');
+    const mensagem = document.getElementById('mensagem');
+
+    async function fetchConvenios() {
+      try {
+        const res = await fetch(API_URL);
+        const convenios = await res.json();
+        renderTabela(convenios);
+      } catch (e) {
+        mensagem.textContent = 'Erro ao buscar convênios na API';
+        tabela.style.display = 'none';
+        semConvenio.style.display = '';
+      }
+    }
+
+    function renderTabela(convenios) {
+      tbody.innerHTML = '';
+      if (!convenios || convenios.length === 0) {
+        tabela.style.display = 'none';
+        semConvenio.style.display = '';
+        return;
+      }
+      tabela.style.display = '';
+      semConvenio.style.display = 'none';
+      convenios.forEach(conv => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${conv.convenio}</td>
+          <td>${conv.plano}</td>
+          <td>${conv.carteirinha}</td>
+          <td>${conv.validade}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    fetchConvenios();
   </script>
 </body>
 </html>
