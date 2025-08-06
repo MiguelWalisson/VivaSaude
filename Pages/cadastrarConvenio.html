@@ -7,54 +7,197 @@
   <link rel="stylesheet" href="/assents/css/CadastrarConvenio.css">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
   <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    /* Estilo básico para tabela de convênios */
+    #tabela-convenios {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 30px;
+      background: #fff;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,168,168,0.08);
+    }
+    #tabela-convenios th, #tabela-convenios td {
+      padding: 12px 8px;
+      text-align: left;
+    }
+    #tabela-convenios th {
+      background: #00A8A8;
+      color: #fff;
+      font-weight: 600;
+      font-size: 15px;
+    }
+    #tabela-convenios tr {
+      border-bottom: 1px solid #e0e0e0;
+    }
+    #tabela-convenios td {
+      font-size: 14px;
+      color: #333;
+    }
+    #tabela-convenios button {
+      background: #00A8A8;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      padding: 5px 12px;
+      font-size: 13px;
+      cursor: pointer;
+      margin-right: 6px;
+      transition: background 0.2s;
+    }
+    #tabela-convenios button:hover {
+      background: #0e8f8f;
+    }
+    .mensagem {
+      margin-top: 10px;
+      font-size: 14px;
+      color: green;
+      font-weight: 500;
+    }
+  </style>
 </head>
 <body>
-
-
   <div class="container">
     <h1>Cadastro de convênio</h1>
-
-    <form class="formulario">
+    <form class="formulario" id="formConvenio">
       <div class="linha">
         <div class="campo">
           <label for="convenio">Convênio</label>
-          <select id="convenio" name="convenio">
-            <option>Selecione</option>
+          <select id="convenio" name="convenio" required>
+            <option value="">Selecione</option>
             <option>Unimed</option>
             <option>Bradesco Saúde</option>
             <option>Amil</option>
           </select>
         </div>
-
         <div class="campo">
           <label for="plano">Plano</label>
-          <select id="plano" name="plano">
-            <option>Selecione</option>
+          <select id="plano" name="plano" required>
+            <option value="">Selecione</option>
             <option>Nacional</option>
             <option>Regional</option>
             <option>Básico</option>
           </select>
         </div>
       </div>
-
       <div class="linha">
         <div class="campo">
           <label for="carteirinha">Número da carteirinha</label>
-          <input type="text" id="carteirinha" name="carteirinha">
+          <input type="text" id="carteirinha" name="carteirinha" required>
         </div>
-
         <div class="campo">
           <label for="validade">Validade da carteirinha</label>
-          <input type="date" id="validade" name="validade">
+          <input type="date" id="validade" name="validade" required>
         </div>
       </div>
-
       <button type="submit" class="btn">Cadastrar Convênio</button>
+      <div class="mensagem" id="mensagem"></div>
     </form>
+
+    <h2 style="margin-top:40px;">Convênios cadastrados</h2>
+    <table id="tabela-convenios">
+      <thead>
+        <tr>
+          <th>Convênio</th>
+          <th>Plano</th>
+          <th>Carteirinha</th>
+          <th>Validade</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Linhas serão inseridas via JS -->
+      </tbody>
+    </table>
   </div>
 
   <script>
     lucide.createIcons();
+
+    const form = document.getElementById('formConvenio');
+    const mensagem = document.getElementById('mensagem');
+    const tabela = document.getElementById('tabela-convenios').querySelector('tbody');
+    let convenios = [];
+    let editIndex = null;
+
+    function renderTabela() {
+      tabela.innerHTML = '';
+      if (convenios.length === 0) {
+        tabela.innerHTML = `<tr><td colspan="5" style="text-align:center;">Nenhum convênio cadastrado.</td></tr>`;
+        return;
+      }
+      convenios.forEach((conv, idx) => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${conv.convenio}</td>
+          <td>${conv.plano}</td>
+          <td>${conv.carteirinha}</td>
+          <td>${conv.validade}</td>
+          <td>
+            <button type="button" onclick="editarConvenio(${idx})">Editar</button>
+            <button type="button" onclick="excluirConvenio(${idx})">Excluir</button>
+          </td>
+        `;
+        tabela.appendChild(tr);
+      });
+    }
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const convenio = form.convenio.value;
+      const plano = form.plano.value;
+      const carteirinha = form.carteirinha.value.trim();
+      const validade = form.validade.value;
+
+      if (!convenio || !plano || !carteirinha || !validade) {
+        mensagem.textContent = "Preencha todos os campos!";
+        mensagem.style.color = "red";
+        return;
+      }
+
+      const novoConvenio = { convenio, plano, carteirinha, validade };
+
+      if (editIndex === null) {
+        convenios.push(novoConvenio);
+        mensagem.textContent = "Convênio cadastrado com sucesso!";
+      } else {
+        convenios[editIndex] = novoConvenio;
+        mensagem.textContent = "Convênio alterado com sucesso!";
+      }
+      mensagem.style.color = "green";
+      form.reset();
+      editIndex = null;
+      form.querySelector('button[type="submit"]').textContent = 'Cadastrar Convênio';
+      renderTabela();
+      setTimeout(() => mensagem.textContent = '', 2000);
+    });
+
+    window.editarConvenio = function(idx) {
+      const conv = convenios[idx];
+      form.convenio.value = conv.convenio;
+      form.plano.value = conv.plano;
+      form.carteirinha.value = conv.carteirinha;
+      form.validade.value = conv.validade;
+      editIndex = idx;
+      form.querySelector('button[type="submit"]').textContent = 'Salvar Alterações';
+    };
+
+    window.excluirConvenio = function(idx) {
+      if (confirm('Deseja excluir este convênio?')) {
+        convenios.splice(idx, 1);
+        renderTabela();
+        form.reset();
+        editIndex = null;
+        mensagem.textContent = "Convênio excluído!";
+        mensagem.style.color = "green";
+        setTimeout(() => mensagem.textContent = '', 2000);
+        form.querySelector('button[type="submit"]').textContent = 'Cadastrar Convênio';
+      }
+    };
+
+    renderTabela();
   </script>
+  <script src="/assents/js/cadastrarConvenio.js"></script>
 </body>
 </html>
