@@ -1,16 +1,16 @@
 'use strict';
 
-// URL da sua API
+
 const API_URL = 'http://localhost:8080/api/cadastroconvenio';
 
-// Seletores dos elementos
+
 const form = document.getElementById('formConvenio');
 const mensagem = document.getElementById('mensagem');
 const tabela = document.getElementById('tabela-convenios').querySelector('tbody');
 let convenios = [];
 let editId = null;
 
-// ------------------- READ (Buscar todos) -------------------
+
 async function fetchConvenios() {
   try {
     const res = await fetch(API_URL);
@@ -22,7 +22,7 @@ async function fetchConvenios() {
   }
 }
 
-// ------------------- CREATE (Cadastrar) --------------------
+
 async function criarConvenio(convenio) {
   try {
     const res = await fetch(API_URL, {
@@ -37,7 +37,7 @@ async function criarConvenio(convenio) {
   }
 }
 
-// ------------------- UPDATE (Atualizar) --------------------
+
 async function atualizarConvenio(id, convenio) {
   try {
     const res = await fetch(`${API_URL}/${id}`, {
@@ -52,7 +52,7 @@ async function atualizarConvenio(id, convenio) {
   }
 }
 
-// ------------------- DELETE (Excluir) ----------------------
+
 async function deletarConvenio(id) {
   try {
     await fetch(`${API_URL}/${id}`, { method: 'DELETE' });
@@ -62,7 +62,6 @@ async function deletarConvenio(id) {
   }
 }
 
-// Renderiza a tabela de convênios
 function renderTabela() {
   tabela.innerHTML = '';
   if (!convenios || convenios.length === 0) {
@@ -86,7 +85,7 @@ function renderTabela() {
   });
 }
 
-// ------------------- CREATE e UPDATE -----------------------
+
 form.addEventListener('submit', async function(e) {
   e.preventDefault();
   const convenio = form.convenio.value;
@@ -103,11 +102,11 @@ form.addEventListener('submit', async function(e) {
   const novoConvenio = { convenio, plano, carteirinha, validade };
 
   if (editId === null) {
-    // CREATE
+
     await criarConvenio(novoConvenio);
     mensagem.textContent = "Convênio cadastrado com sucesso!";
   } else {
-    // UPDATE
+
     await atualizarConvenio(editId, novoConvenio);
     mensagem.textContent = "Convênio alterado com sucesso!";
   }
@@ -119,9 +118,9 @@ form.addEventListener('submit', async function(e) {
   setTimeout(() => mensagem.textContent = '', 2000);
 });
 
-// ------------------- EDITAR e DELETE -----------------------
+
 window.editarConvenio = function(id) {
-  // Busca o convênio pelo id
+
   const conv = convenios.find(c => String(c.id) === String(id));
   if (!conv) return;
   form.convenio.value = conv.convenio;
@@ -134,7 +133,7 @@ window.editarConvenio = function(id) {
 
 window.excluirConvenio = async function(id) {
   if (confirm('Deseja excluir este convênio?')) {
-    await deletarConvenio(id); // DELETE
+    await deletarConvenio(id); 
     form.reset();
     editId = null;
     mensagem.textContent = "Convênio excluído!";
@@ -145,5 +144,4 @@ window.excluirConvenio = async function(id) {
   }
 };
 
-// Inicializa a tabela ao carregar a página
 fetchConvenios();
