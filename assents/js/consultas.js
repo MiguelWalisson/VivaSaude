@@ -1,7 +1,4 @@
 
-
- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
 document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('consultaForm');
 
