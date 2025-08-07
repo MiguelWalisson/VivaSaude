@@ -16,40 +16,14 @@
       <a href="examesFuturos.html">Exames Futuros</a>
       <a href="historicoExames.html">Histórico Exames</a>
        <a href="resultadosExames.html">Resultado Exames</a>
-
     </nav>           
   </header>
-
-  <main class="container">
-    <div class="conteudo">
-      <div class="coluna-esquerda">
-        <p class="label">Exame particular ou de convênio?</p>
-        <div class="radio-grupo">
-          <label><input type="radio" name="tipo" checked> Particular</label>
-          <label><input type="radio" name="tipo"> Convênio</label>
-        </div>
-
-<p class="label">Selecione o convênio:</p>
-
-<div id="campo-convenio" style="display: none;">
-  <select name="convenio" id="select-convenio">
-    <option value="" disabled selected>Selecione</option>
-  </select>
-</div>
-
-<a href="cadastrarConvenio.html" class="add-convenio">
-  <i data-lucide="plus-circle" class="icon"></i> Adicionar convênio
-</a>
-
-        <button class="btn-agendar">Agendar</button>
-      </div>
-
+  <h2 class="titulo">Agendar Exame</h2>
       <div class="coluna-direita">
         <div class="campo">
           <label>Especialidade do Exame</label>
 <select name="exame">
   <option value="" disabled selected>Selecione um exame</option>
-
   <optgroup label="Psicologia">
     <option value="avaliacao-neuropsicologica">Avaliação Neuropsicológica</option>
     <option value="escala-beck">Escala Beck de Depressão</option>
@@ -106,8 +80,12 @@
           <label>Horário</label>
           <input type="time">
         </div>
+
       </div>
+      <button class="btn-agendar">Agendar</button>
     </div>
+            
+      </div>
   </main>
   <script>
   lucide.createIcons();

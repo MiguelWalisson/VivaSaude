@@ -17,30 +17,7 @@
       <a href="historicoMedico.html">Histórico Médico</a>
     </nav>
   </header>
-
-  <main class="container">
-    <div class="conteudo">
-      <div class="coluna-esquerda">
-        <p class="label">Consulta particular ou de convênio?</p>
-        <div class="radio-grupo">
-          <label><input type="radio" name="tipo" checked> Particular</label>
-          <label><input type="radio" name="tipo"> Convênio</label>
-        </div>
-
-<p class="label">Selecione o convênio:</p>
-
-<div id="campo-convenio" style="display: none;">
-  <select name="convenio" id="select-convenio">
-    <option value="" disabled selected>Selecione</option>
-  </select>
-</div>
-
-<a href="cadastrarConvenio.html" class="add-convenio">
-  <i data-lucide="plus-circle" class="icon"></i> Adicionar convênio
-</a>
-        <button class="btn-agendar">Agendar</button>
-      </div>
-
+  <h2 class="titulo">Agendar Consulta</h2> 
       <div class="coluna-direita">
         <div class="campo">
           <label>Especialidade da consulta</label>
@@ -72,6 +49,8 @@
   <option value="Dr-Marluce">Dr Marluce</option>
 </select>
 
+        <button class="btn-agendar">Agendar</button>
+      </div>
         </div>
       </div>
     </div>
@@ -79,21 +58,6 @@
 <script>
   lucide.createIcons();
 
-  const radios = document.querySelectorAll('input[name="tipo"]');
-  const campoConvenio = document.getElementById('campo-convenio');
-  const cartaoConvenio = document.getElementById('cartao-convenio');
-
-  radios.forEach(radio => {
-    radio.addEventListener('change', () => {
-      if (radio.checked && radio.parentElement.textContent.includes("Convênio")) {
-        campoConvenio.style.display = 'block';
-        cartaoConvenio.style.display = 'block';
-      } else {
-        campoConvenio.style.display = 'none';
-        cartaoConvenio.style.display = 'none';
-      }
-    });
-  });
 </script>
 </body>
 </html>
