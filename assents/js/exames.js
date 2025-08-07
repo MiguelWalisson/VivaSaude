@@ -35,4 +35,8 @@ function carregarPacientes() {
       const select = document.querySelector('[name="id_paciente"]');
       select.innerHTML = '<option value="">Selecione o paciente</option>';
       pacientes.forEach(pac => {
-        select.innerHTML += `<
+        select.innerHTML += `<option value="${pac.id}">${pac.nome}</option>`;
+      });
+    })
+    .catch(error => console.error('Erro ao carregar pacientes:', error));
+}
