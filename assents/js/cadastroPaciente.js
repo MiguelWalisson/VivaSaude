@@ -47,10 +47,11 @@ const limparFormulario = () => {
                 });
         }
 async function preencherCadastro (event){
+    event.preventDefault();
     try{
 
     
-    const nome = document.getElementById('Nome Completo').value;
+    const nome = document.getElementById('NomeCompleto').value;
     const cpf = document.getElementById('CPF').value;
     const dataNascimento = document.getElementById('Datadenascimento').value;
     const genero = document.getElementById('Gênero').value;
@@ -59,7 +60,7 @@ async function preencherCadastro (event){
     const endereco = document.getElementById('endereco').value;
     const email = document.getElementById('email').value;
     const senha = document.getElementById('Senha').value;
-    const senhaConfirm = document.getElementById('Confirmar Senha').value;
+    const senhaConfirm = document.getElementById('ConfirmarSenha').value;
     
     const DadosPaciente = {
         nome: nome,
@@ -82,19 +83,19 @@ console.log('Enviando dados para API:', DadosPaciente);
         body: JSON.stringify(DadosPaciente)
     })
      if (responsePaciente.ok){
-             CadastroPaciente = await preencherCadastro();
+            
             alert('Funcionario Cadastrado!');
-            document.getElementById('formcadastroFuncionario').reset();
+            document.getElementById('formcadastroPaciente').reset();
             return;
         } else{
-            const erroTexto = await apiresposta.text();
+            const erroTexto = await responsePaciente.text();
             alert("Erro ao cadastrar funcionário :" + erroTexto);
             return;
         }
 }catch (error) {
         console.error('Erro', error);
 }
-event.preventDefault();
+
 };
 document.getElementById('Telefone').addEventListener('input', function(e) {
     let value = e.target.value.replace(/\D/g, '');
