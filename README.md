@@ -40,39 +40,37 @@ O banco de dados foi modelado utilizando **MySQL**, com tabelas específicas par
 - 📚 **[Orientador(a)]** – Orientação e acompanhamento do projeto
 
 ---
-Abra no seu editor (VSCode, IntelliJ, etc.)
-
-Configure o banco MySQL:
-
-Crie um banco com o nome vivasaude
-
-Configure o application.properties com seu usuário e senha do MySQL
-
-Instale as dependências Maven:
-
-bash
-Copiar
-Editar
-mvn install
-Execute o projeto:
-
-bash
-Copiar
-Editar
-mvn spring-boot:run
-Acesse no navegador:
-
-arduino
-Copiar
-Editar
-http://localhost:8080
-📜 Licença
-Este projeto é de uso acadêmico.
-Todos os direitos reservados © 2025.
-
-💙 Desenvolvido com dedicação para o TCC – VivaSaúde
-
 ## ⚙️ Como Executar o Projeto
 1. **Clone o repositório**:
    ```bash
    git clone https://github.com/SeuUsuario/VivaSaude.git
+---
+2. **Abra no seu editor (VSCode, Intellij, etc.)**
+---
+3.Configure o Banco MySql:
+- Crie um banco com o nome **vivasaude**
+- Configure o **application.properties** com seu usuário e senha do MySQL
+---
+4. **Instale as dependências Maven**:
+   ```bash
+   mvn install
+---
+5. **Execute o projeto**:
+```bash
+ mvn spring-boot:run
+```
+---
+6.**Acesse no navegador**:
+```bash
+http://localhost:8080
+```
+---
+## 📜 Licença
+
+- Este projeto é de uso acadêmico.
+- Todos os direitos resevados © 2025.
+---
+
+
+ 
+   
