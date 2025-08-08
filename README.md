@@ -35,8 +35,11 @@ O banco de dados foi modelado utilizando **MySQL**, com tabelas específicas par
 ---
 
 ## 👥 Membros da Equipe
-- 👩‍💻 **[Seu Nome]** – Desenvolvedor Backend e Frontend
-- 🛠 **[Nome do(a) colega, se houver]** – Auxílio na implementação e testes
+- 👩‍💻 **[Miguel Walisson]** – Desenvolvedor Backend e Frontend
+- 👩‍💻 **[Arthur Caetano]** – Desenvolvedor Backend
+- 👩‍💻 **[Caio]** – Desenvolvedor Backend
+- 👩‍💻 **[Anna Luiza Ramalho]** – Desenvolvedor Frontend
+- 👩‍💻 **[Maria Luiza]** – Desenvolvedor Frontend
 - 📚 **[Orientador(a)]** – Orientação e acompanhamento do projeto
 
 ---
@@ -69,7 +72,7 @@ http://localhost:8080
 
 - Este projeto é de uso acadêmico.
 - Todos os direitos resevados © 2025.
----
+
 
 
  
