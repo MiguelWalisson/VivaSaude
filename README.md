@@ -35,13 +35,11 @@ O banco de dados foi modelado utilizando **MySQL**, com tabelas específicas par
 ---
 
 ## 👥 Membros da Equipe
-- 👩‍💻 **[Miguel Walisson]** – Desenvolvedor Backend e Frontend
-- 👩‍💻 **[Arthur Caetano]** – Desenvolvedor Backend
-- 👩‍💻 **[Caio]** – Desenvolvedor Backend
-- 👩‍💻 **[Anna Luiza Ramalho]** – Desenvolvedor Frontend
-- 👩‍💻 **[Maria Luiza]** – Desenvolvedor Frontend
-- 📚 **[Orientador(a)]** – Orientação e acompanhamento do projeto
-
+- 👩‍💻 **[Miguel Walisson](https://github.com/malumnzs)** – Desenvolvedor Backend e Frontend
+- 👩‍💻 **[Arthur Caetano]()** – Desenvolvedor Backend
+- 👩‍💻 **[Caio](https://github.com/Caiovsscodes)** – Desenvolvedor Backend
+- 👩‍💻 **[Anna Luiza Ramalho](https://github.com/fuuzzyy)** – Desenvolvedor Frontend
+- 👩‍💻 **[Maria Luiza](https://github.com/malumnzs)** – Desenvolvedor Frontend
 ---
 ## ⚙️ Como Executar o Projeto
 1. **Clone o repositório**:
