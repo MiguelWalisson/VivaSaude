@@ -66,10 +66,17 @@ O banco de dados foi modelado utilizando **MySQL**, com tabelas específicas par
 http://localhost:8080
 ```
 ---
+## API 
+
+
+- A API do projeto está disponivel em: https://github.com/MiguelWalisson/vivasaudeAPI
+
+---
 ## 📜 Licença
 
 - Este projeto é de uso acadêmico.
 - Todos os direitos resevados © 2025.
+  
 
 
 
