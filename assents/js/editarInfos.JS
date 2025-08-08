@@ -15,7 +15,7 @@ async function fetchUsuario() {
 console.log("Carregando dados do paciente...");
 window.addEventListener('DOMContentLoaded',() => {  
 
-fetch(url)
+fetch(url + '/usuario')
 .then(res =>{
     if(!res.ok) throw new Error('Erro na requisição:');
     return res.json();
