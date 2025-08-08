@@ -39,7 +39,7 @@ O banco de dados foi modelado utilizando **MySQL**, com tabelas específicas par
 - 👩‍💻 **[Arthur Caetano](https://github.com/Arthur-Guilherme7)** – Desenvolvedor Backend
 - 👩‍💻 **[Caio](https://github.com/Caiovsscodes)** – Desenvolvedor Backend
 - 👩‍💻 **[Anna Luiza Ramalho](https://github.com/fuuzzyy)** – Desenvolvedor Frontend
-- 👩‍💻 **[Maria Luiza](https://github.com/malumnzs)** – Desenvolvedor Frontend
+- 👩‍💻 **[Maria Luiza De Menezes](https://github.com/malumnzs)** – Desenvolvedor Frontend
 ---
 ## ⚙️ Como Executar o Projeto
 1. **Clone o repositório**:
