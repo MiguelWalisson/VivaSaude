@@ -6,7 +6,7 @@ const limparFormulario = () => {
 }
 
 const preencherEndereco = (endereco) =>{
-    document.getElementById('enderco').value = endereco.logradouro.endereco.bairro.endereco.localidade.endereco.uf;
+    document.getElementById('endereco').value = endereco.logradouro.endereco.bairro.endereco.localidade.endereco.uf;
 
 };
 
@@ -17,7 +17,7 @@ const buscarCep = async()=>{
         const regexcep = /^[0-9]{8}$/;
 
         if(!regexcep.test(cep)){
-            document.getElementById('CEP').value = 'Formato invalido!'
+            document.getElementById('cep').value = 'Formato invalido!'
             console.error("CEP não encontrado!")
             limparFormulario();
             return;
@@ -26,7 +26,7 @@ const buscarCep = async()=>{
         const endereco = await dados.json();
         
         if(endereco.hasOwnProperty('erro')){
-            document.getElementById('CEP').value = 'CEP não encontrado!'
+            document.getElementById('cep').value = 'CEP não encontrado!'
             console.error("CEP não encontrado!")
             limparFormulario();
             return;
@@ -38,7 +38,7 @@ const buscarCep = async()=>{
         limparFormulario();
     }
 };
-document.getElementById('CEP')
+document.getElementById('cep')
 .addEventListener('focusout',buscarCep);
 
 const CadastroPaciente =async(event) => {
@@ -46,16 +46,16 @@ const CadastroPaciente =async(event) => {
     try{
 
     
-    const nome = document.getElementById('Nome Completo').value;
-    const cpf = document.getElementById('CPF').value = '';
-    const dataNascimento = document.getElementById('Data de Nascimento').value;
-    const genero = document.getElementById('Gênero').value;
-    const telefone = document.getElementById('Telefone').value;
-    const cep = document.getElementById('CEP').value;
+    const nome = document.getElementById('nome').value;
+    const cpf = document.getElementById('cpf').value = '';
+    const dataNascimento = document.getElementById('dataNascimento').value;
+    const genero = document.getElementById('genero').value;
+    const telefone = document.getElementById('telefone').value;
+    const cep = document.getElementById('cep').value;
     const endereco = document.getElementById('endereco').value;
     const email = document.getElementById('email').value;
-    const senha = document.getElementById('Senha').value;
-    const senhaConfirm = document.getElementById('Confirmar Senha').value;
+    const senha = document.getElementById('senha').value;
+    const senhaConfirm = document.getElementById('confirmarSenha').value;
     
     const DadosPaciente = {
         nome: nome,
