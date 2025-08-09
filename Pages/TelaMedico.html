@@ -3,6 +3,497 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Clínica Viva Saúde - Painel</title>
+  <title>Clínica Viva Saúde - Painel Médico</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
-  
+  <style>
+    :root {
+      --primary-color: rgb(0, 168, 168);
+      --primary-dark: rgb(0, 140, 140);
+      --secondary-color: #e7f3fe;
+      --text-color: #333;
+      --light-gray: #f8f9fa;
+      --white: #ffffff;
+      --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      --transition: all 0.3s ease;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: var(--light-gray);
+      color: var(--text-color);
+      line-height: 1.6;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    header {
+      background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+      color: var(--white);
+      padding: 1rem 0;
+      box-shadow: var(--shadow);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo-img {
+      height: 60px;
+      width: 60px;
+      background: var(--primary-color);
+      border-radius: 50%;
+      padding: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      transition: var(--transition);
+    }
+
+    .logo-img:hover {
+      transform: scale(1.05);
+    }
+
+    .logo-img svg {
+      width: 36px;
+      height: 36px;
+      fill: var(--white);
+    }
+
+    .logo-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .logo-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      line-height: 1.2;
+      color: var(--white);
+      letter-spacing: 0.5px;
+    }
+
+    .logo-subtitle {
+      font-size: 0.85rem;
+      color: rgba(255, 255, 255, 0.9);
+      letter-spacing: 1.2px;
+      font-weight: 400;
+      margin-top: 2px;
+      text-transform: uppercase;
+    }
+
+    .user-info {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-left: auto;
+      padding: 0.5rem 1rem;
+      background-color: rgba(255, 255, 255, 0.2);
+      border-radius: 20px;
+      transition: var(--transition);
+    }
+
+    .user-info:hover {
+      background-color: rgba(255, 255, 255, 0.3);
+    }
+
+    .user-info i {
+      font-size: 1.2rem;
+    }
+
+    .doctor-dashboard {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 20px;
+      flex: 1;
+    }
+
+    .welcome-section {
+      background: linear-gradient(135deg, var(--secondary-color), var(--white));
+      padding: 2rem;
+      border-radius: 12px;
+      margin-bottom: 2rem;
+      box-shadow: var(--shadow);
+      text-align: center;
+    }
+
+    .welcome-section h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      color: var(--primary-dark);
+    }
+
+    .welcome-section p {
+      font-size: 1.1rem;
+      color: var(--text-color);
+    }
+
+    .doctor-schedule {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    @media (min-width: 992px) {
+      .doctor-schedule {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .schedule-card {
+      background: var(--white);
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: var(--shadow);
+    }
+
+    .schedule-card h3 {
+      color: var(--primary-dark);
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid var(--secondary-color);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .schedule-card h3 i {
+      color: var(--primary-color);
+    }
+
+    .appointment-list {
+      list-style: none;
+    }
+
+    .appointment-item {
+      padding: 1rem 0;
+      border-bottom: 1px solid #eee;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .appointment-item:last-child {
+      border-bottom: none;
+    }
+
+    .appointment-time {
+      font-weight: 600;
+      color: var(--primary-dark);
+      min-width: 80px;
+    }
+
+    .appointment-patient {
+      flex: 1;
+      margin: 0 1rem;
+    }
+
+    .appointment-patient-name {
+      font-weight: 600;
+    }
+
+    .appointment-patient-info {
+      font-size: 0.9rem;
+      color: #666;
+    }
+
+    .appointment-actions button {
+      background: var(--primary-color);
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .appointment-actions button:hover {
+      background: var(--primary-dark);
+    }
+
+    .quick-actions {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .quick-action-card {
+      background: var(--white);
+      border-radius: 12px;
+      padding: 1.5rem;
+      text-align: center;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+      cursor: pointer;
+      border-top: 4px solid var(--primary-color);
+    }
+
+    .quick-action-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .quick-action-card i {
+      font-size: 2rem;
+      color: var(--primary-color);
+      margin-bottom: 1rem;
+    }
+
+    .quick-action-card p {
+      font-weight: 600;
+      color: var(--text-color);
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .stat-card {
+      background: var(--white);
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: var(--shadow);
+    }
+
+    .stat-card h4 {
+      color: #666;
+      font-size: 0.9rem;
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .stat-card .stat-value {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--primary-dark);
+    }
+
+    .stat-card .stat-change {
+      display: flex;
+      align-items: center;
+      font-size: 0.9rem;
+      margin-top: 0.5rem;
+    }
+
+    .stat-card .stat-change.positive {
+      color: #28a745;
+    }
+
+    .stat-card .stat-change.negative {
+      color: #dc3545;
+    }
+
+    footer {
+      background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+      color: var(--white);
+      text-align: center;
+      padding: 1.5rem 0;
+      margin-top: auto;
+    }
+
+    footer p {
+      margin: 0;
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 768px) {
+      .welcome-section h2 {
+        font-size: 1.5rem;
+      }
+
+      .welcome-section p {
+        font-size: 1rem;
+      }
+
+      .quick-actions {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      }
+    }
+  </style>
+</head>
+<body>
+<header>
+  <div class="header-container">
+    <nav>
+      <div class="logo-container">
+        <div class="logo-img">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/>
+            <path d="M12 6c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6zm0 10c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4z" opacity="0.3"/>
+          </svg>
+        </div>
+        <div class="logo-text">
+          <div class="logo-title">Viva Saúde</div>
+          <div class="logo-subtitle">Painel Médico</div>
+        </div>
+      </div>
+
+      <div class="user-info">
+        <i class="fas fa-user-md"></i>
+        <span>Dr. <strong>Caio Caetano</strong></span>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main class="doctor-dashboard">
+  <section class="welcome-section">
+    <h2>Bem-vindo, Dr. Caio Caetano</h2>
+    <p>Seu painel médico com todas as informações necessárias para seu dia de trabalho</p>
+  </section>
+
+  <section class="doctor-schedule">
+    <div class="schedule-card">
+      <h3><i class="fas fa-calendar-day"></i> Consultas Hoje</h3>
+      <ul class="appointment-list">
+        <li class="appointment-item">
+          <span class="appointment-time">08:30</span>
+          <div class="appointment-patient">
+            <div class="appointment-patient-name">Maria Silva</div>
+            <div class="appointment-patient-info">Check-up anual</div>
+          </div>
+          <div class="appointment-actions">
+            <button>Iniciar</button>
+          </div>
+        </li>
+        <li class="appointment-item">
+          <span class="appointment-time">10:15</span>
+          <div class="appointment-patient">
+            <div class="appointment-patient-name">João Oliveira</div>
+            <div class="appointment-patient-info">Retorno</div>
+          </div>
+          <div class="appointment-actions">
+            <button>Iniciar</button>
+          </div>
+        </li>
+        <li class="appointment-item">
+          <span class="appointment-time">14:00</span>
+          <div class="appointment-patient">
+            <div class="appointment-patient-name">Ana Costa</div>
+            <div class="appointment-patient-info">Primeira consulta</div>
+          </div>
+          <div class="appointment-actions">
+            <button>Iniciar</button>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="schedule-card">
+      <h3><i class="fas fa-calendar-week"></i> Próximas Consultas</h3>
+      <ul class="appointment-list">
+        <li class="appointment-item">
+          <span class="appointment-time">Amanhã</span>
+          <div class="appointment-patient">
+            <div class="appointment-patient-name">Carlos Mendes</div>
+            <div class="appointment-patient-info">09:30 - Retorno</div>
+          </div>
+        </li>
+        <li class="appointment-item">
+          <span class="appointment-time">Qui</span>
+          <div class="appointment-patient">
+            <div class="appointment-patient-name">Fernanda Lima</div>
+            <div class="appointment-patient-info">11:00 - Check-up</div>
+          </div>
+        </li>
+        <li class="appointment-item">
+          <span class="appointment-time">Sex</span>
+          <div class="appointment-patient">
+            <div class="appointment-patient-name">Roberto Alves</div>
+            <div class="appointment-patient-info">16:45 - Primeira consulta</div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="quick-actions">
+    <div class="quick-action-card" onclick="location.href='prontuario.html'">
+      <i class="fas fa-file-medical"></i>
+      <p>Prontuários</p>
+    </div>
+    <div class="quick-action-card" onclick="location.href='receitas.html'">
+      <i class="fas fa-prescription-bottle-alt"></i>
+      <p>Receitas</p>
+    </div>
+    <div class="quick-action-card" onclick="location.href='exames.html'">
+      <i class="fas fa-vials"></i>
+      <p>Solicitar Exames</p>
+    </div>
+    <div class="quick-action-card" onclick="location.href='pacientes.html'">
+      <i class="fas fa-user-injured"></i>
+      <p>Meus Pacientes</p>
+    </div>
+  </section>
+
+  <section class="stats-grid">
+    <div class="stat-card">
+      <h4>Consultas Hoje</h4>
+      <div class="stat-value">5</div>
+      <div class="stat-change positive">
+        <i class="fas fa-arrow-up"></i> 2 a mais que ontem
+      </div>
+    </div>
+    <div class="stat-card">
+      <h4>Pacientes Ativos</h4>
+      <div class="stat-value">42</div>
+      <div class="stat-change positive">
+        <i class="fas fa-arrow-up"></i> 5 novos este mês
+      </div>
+    </div>
+    <div class="stat-card">
+      <h4>Horas Trabalhadas</h4>
+      <div class="stat-value">28.5</div>
+      <div class="stat-change negative">
+        <i class="fas fa-arrow-down"></i> 3.2 menos que semana passada
+      </div>
+    </div>
+    <div class="stat-card">
+      <h4>Exames Pendentes</h4>
+      <div class="stat-value">7</div>
+      <div class="stat-change positive">
+        <i class="fas fa-arrow-down"></i> 3 resultados chegaram
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <p>&copy; 2025 Clínica Médica Viva Saúde. Todos os direitos reservados.</p>
+</footer>
+</script>
+</body>
+</html>
