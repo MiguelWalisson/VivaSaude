@@ -78,25 +78,6 @@
       </div>
     </div>
   </main>
-
-  <script>
-    lucide.createIcons();
-
-  const radios = document.querySelectorAll('input[name="tipo"]');
-  const campoConvenio = document.getElementById('campo-convenio');
-  const cartaoConvenio = document.getElementById('cartao-convenio');
-
-  radios.forEach(radio => {
-    radio.addEventListener('change', () => {
-      if (radio.checked && radio.parentElement.textContent.includes("Convênio")) {
-        campoConvenio.style.display = 'block';
-        cartaoConvenio.style.display = 'block';
-      } else {
-        campoConvenio.style.display = 'none';
-        cartaoConvenio.style.display = 'none';
-      }
-    });
-  });
-</script>
+  <script src = "/assents/js/agendarConsulta.js"></script>
 </body>
 </html>
