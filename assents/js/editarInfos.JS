@@ -7,7 +7,7 @@ async function fetchUsuario() {
   try {
   
      
-    const res = await fetch(url + `/3`); 
+    const res = await fetch(url + `/1`); 
 
     if(!res.ok) throw new Error('Erro na requisição' + res.status);
     usuario = await res.json();
