@@ -4,6 +4,9 @@ const limparFormulario = () => {
     document.getElementById('endereco').value = '';
 
 }
+const limparCep =() => {
+    document.getElementById('CEP').value = '';
+}
 
  document.getElementById('CEP').addEventListener('focusout', consultarCEP);
  document.getElementById('btcadastro').addEventListener('click',preencherCadastro);
@@ -15,6 +18,8 @@ const limparFormulario = () => {
             
             if (cep.length !== 8) {
                 alert('CEP inválido! Digite um CEP com 8 dígitos.');
+                limparCep();
+
                 return;
             }
             
@@ -22,7 +27,9 @@ const limparFormulario = () => {
             fetch(`https://viacep.com.br/ws/${cep}/json/`)
                 .then(response => {
                     if (!response.ok) {
-                        throw new Error('CEP não encontrado');
+                        
+                    throw new Error('CEP não encontrado');
+                        
                     }
                     return response.json();
                 })
@@ -44,6 +51,8 @@ const limparFormulario = () => {
                 .catch(error => {
                     document.getElementById('endereco').value = '';
                     alert(error.message);
+                    limparCep();
+                    
                 });
         }
 async function preencherCadastro (event){
