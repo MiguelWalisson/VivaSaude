@@ -23,7 +23,7 @@ async function loginPaciente(event){
             mensagem.style.color = 'green';
             mensagem.textContent = `Bem-vindo(a), ${paciente.nome}`;
              setTimeout(() =>{
-            window.location.href = "/index.html";
+            window.location.href = "/index=paciente.html";
             }, 1500);
         }
         else if (response.status ===  401)
