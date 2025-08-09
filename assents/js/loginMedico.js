@@ -25,7 +25,7 @@ async function loginMedico(event){
             console.log("Medico logado:",medico);
             localStorage.setItem("medicoLogado",JSON.stringify(medico));
 
-            mensagem.style.colo = 'green';
+            mensagem.style.color = 'green';
             mensagem.textContent = `Bem-vindo(a), Dr. ${medico.nome}`;
             setTimeout(() =>{
             window.location.href = "/index.html";
