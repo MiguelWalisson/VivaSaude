@@ -1,6 +1,9 @@
 'use strict'
 
 const url = 'http://localhost:8080/auth/login';
+const urlParams = new URLSearchParams(window.location.search);
+const tipo = urlParams.get('tipo');
+
 async function loginPaciente(event){
     event.preventDefault();
     const email = document.getElementById('email').value;
@@ -10,7 +13,7 @@ async function loginPaciente(event){
         const response = await fetch(url, {
             method: 'POST',
             headers: {"Content-Type": "application/json"},
-            body: JSON.stringify({email, senha})
+            body: JSON.stringify({email, senha, tipo})
         });
         if(response.ok){
             const paciente = await response.json();
