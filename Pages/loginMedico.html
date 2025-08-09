@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="/assents/css/PacienteLogin.css" />
+  <title>Login</title>
+</head>
+<body>
+  <div class="container">
+    <div class="imagem-lado">
+      <img src="/assents/images/image.png" alt="Imagem ilustrativa">
+    </div>
+    <main class="login">
+      <h1 class="title">Acesso Médico</h1>
+      <form id="formLoginPaciente">
+        <div class="inputdiv">
+          <input id="email" type="email" required />
+          <label for="email">Email</label>
+        </div>
+        <div class="inputdiv">
+          <input type="password" id="Senha" type="password" required />
+          <label for="Senha">Senha</label>
+        </div>
+        <div class="button-container">
+          <button  type="submit"class="button" id="btlogin">Entrar</button>
+        </div>
+        <div class="loginlink">
+          <p id="mensagem"></p>
+        </div>
+      </form>
+    </main>
+  </div>
+  <script src="/assents/js/loginMedico.js"></script>
+<!-- onclick="window.location.href='/Pages/telaPaciente.html'" -->
+</body>
+</html>
+
