@@ -1,16 +1,24 @@
 'use strict'
 
 const url = 'http://localhost:8080/auth/login';
+const urlParams = new URLSearchParams(window.location.search);
+const tipo = urlParams.get('tipo');
 async function loginMedico(event){
     event.preventDefault();
     const email = document.getElementById('email').value;
     const senha = document.getElementById('Senha').value;
     const mensagem = document.getElementById('mensagem');
+
+    if(!tipo){
+        mensagem.style.color = 'red';
+        mensagem.textContent = 'Tipo de usuário não definido!'
+        return;
+    }
     try{
         const response = await fetch(url, {
             method:'POST',
             headers: {"Content-Type": "application/json"},
-            body: JSON.stringify({email,senha})
+            body: JSON.stringify({email,senha,tipo})
         });
         if(response.ok){
             const medico = await response.json();
@@ -19,7 +27,10 @@ async function loginMedico(event){
 
             mensagem.style.colo = 'green';
             mensagem.textContent = `Bem-vindo(a), Dr. ${medico.nome}`;
+            setTimeout(() =>{
             window.location.href = "/index.html";
+            }, 1500);
+            
         }else if(response.status === 401){
             mensagem.style.color = 'red';
             mensagem.textContent = "Email ou senha incorretos!";
