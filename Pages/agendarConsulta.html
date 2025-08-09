@@ -23,77 +23,102 @@
       <div class="coluna-esquerda">
         <p class="label">Consulta particular ou de convênio?</p>
         <div class="radio-grupo">
-          <label><input type="radio" name="tipo" checked> Particular</label>
-          <label><input type="radio" name="tipo"> Convênio</label>
+          <label><input type="radio" name="tipo" value="Particular"> Particular</label>
+          <label><input type="radio" name="tipo" value="Convênio"> Convênio</label>
         </div>
 
-<p class="label">Selecione o convênio:</p>
+        <p class="label">Selecione o convênio:</p>
+        <div id="campo-convenio" style="display: none;">
+          <select name="convenio" id="select-convenio">
+            <option value="" disabled selected>Selecione</option>
+            <option value="Unimed">Unimed</option>
+            <option value="Amil">Amil</option>
+            <option value="Bradesco">Bradesco</option>
+          </select>
+        </div>
 
-<div id="campo-convenio" style="display: none;">
-  <select name="convenio" id="select-convenio">
-    <option value="" disabled selected>Selecione</option>
-  </select>
-</div>
+        <a href="cadastrarConvenio.html" class="add-convenio">
+          <i data-lucide="plus-circle" class="icon"></i> Adicionar convênio
+        </a>
 
-<a href="cadastrarConvenio.html" class="add-convenio">
-  <i data-lucide="plus-circle" class="icon"></i> Adicionar convênio
-</a>
-        <button class="btn-agendar">Agendar</button>
+        <button class="btn-agendar" type="button">Agendar</button>
       </div>
 
       <div class="coluna-direita">
         <div class="campo">
           <label>Especialidade da consulta</label>
-         <select name="especialidade">
-  <option value="" disabled selected>Selecione</option>
-  <option value="psicologia">Psicologia</option>
-  <option value="geriatria">Geriatria</option>
-  <option value="nutrição">Nutrição</option>
-  <option value="ginecologia">Ginecologia</option>
-</select>
-
+          <select name="especialidade" id="especialidade">
+            <option value="" disabled selected>Selecione</option>
+            <option value="Psicologia">Psicologia</option>
+            <option value="Geriatria">Geriatria</option>
+            <option value="Nutrição">Nutrição</option>
+            <option value="Ginecologia">Ginecologia</option>
+          </select>
         </div>
 
         <div class="campo">
           <label>Data</label>
-          <input type="date">
+          <input type="date" id="data-consulta">
         </div>
 
         <div class="campo">
           <label>Horário</label>
-          <input type="time">
+          <input type="time" id="hora-consulta">
         </div>
 
         <div class="campo">
           <label>Médicos disponíveis</label>
-         <select name="medicos-disponiveis">
-  <option value="" disabled selected>Selecione</option>
-  <option value="Dr-Joao">Dr. João</option>
-  <option value="Dr-Marluce">Dr Marluce</option>
-</select>
-
+          <select name="medicos-disponiveis" id="medicos-disponiveis">
+            <option value="" disabled selected>Selecione</option>
+            <option value="Dr. João">Dr. João</option>
+            <option value="Dr. Marluce">Dr. Marluce</option>
+          </select>
         </div>
       </div>
     </div>
   </main>
-<script>
-  lucide.createIcons();
 
-  const radios = document.querySelectorAll('input[name="tipo"]');
-  const campoConvenio = document.getElementById('campo-convenio');
-  const cartaoConvenio = document.getElementById('cartao-convenio');
+  <script>
+    lucide.createIcons();
 
-  radios.forEach(radio => {
-    radio.addEventListener('change', () => {
-      if (radio.checked && radio.parentElement.textContent.includes("Convênio")) {
-        campoConvenio.style.display = 'block';
-        cartaoConvenio.style.display = 'block';
-      } else {
-        campoConvenio.style.display = 'none';
-        cartaoConvenio.style.display = 'none';
-      }
+    const radios = document.querySelectorAll('input[name="tipo"]');
+    const campoConvenio = document.getElementById('campo-convenio');
+    const btnAgendar = document.querySelector('.btn-agendar');
+
+    radios.forEach(radio => {
+      radio.addEventListener('change', () => {
+        campoConvenio.style.display = radio.value === 'Convênio' ? 'block' : 'none';
+      });
     });
-  });
-</script>
+
+    btnAgendar.addEventListener('click', () => {
+      const tipo = document.querySelector('input[name="tipo"]:checked')?.value;
+      const convenio = document.getElementById('select-convenio').value || '-';
+      const especialidade = document.getElementById('especialidade').value;
+      const data = document.getElementById('data-consulta').value;
+      const hora = document.getElementById('hora-consulta').value;
+      const medico = document.getElementById('medicos-disponiveis').value;
+
+      if (!tipo || !especialidade || !data || !hora || !medico) {
+        alert("Preencha todos os campos obrigatórios!");
+        return;
+      }
+
+      alert("Consulta agendada com sucesso!");
+      limparFormulario();
+    });
+
+    function limparFormulario() {
+      document.querySelectorAll('input[name="tipo"]').forEach(r => r.checked = false);
+      campoConvenio.style.display = 'none';
+      document.getElementById('select-convenio').value = '';
+      document.getElementById('especialidade').value = '';
+      document.getElementById('data-consulta').value = '';
+      document.getElementById('hora-consulta').value = '';
+      document.getElementById('medicos-disponiveis').value = '';
+      btnAgendar.textContent = 'Agendar';
+    }
+  </script>
+  <script src="/assents/js/agendarConsulta.js"></script>
 </body>
 </html>
