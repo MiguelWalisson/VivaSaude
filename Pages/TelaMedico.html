@@ -8,11 +8,13 @@
   <style>
     :root {
       --primary-color: rgb(0, 168, 168);
-      --primary-dark: rgb(0, 140, 140);
+      --primary-dark: rgb(0, 168, 168);
       --secondary-color: #e7f3fe;
       --text-color: #333;
       --light-gray: #f8f9fa;
       --white: #ffffff;
+      --dark-bg: #1a2a3a;
+      --dark-text: #f0f0f0;
       --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
       --transition: all 0.3s ease;
     }
@@ -35,6 +37,11 @@
       min-height: 100vh;
     }
 
+    body.dark-mode {
+      background-color: var(--dark-bg);
+      color: var(--dark-text);
+    }
+
     header {
       background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
       color: var(--white);
@@ -49,6 +56,10 @@
       max-width: 1200px;
       margin: 0 auto;
       padding: 0 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
     }
 
     nav {
@@ -56,6 +67,7 @@
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
+      width: 100%;
     }
 
     .logo-container {
@@ -109,6 +121,346 @@
       text-transform: uppercase;
     }
 
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+      margin-top: 1rem;
+    }
+
+    nav ul li {
+      position: relative;
+    }
+
+    nav ul li a {
+      color: var(--white);
+      text-decoration: none;
+      font-weight: 500;
+      padding: 0.5rem 0;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    nav ul li a:hover {
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    nav ul li a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background-color: var(--white);
+      transition: var(--transition);
+    }
+
+    nav ul li a:hover::after {
+      width: 100%;
+    }
+
+    .quick-actions {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .quick-actions button, .quick-actions .notifications {
+      background: rgba(255, 255, 255, 0.2);
+      border: none;
+      color: var(--white);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .quick-actions button:hover, .quick-actions .notifications:hover {
+      background: rgba(255, 255, 255, 0.3);
+      transform: scale(1.1);
+    }
+
+    .notifications {
+      position: relative;
+    }
+
+    .badge {
+      position: absolute;
+      top: -5px;
+      right: -5px;
+      background-color: #ff4757;
+      color: white;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      font-size: 0.7rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, var(--secondary-color), var(--white));
+      padding: 4rem 1rem 3rem;
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .dark-mode .hero {
+      background: linear-gradient(135deg, #2a3a4a, #1a2a3a);
+    }
+
+    .hero h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      color: var(--primary-dark);
+      font-weight: 700;
+    }
+
+    .dark-mode .hero h2 {
+      color: var(--white);
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      max-width: 700px;
+      margin: 0 auto;
+      color: var(--text-color);
+      font-weight: 300;
+    }
+
+    .dark-mode .hero p {
+      color: var(--dark-text);
+    }
+
+    .hero-divider {
+      width: 100px;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary-color), transparent);
+      margin: 1.5rem auto 0;
+      border-radius: 2px;
+    }
+
+    .dashboard-summary {
+      max-width: 1200px;
+      margin: 0 auto 2rem;
+      padding: 0 1rem;
+    }
+
+    .summary-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .summary-card {
+      background: var(--white);
+      border-radius: 10px;
+      padding: 1.5rem;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+      border-left: 4px solid var(--primary-color);
+    }
+
+    .dark-mode .summary-card {
+      background: #2a3a4a;
+      color: var(--dark-text);
+    }
+
+    .summary-card h4 {
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+      color: #666;
+    }
+
+    .dark-mode .summary-card h4 {
+      color: #aaa;
+    }
+
+    .summary-card .count {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .summary-card .change {
+      font-size: 0.85rem;
+    }
+
+    .summary-card .positive {
+      color: #2ecc71;
+    }
+
+    .summary-card .negative {
+      color: #ff4757;
+    }
+
+    .summary-card .neutral {
+      color: #3498db;
+    }
+
+    .dashboard {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1rem;
+      flex: 1;
+    }
+
+    .dashboard h3 {
+      text-align: center;
+      margin-bottom: 2.5rem;
+      font-size: 1.8rem;
+      color: var(--primary-dark);
+      font-weight: 600;
+      position: relative;
+      padding-bottom: 10px;
+    }
+
+    .dark-mode .dashboard h3 {
+      color: var(--primary-color);
+    }
+
+    .dashboard h3::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary-color), transparent);
+      border-radius: 2px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 2rem;
+      padding: 1rem;
+    }
+
+    .card {
+      background: var(--white);
+      border-radius: 12px;
+      box-shadow: var(--shadow);
+      padding: 2rem 1.5rem;
+      text-align: center;
+      transition: var(--transition);
+      cursor: pointer;
+      border: none;
+      position: relative;
+      overflow: hidden;
+      border-top: 4px solid var(--primary-color);
+    }
+
+    .dark-mode .card {
+      background: #2a3a4a;
+      color: var(--dark-text);
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: var(--primary-color);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: var(--transition);
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+    }
+
+    .card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .card i {
+      font-size: 2.8rem;
+      color: var(--primary-color);
+      margin-bottom: 1.2rem;
+      transition: var(--transition);
+    }
+
+    .card:hover i {
+      transform: scale(1.15);
+    }
+
+    .card p {
+      font-weight: 600;
+      font-size: 1.2rem;
+      margin-top: 0.5rem;
+      transition: var(--transition);
+      color: var(--primary-dark);
+    }
+
+    .dark-mode .card p {
+      color: var(--primary-color);
+    }
+
+    .card a {
+      color: inherit;
+      text-decoration: none;
+      display: block;
+      height: 100%;
+    }
+
+    .card-description {
+      font-size: 0.9rem;
+      color: #666;
+      margin-top: 0.8rem;
+      font-weight: 400;
+    }
+
+    .dark-mode .card-description {
+      color: #aaa;
+    }
+
+    .footer-container {
+      position: relative;
+      width: 100%;
+      background: transparent;
+      margin-top: auto;
+    }
+
+    .waves {
+      width: 100%;
+      height: 150px;
+      display: block;
+      margin: 0;
+      padding: 0;
+    }
+
+    .waves svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .footer-content {
+      background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+      color: var(--white);
+      text-align: center;
+      padding: 1.5rem 0;
+      margin-top: -1px;
+    }
+
+    .footer-content p {
+      margin: 0;
+      font-size: 0.9rem;
+    }
+
     .user-info {
       display: flex;
       align-items: center;
@@ -128,372 +480,272 @@
       font-size: 1.2rem;
     }
 
-    .doctor-dashboard {
-      max-width: 1200px;
-      margin: 2rem auto;
-      padding: 0 20px;
-      flex: 1;
-    }
-
-    .welcome-section {
-      background: linear-gradient(135deg, var(--secondary-color), var(--white));
-      padding: 2rem;
-      border-radius: 12px;
-      margin-bottom: 2rem;
+    .search-container {
+      position: absolute;
+      top: 100%;
+      right: 20px;
+      width: 300px;
+      background: white;
+      border-radius: 8px;
       box-shadow: var(--shadow);
-      text-align: center;
+      padding: 1rem;
+      z-index: 101;
+      display: none;
     }
 
-    .welcome-section h2 {
-      font-size: 2rem;
-      margin-bottom: 1rem;
-      color: var(--primary-dark);
+    .search-container.active {
+      display: block;
     }
 
-    .welcome-section p {
-      font-size: 1.1rem;
-      color: var(--text-color);
-    }
-
-    .doctor-schedule {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 2rem;
-      margin-bottom: 2rem;
-    }
-
-    @media (min-width: 992px) {
-      .doctor-schedule {
-        grid-template-columns: 1fr 1fr;
-      }
-    }
-
-    .schedule-card {
-      background: var(--white);
-      border-radius: 12px;
-      padding: 1.5rem;
-      box-shadow: var(--shadow);
-    }
-
-    .schedule-card h3 {
-      color: var(--primary-dark);
-      margin-bottom: 1rem;
-      padding-bottom: 0.5rem;
-      border-bottom: 2px solid var(--secondary-color);
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .schedule-card h3 i {
-      color: var(--primary-color);
-    }
-
-    .appointment-list {
-      list-style: none;
-    }
-
-    .appointment-item {
-      padding: 1rem 0;
-      border-bottom: 1px solid #eee;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .appointment-item:last-child {
-      border-bottom: none;
-    }
-
-    .appointment-time {
-      font-weight: 600;
-      color: var(--primary-dark);
-      min-width: 80px;
-    }
-
-    .appointment-patient {
-      flex: 1;
-      margin: 0 1rem;
-    }
-
-    .appointment-patient-name {
-      font-weight: 600;
-    }
-
-    .appointment-patient-info {
-      font-size: 0.9rem;
-      color: #666;
-    }
-
-    .appointment-actions button {
-      background: var(--primary-color);
-      color: white;
-      border: none;
-      padding: 0.5rem 1rem;
-      border-radius: 6px;
-      cursor: pointer;
-      transition: var(--transition);
-    }
-
-    .appointment-actions button:hover {
-      background: var(--primary-dark);
-    }
-
-    .quick-actions {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 1.5rem;
-      margin-bottom: 2rem;
-    }
-
-    .quick-action-card {
-      background: var(--white);
-      border-radius: 12px;
-      padding: 1.5rem;
-      text-align: center;
-      box-shadow: var(--shadow);
-      transition: var(--transition);
-      cursor: pointer;
-      border-top: 4px solid var(--primary-color);
-    }
-
-    .quick-action-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-    }
-
-    .quick-action-card i {
-      font-size: 2rem;
-      color: var(--primary-color);
-      margin-bottom: 1rem;
-    }
-
-    .quick-action-card p {
-      font-weight: 600;
-      color: var(--text-color);
-    }
-
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-      gap: 1.5rem;
-      margin-bottom: 2rem;
-    }
-
-    .stat-card {
-      background: var(--white);
-      border-radius: 12px;
-      padding: 1.5rem;
-      box-shadow: var(--shadow);
-    }
-
-    .stat-card h4 {
-      color: #666;
-      font-size: 0.9rem;
+    .search-container input {
+      width: 100%;
+      padding: 0.5rem;
+      border: 1px solid #ddd;
+      border-radius: 4px;
       margin-bottom: 0.5rem;
-      text-transform: uppercase;
-      letter-spacing: 1px;
     }
 
-    .stat-card .stat-value {
-      font-size: 2rem;
-      font-weight: 700;
-      color: var(--primary-dark);
+    .search-results {
+      max-height: 300px;
+      overflow-y: auto;
     }
 
-    .stat-card .stat-change {
-      display: flex;
-      align-items: center;
-      font-size: 0.9rem;
-      margin-top: 0.5rem;
+    .search-result-item {
+      padding: 0.5rem;
+      border-bottom: 1px solid #eee;
+      cursor: pointer;
     }
 
-    .stat-card .stat-change.positive {
-      color: #28a745;
+    .search-result-item:hover {
+      background: #f5f5f5;
     }
 
-    .stat-card .stat-change.negative {
-      color: #dc3545;
+    /* Tooltip styles */
+    [data-tooltip] {
+      position: relative;
     }
 
-    footer {
-      background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
-      color: var(--white);
-      text-align: center;
-      padding: 1.5rem 0;
-      margin-top: auto;
+    [data-tooltip]::after {
+      content: attr(data-tooltip);
+      position: absolute;
+      bottom: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #333;
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      white-space: nowrap;
+      opacity: 0;
+      visibility: hidden;
+      transition: var(--transition);
     }
 
-    footer p {
-      margin: 0;
-      font-size: 0.9rem;
+    [data-tooltip]:hover::after {
+      opacity: 1;
+      visibility: visible;
+      bottom: calc(100% + 5px);
     }
 
     @media (max-width: 768px) {
-      .welcome-section h2 {
-        font-size: 1.5rem;
+      nav {
+        flex-direction: column;
+      }
+      
+      nav ul {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      
+      .user-info, .quick-actions {
+        margin: 1rem auto 0;
+      }
+      
+      .cards {
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        gap: 1.5rem;
       }
 
-      .welcome-section p {
+      .logo-container {
+        flex-direction: column;
+        text-align: center;
+        margin-bottom: 1rem;
+      }
+
+      .waves {
+        height: 100px;
+      }
+
+      .hero h2 {
+        font-size: 2rem;
+      }
+
+      .hero p {
         font-size: 1rem;
       }
 
-      .quick-actions {
-        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      .card {
+        padding: 1.5rem 1rem;
+      }
+
+      .card i {
+        font-size: 2.2rem;
+      }
+
+      .card p {
+        font-size: 1.1rem;
+      }
+
+      .summary-cards {
+        grid-template-columns: 1fr;
       }
     }
   </style>
 </head>
 <body>
-<header>
-  <div class="header-container">
-    <nav>
-      <div class="logo-container">
-        <div class="logo-img">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/>
-            <path d="M12 6c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6zm0 10c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4z" opacity="0.3"/>
-          </svg>
+  <header>
+    <div class="header-container">
+      <nav>
+        <div class="logo-container">
+          <div class="logo-img">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/>
+              <path d="M12 6c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6zm0 10c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4z" opacity="0.3"/>
+            </svg>
+          </div>
+          <div class="logo-text">
+            <div class="logo-title">Viva Saúde </div>
+            <div class="logo-subtitle">Saúde Integrada</div>
+          </div>
         </div>
-        <div class="logo-text">
-          <div class="logo-title">Viva Saúde</div>
-          <div class="logo-subtitle">Painel Médico</div>
+        
+        <ul>
+          <li><a href="#"><i class="fas fa-home"></i> Início</a></li>
+          <li><a href="#"><i class="fas fa-calendar-alt"></i> Agenda</a></li>
+          <li><a href="#"><i class="fas fa-chart-line"></i> Relatórios</a></li>
+          <li><a href="#"><i class="fas fa-cog"></i> Configurações</a></li>
+        </ul>
+        
+        <div class="quick-actions">
+          <button class="search-toggle" aria-label="Abrir busca" data-tooltip="Buscar">
+            <i class="fas fa-search"></i>
+          </button>
+          <div class="notifications" aria-label="Notificações" data-tooltip="Notificações">
+            <i class="fas fa-bell"></i>
+            <span class="badge">3</span>
+          </div>
+          <button class="theme-toggle" aria-label="Alternar tema" data-tooltip="Tema escuro/claro">
+            <i class="fas fa-moon"></i>
+          </button>
+          <div class="user-info">
+            <i class="fas fa-user-circle"></i>
+            <span>Olá, <strong>Maria Ramalho</strong> </span>
+          </div>
         </div>
+      </nav>
+    </div>
+    
+    <div class="search-container">
+      <input type="text" placeholder="Buscar pacientes, médicos, consultas...">
+      <div class="search-results">
+        <!-- Resultados da busca apareceriam aqui -->
       </div>
+    </div>
+  </header>
 
-      <div class="user-info">
-        <i class="fas fa-user-md"></i>
-        <span>Dr. <strong>Caio Caetano</strong></span>
+  <main>
+    <section class="hero">
+      <h2>Bem-vindo ao Painel da Clínica Viva Saúde </h2>
+      <p>Excelência em cuidados médicos e gestão de saúde integrada</p>
+      <div class="hero-divider"></div>
+    </section>
+
+    <section class="dashboard-summary">
+      <div class="summary-cards">
+        <div class="summary-card">
+          <h4>Consultas Hoje</h4>
+          <p class="count">12</p>
+          <p class="change positive">+2 do que ontem</p>
+        </div>
+        <div class="summary-card">
+          <h4>Exames Pendentes</h4>
+          <p class="count">5</p>
+          <p class="change neutral">Mesmo que ontem</p>
+        </div>
+        <div class="summary-card">
+          <h4>Mensagens</h4>
+          <p class="count">3</p>
+          <p class="change negative">-1 do que ontem</p>
+        </div>
+        <div class="summary-card">
+          <h4>Pacientes Ativos</h4>
+          <p class="count">142</p>
+          <p class="change positive">+8 este mês</p>
+        </div>
       </div>
-    </nav>
+    </section>
+
+    <section class="dashboard">
+      <h3>Acesso Rápido</h3>
+      <div class="cards">
+        <div class="card" data-tooltip="Gerenciar pacientes">
+          <a href="pacientes.html">
+            <i class="fas fa-user-injured"></i>
+            <p>Pacientes</p>
+            <div class="card-description">Cadastro e histórico de pacientes</div>
+          </a>
+        </div>
+        <div class="card" data-tooltip="Gerenciar médicos">
+          <a href="medicos.html">
+            <i class="fas fa-user-md"></i>
+            <p>Médicos</p>
+            <div class="card-description">Corpo clínico e especialidades</div>
+          </a>
+        </div>
+        <div class="card" data-tooltip="Agendar consultas">
+          <a href="consultas.html">
+            <i class="fas fa-calendar-check"></i>
+            <p>Consultas</p>
+            <div class="card-description">Agendamento e acompanhamento</div>
+          </a>
+        </div>
+        <div class="card" data-tooltip="Gerenciar exames">
+          <a href="exames.html">
+            <i class="fas fa-vials"></i>
+            <p>Exames</p>
+            <div class="card-description">Solicitações e resultados</div>
+          </a>
+        </div>
+        <div class="card" data-tooltip="Acessar prontuários">
+          <a href="prontuario.html">
+            <i class="fas fa-file-medical"></i>
+            <p>Prontuário</p>
+            <div class="card-description">Registros médicos completos</div>
+          </a>
+        </div>
+        <div class="card" data-tooltip="Histórico completo">
+          <a href="historico.html">
+            <i class="fas fa-notes-medical"></i>
+            <p>Histórico</p>
+            <div class="card-description">Histórico de atendimentos</div>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="footer-container">
+    <div class="waves">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" preserveAspectRatio="none">
+        <path fill="rgb(0, 168, 168)" fill-opacity="1" d="M0,192L48,186.7C96,181,192,171,288,181.3C384,192,480,224,576,218.7C672,213,768,171,864,165.3C960,160,1056,192,1152,192C1248,192,1344,160,1392,144L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+      </svg>
+    </div>
+    <div class="footer-content">
+      <p>&copy; 2025 Viva Saúde. Todos os direitos reservados.</p>
+    </div>
   </div>
-</header>
 
-<main class="doctor-dashboard">
-  <section class="welcome-section">
-    <h2>Bem-vindo, Dr. Caio Caetano</h2>
-    <p>Seu painel médico com todas as informações necessárias para seu dia de trabalho</p>
-  </section>
-
-  <section class="doctor-schedule">
-    <div class="schedule-card">
-      <h3><i class="fas fa-calendar-day"></i> Consultas Hoje</h3>
-      <ul class="appointment-list">
-        <li class="appointment-item">
-          <span class="appointment-time">08:30</span>
-          <div class="appointment-patient">
-            <div class="appointment-patient-name">Maria Silva</div>
-            <div class="appointment-patient-info">Check-up anual</div>
-          </div>
-          <div class="appointment-actions">
-            <button>Iniciar</button>
-          </div>
-        </li>
-        <li class="appointment-item">
-          <span class="appointment-time">10:15</span>
-          <div class="appointment-patient">
-            <div class="appointment-patient-name">João Oliveira</div>
-            <div class="appointment-patient-info">Retorno</div>
-          </div>
-          <div class="appointment-actions">
-            <button>Iniciar</button>
-          </div>
-        </li>
-        <li class="appointment-item">
-          <span class="appointment-time">14:00</span>
-          <div class="appointment-patient">
-            <div class="appointment-patient-name">Ana Costa</div>
-            <div class="appointment-patient-info">Primeira consulta</div>
-          </div>
-          <div class="appointment-actions">
-            <button>Iniciar</button>
-          </div>
-        </li>
-      </ul>
-    </div>
-
-    <div class="schedule-card">
-      <h3><i class="fas fa-calendar-week"></i> Próximas Consultas</h3>
-      <ul class="appointment-list">
-        <li class="appointment-item">
-          <span class="appointment-time">Amanhã</span>
-          <div class="appointment-patient">
-            <div class="appointment-patient-name">Carlos Mendes</div>
-            <div class="appointment-patient-info">09:30 - Retorno</div>
-          </div>
-        </li>
-        <li class="appointment-item">
-          <span class="appointment-time">Qui</span>
-          <div class="appointment-patient">
-            <div class="appointment-patient-name">Fernanda Lima</div>
-            <div class="appointment-patient-info">11:00 - Check-up</div>
-          </div>
-        </li>
-        <li class="appointment-item">
-          <span class="appointment-time">Sex</span>
-          <div class="appointment-patient">
-            <div class="appointment-patient-name">Roberto Alves</div>
-            <div class="appointment-patient-info">16:45 - Primeira consulta</div>
-          </div>
-        </li>
-      </ul>
-    </div>
-  </section>
-
-  <section class="quick-actions">
-    <div class="quick-action-card" onclick="location.href='prontuario.html'">
-      <i class="fas fa-file-medical"></i>
-      <p>Prontuários</p>
-    </div>
-    <div class="quick-action-card" onclick="location.href='receitas.html'">
-      <i class="fas fa-prescription-bottle-alt"></i>
-      <p>Receitas</p>
-    </div>
-    <div class="quick-action-card" onclick="location.href='exames.html'">
-      <i class="fas fa-vials"></i>
-      <p>Solicitar Exames</p>
-    </div>
-    <div class="quick-action-card" onclick="location.href='pacientes.html'">
-      <i class="fas fa-user-injured"></i>
-      <p>Meus Pacientes</p>
-    </div>
-  </section>
-
-  <section class="stats-grid">
-    <div class="stat-card">
-      <h4>Consultas Hoje</h4>
-      <div class="stat-value">5</div>
-      <div class="stat-change positive">
-        <i class="fas fa-arrow-up"></i> 2 a mais que ontem
-      </div>
-    </div>
-    <div class="stat-card">
-      <h4>Pacientes Ativos</h4>
-      <div class="stat-value">42</div>
-      <div class="stat-change positive">
-        <i class="fas fa-arrow-up"></i> 5 novos este mês
-      </div>
-    </div>
-    <div class="stat-card">
-      <h4>Horas Trabalhadas</h4>
-      <div class="stat-value">28.5</div>
-      <div class="stat-change negative">
-        <i class="fas fa-arrow-down"></i> 3.2 menos que semana passada
-      </div>
-    </div>
-    <div class="stat-card">
-      <h4>Exames Pendentes</h4>
-      <div class="stat-value">7</div>
-      <div class="stat-change positive">
-        <i class="fas fa-arrow-down"></i> 3 resultados chegaram
-      </div>
-    </div>
-  </section>
-</main>
-
-<footer>
-  <p>&copy; 2025 Clínica Médica Viva Saúde. Todos os direitos reservados.</p>
-</footer>
-</script>
+  <script src="Telainicial(interna).js"></script>
 </body>
 </html>

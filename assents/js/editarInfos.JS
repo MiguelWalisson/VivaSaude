@@ -1,49 +1,58 @@
-'use strict';
+'use strict'
 
-// URL da sua API
-const API_URL = 'http://localhost:8080/api/cadastroconvenio';
-
-// Exemplo de campos do formulário
-const form = document.getElementById('formEditar');
-const mensagem = document.getElementById('mensagem');
-
-let usuario = {};
-let editId = null;
+const url = 'http://localhost:8080/pacientes';
+let usuario = null;
 
 async function fetchUsuario() {
   try {
   
-    const res = await fetch(API_URL + '/usuario'); 
+     
+    const res = await fetch(url + `/1`); 
+
+    if(!res.ok) throw new Error('Erro na requisição' + res.status);
     usuario = await res.json();
-    preencherFormulario();
-  } catch (e) {
-    mensagem.textContent = 'Erro ao buscar informações na API';
-    mensagem.style.color = 'red';
+    preencherFormulario(usuario);
+    } catch (e) {
+    console.log = ('Erro ao buscar usuario na API' + e);
+    alert('Erro ao carregar dados do paciente!');
+   
   }
 }
-
-function preencherFormulario() {
-  for (const campo in usuario) {
-    if (document.getElementById(campo)) {
-      document.getElementById(campo).value = usuario[campo];
-    }
-  }
+function preencherFormulario(dados){
+  document.getElementById('nome').value = dados.nome || '';
+  document.getElementById('cpf').value = dados.cpf || '';
+  document.getElementById('data').value = dados.dataNascimento || '';
+  document.getElementById('genero').value = dados.genero || '';
+  document.getElementById('telefone').value = dados.telefone || '';
+  document.getElementById('cep').value = dados.cep || '';
+  document.getElementById('endereco').value = dados.endereco || '';
+  document.getElementById('email').value = dados.email || '';
 }
-
-
 async function atualizarUsuario(dados) {
-  try {
-    const res = await fetch(`${API_URL}/usuario/${usuario.id || 1}`, {
+  try{
+    if(!usuario || !usuario.id){
+      throw new Error('Usuário não está carregado ou ID inválido.');
+
+    }
+    const res = await fetch(`${url}/usuario/${usuario.id}`,{
       method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(dados)
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify(dados),
     });
-    return await res.json();
-  } catch (e) {
-    mensagem.textContent = 'Erro ao atualizar informações na API';
-    mensagem.style.color = 'red';
+    if(!res.ok){
+      throw new Error(`Erro ao atualizar: ${res.status}`);
+    }
+    const dataAtualizada = await res.json();
+    return dataAtualizada;
+  }catch(e){
+    console.log("Erro ao atualizar informações na API: ", e);
+    alert('Erro ao salvar informações!');
   }
+    
 }
+
+const form = document.getElementById('formEditar');
+const mensagem = document.getElementById('mensagem');
 
 form.addEventListener('submit', async function(e) {
   e.preventDefault();
@@ -58,15 +67,16 @@ form.addEventListener('submit', async function(e) {
     endereco: document.getElementById('endereco').value,
     email: document.getElementById('email').value
   };
+  const atualizado = await atualizarUsuario(dados);
 
-
-  await atualizarUsuario(dados);
-  mensagem.textContent = "Informações salvas com sucesso!";
-  mensagem.style.color = "green";
-  setTimeout(() => {
-    mensagem.textContent = "";
-  }, 2000);
+  if(atualizado) {
+    mensagem.textContent = 'Informações salvas com sucesso!';
+    setTimeout(() => {
+      mensagem.textContent = '';
+    }, 2000);
+  }
 });
+window.addEventListener('DOMContentLoaded',fetchUsuario);
 
 
-fetchUsuario();
+ 
