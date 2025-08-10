@@ -1,91 +1,166 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Nutrição - Viva Saúde</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Poppins', sans-serif;
-      background: url('/assents/images/nutricao.jpg') no-repeat center center/cover;
-    }
-    header {
-      background-color: #00bcd4;
-      padding: 15px 40px;
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Nutrição - Viva Saúde</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: 'Poppins', sans-serif;
+    background-color: white;
+    color: #222;
+  }
+
+  /* Cabeçalho */
+    .topbar {
+      background: rgb(0, 168, 168);
+      color: white;
+      padding: 20px 40px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      color: white;
+      width: 100%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+      transition: top 1.0s ease-in-out;
+      height: 85px;
     }
-    nav a {
-      color: white;
+
+    .topbar.hidden {
+      top: -100px;
+    }
+
+    .topbar:hover {
+      top: 0 !important;
+    }
+    .logo strong {
+      font-size: 24px;
+      font-weight: 600;
+      color: #ffff;
+    } 
+
+    .topbar nav a {
       margin-left: 30px;
+      color: white;
       text-decoration: none;
       font-weight: 500;
     }
-    .content {
-      background-color: rgba(255,255,255,0.6);
-      max-width: 900px;
-      margin: 60px auto;
-      padding: 30px;
-      border-radius: 20px;
+  /* Imagem com overlay azul e texto */
+  .imagem-container {
+    position: relative;
+    width: 100%;
+    height: 300px;
+    overflow: hidden;
+    border-bottom: 2px solid #00A8A8;
+    margin-top: 80px;
+    
+  }
+
+  .imagem-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    filter: brightness(0.45) saturate(1.2) contrast(0.9);
+
+  }
+
+  .imagem-container::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 168, 168, 0.4);
+    pointer-events: none;
+  }
+
+  .titulo-imagem {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-weight: 700;
+    font-size: 1.5rem;
+    z-index: 2;
+  }
+
+  /* Conteúdo texto */
+  .texto-container {
+    max-width: 900px;
+    margin: 25px auto 50px;
+    padding: 0 20px;
+    font-size: 0.875rem;
+    line-height: 1.3;
+  }
+
+  .texto-container ul {
+    list-style: disc inside;
+    margin: 10px 0 15px 0;
+  }
+
+  /* Responsividade */
+  @media (max-width: 600px) {
+    header {
+      padding: 12px 15px;
+      font-size: 14px;
     }
-    h1 {
-      text-align: center;
-      color: #0097a7;
+
+    .imagem-container {
+      height: 140px;
     }
-    ul {
-      padding-left: 20px;
+
+    .titulo-imagem {
+      font-size: 1.2rem;
     }
-    p, li {
-      margin-bottom: 10px;
+
+    .texto-container {
+      font-size: 0.8rem;
+      margin: 20px 10px 40px;
     }
-  </style>
+  }
+</style>
 </head>
 <body>
-  <header>
-    <div><strong>Viva Saúde</strong></div>
-    <nav>
-      <a href="#">Início</a>
-      <a href="#">Sobre</a>
-      <a href="#">Serviços</a>
-      <a href="#">Quero ser cliente</a>
-    </nav>
-  </header>
 
-  <div class="content">
-    <h1>Nutrição</h1>
-    <p>Nutrição é a área que estuda os alimentos e como eles interagem com o corpo humano, influenciando a saúde, o crescimento, a prevenção e o tratamento de doenças.</p>
+  <header class="topbar">
+    <div class="logo">
+      <strong>Viva Saúde</strong>
+    </div>
+  <nav><a href="/index.html">Início</a></nav>
+</header>
 
-    <p><strong>O que o nutricionista faz:</strong></p>
-    <ul>
-      <li>Avalia os hábitos alimentares da pessoa e seu estado de saúde.</li>
-      <li>Elabora planos alimentares personalizados, conforme os objetivos: emagrecimento, ganho de massa, controle de doenças, melhoria de performance esportiva, entre outros.</li>
-      <li>Orienta sobre alimentação equilibrada, segura e saudável.</li>
-      <li>Acompanha pessoas com doenças como:
-        <ul>
-          <li>diabetes</li>
-          <li>obesidade</li>
-          <li>hipertensão</li>
-          <li>intolerâncias ou alergias alimentares</li>
-          <li>distúrbios alimentares (como anorexia e bulimia)</li>
-        </ul>
-      </li>
-      <li>Atua em diferentes áreas, como:
-        <ul>
-          <li>clínicas e hospitais</li>
-          <li>escolas</li>
-          <li>academias</li>
-          <li>indústria de alimentos</li>
-          <li>restaurantes e cozinhas industriais</li>
-          <li>esportes</li>
-        </ul>
-      </li>
-    </ul>
+<section class="imagem-container">
+  <img src="/assents/images/nutricao.jpg" alt="Imagem de nutrição" />
+  <h1 class="titulo-imagem">Nutrição</h1>
+</section>
 
-    <p><strong>Resumindo:</strong> o nutricionista é o profissional que cuida da alimentação e nutrição das pessoas, ajudando a melhorar a saúde por meio de uma dieta adequada às suas necessidades.</p>
-  </div>
+<section class="texto-container">
+  <p>O que faz um(a) nutricionista?<br>
+  O nutricionista avalia os hábitos alimentares e o estado de saúde da pessoa para elaborar planos alimentares personalizados, de acordo com cada objetivo — como emagrecimento, ganho de massa, controle de doenças ou melhora da performance esportiva.<br>
+  Também orienta sobre uma alimentação equilibrada, segura e saudável, adequada às necessidades individuais.<br>
+  Esse profissional acompanha pessoas com condições como diabetes, obesidade, hipertensão, intolerâncias alimentares, alergias e distúrbios alimentares (como anorexia e bulimia).</p>
+
+  <p>Além disso, pode atuar em várias áreas:</p>
+  <ul>
+    <li>Clínicas e hospitais</li>
+    <li>Escolas</li>
+    <li>Academias e esportes</li>
+    <li>Indústria de alimentos</li>
+    <li>Restaurantes e cozinhas industriais</li>
+  </ul>
+
+  <p>Em resumo<br>
+  O nutricionista é o profissional que cuida da saúde por meio da alimentação, ajudando cada pessoa a encontrar uma dieta adequada às suas necessidades, promovendo bem-estar, equilíbrio e qualidade de vida.</p>
+</section>
+
 </body>
 </html>

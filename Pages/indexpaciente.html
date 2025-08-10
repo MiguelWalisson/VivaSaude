@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Viva Saúde</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
 
@@ -62,18 +63,29 @@
       font-weight: 500;
     }
 
-    .topbar nav a.botao-paciente {
-      background-color: white;
-      color: #00c9a7;
-      padding: 8px 16px;
-      border-radius: 20px;
-      font-weight: 600;
-      transition: background 0.3s;
-    }
+.topbar nav button.botao-paciente {
+  background-color: white;
+  color: #00c9a7;
+  padding: 10px 20px; /* Mais espaço interno */
+  margin-left: 15px; /* Afastar do elemento anterior */
+  border: none;
+  border-radius: 20px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 1rem;
+  transition: background 0.3s, transform 0.2s;
+}
 
-    .topbar nav a.botao-paciente:hover {
-      background-color: #f0f0f0;
-    }
+.topbar nav button.botao-paciente:hover {
+  background-color: #f0f0f0;
+  transform: scale(1.05);
+}
+
+.topbar nav button.botao-paciente:active {
+  transform: scale(0.98);
+}
+
 
     .hero {
       padding-top: 230px;
@@ -234,6 +246,32 @@
       font-size: 16px;
       margin-top: 40px;
     }
+nav {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.user-info {
+  margin-left: auto; 
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0.5rem 1rem;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
+  transition: var(--transition);
+}
+
+    .user-info:hover {
+      background-color: rgba(255, 255, 255, 0.3);
+    }
+
+    .user-info i {
+      font-size: 1.2rem;
+    }
+
+
 
     @media (max-width: 768px) {
       .topbar {
@@ -275,7 +313,11 @@
       <a href="#sobre">Sobre Nós</a>
       <a href="#">Contato</a>
       <a href="#">Conheça nossos médicos</a>
-      <button onclick="window.location.href='/Pages/telaPaciente.html?tipo=paciente'" class="botao-paciente">area Paciente</button>
+      <button onclick="window.location.href='/Pages/telaPaciente.html?tipo=paciente'" class="botao-paciente">Área Paciente</button>
+    <div class="user-info">
+            <i class="fas fa-user-circle"></i>
+            <span>Olá, <strong>Maria Ramalho</strong> </span>
+          </div>
     </nav>
   </header>
 
