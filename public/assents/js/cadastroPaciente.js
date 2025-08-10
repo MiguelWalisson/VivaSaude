@@ -87,7 +87,8 @@ console.log('Enviando dados para API:', DadosPaciente);
     const responsePaciente = await fetch('http://localhost:8080/pacientes',{
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+        credentials: 'include'
         },
         body: JSON.stringify(DadosPaciente)
     })
