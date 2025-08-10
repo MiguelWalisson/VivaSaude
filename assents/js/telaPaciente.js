@@ -1,19 +1,29 @@
 'use strict'
 
 
-const url = 'http://localhost:8080/pacientes';
+const url = 'http://localhost:8080/auth/me';
 let usuario = null;
 
 async function fetchUsuario(){
     try{
-        const res = await fetch(url +'/1');
-        if(!res.ok) throw new Error('Erro na requisição' + res.status);
-    usuario = await res.json();
-    console.log('Usuário carregado!', usuario);
-    nomePacienteTitulo();
+        const response = await fetch(url, {
+            method: 'GET',
+            credentials: 'include',
+        });
+        if(response.status === 401){
+            console.log('401')
+            return null;       
+        }
+        if(!response.ok){
+            console.log("Usuário não logado!");
+            return null;
+        }
+        const usuario = await response.json();
+        console.log('Usuário carregado!', usuario);
+        nomePacienteTitulo();
     } catch (e) {
-    console.log('Erro ao buscar usuario na API' + e.message);
-    alert('Erro ao carregar dados do paciente!');
+        console.log('Erro ao buscar usuario na API' + e.message);
+        alert('Erro ao carregar dados do paciente!');
    }
 } 
   

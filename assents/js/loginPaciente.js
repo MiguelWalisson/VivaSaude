@@ -13,7 +13,8 @@ async function loginPaciente(event){
         const response = await fetch(url, {
             method: 'POST',
             headers: {"Content-Type": "application/json"},
-            body: JSON.stringify({email, senha, tipo})
+            credentials: 'include',
+            body: JSON.stringify({email, senha, tipo: "paciente"})
         });
         if(response.ok){
             const paciente = await response.json();
