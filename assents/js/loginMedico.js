@@ -24,7 +24,7 @@ async function loginMedico(event){
         if(response.ok){
             const medico = await response.json();
             console.log("Medico logado:",medico);
-            localStorage.setItem("medicoLogado",JSON.stringify(medico));
+            localStorage.setItem("usuarioLogado",JSON.stringify(medico));
 
             mensagem.style.color = 'green';
             mensagem.textContent = `Bem-vindo(a), Dr. ${medico.nome}`;

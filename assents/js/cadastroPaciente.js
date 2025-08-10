@@ -93,12 +93,16 @@ console.log('Enviando dados para API:', DadosPaciente);
     })
      if (responsePaciente.ok){
             
-            alert('Funcionario Cadastrado!');
+            alert('Paciente Cadastrado!');
             document.getElementById('formcadastroPaciente').reset();
+            setTimeout(() =>{
+                window.location.href = "/Pages/indexpaciente.html";
+
+            }, 1500);
             return;
         } else{
             const erroTexto = await responsePaciente.text();
-            alert("Erro ao cadastrar funcionário :" + erroTexto);
+            alert("Erro ao cadastrar paciente :" + erroTexto);
             return;
         }
 }catch (error) {

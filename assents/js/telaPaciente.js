@@ -1,24 +1,26 @@
 'use strict'
 
 
-const url = 'http://localhost:8080/auth/me';
 let usuario = null;
 
+window.addEventListener('DOMContentLoaded', fetchUsuario); 
 async function fetchUsuario(){
     try{
-        const response = await fetch(url, {
+        const response = await fetch('http://localhost:8080/auth/me', {
             method: 'GET',
             credentials: 'include',
+            
         });
+        console.log("Get paciente", response)
         if(response.status === 401){
-            console.log('401')
+            console.log('401 - Não autenticado')
             return null;       
         }
         if(!response.ok){
             console.log("Usuário não logado!");
             return null;
         }
-        const usuario = await response.json();
+         usuario = await response.json();
         console.log('Usuário carregado!', usuario);
         nomePacienteTitulo();
     } catch (e) {
@@ -42,6 +44,6 @@ function nomePacienteTitulo(){
     }
    
 }
-window.addEventListener('DOMContentLoaded', fetchUsuario);  
+ 
 
 

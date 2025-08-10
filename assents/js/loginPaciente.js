@@ -13,13 +13,16 @@ async function loginPaciente(event){
         const response = await fetch(url, {
             method: 'POST',
             headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({email, senha, tipo}),
             credentials: 'include',
-            body: JSON.stringify({email, senha, tipo})
-        });
+            
+        }
+            ,console.log("Post para login", email, senha, tipo)
+    );
         if(response.ok){
             const paciente = await response.json();
             console.log("Paciente logado:", paciente);
-            localStorage.setItem("pacienteLogado", JSON.stringify(paciente));
+            localStorage.setItem("usuarioLogado", JSON.stringify(paciente));
 
             mensagem.style.color = 'green';
             mensagem.textContent = `Bem-vindo(a), ${paciente.nome}`;

@@ -447,14 +447,6 @@
         }
       });
     });
-
-    //Opções dentro da div userInfo
-    const userInfo = document.getElementById('user-info');
-
-  userInfo.addEventListener('click', () => {
-    userInfo.classList.toggle('active');
-  });
-
   // Para fechar o menu ao clicar fora
   document.addEventListener('click', (event) => {
     if (!userInfo.contains(event.target)) {
