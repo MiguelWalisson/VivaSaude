@@ -17,6 +17,8 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .cabecalho h1 {
@@ -30,25 +32,39 @@ body {
   font-weight: 500;
   font-size: 14px;
 }
+
 .container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 40px 30px;
+  width: 100%;
 }
 
-.conteudo {
+body > .container,
+body > .conteudo,
+body > h2.titulo,
+body > .coluna-direita {
   display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 60px;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
 }
-h2 {
+
+body > .container,
+body > .conteudo {
+  min-height: calc(100vh - 84px); 
+  justify-content: center;
+}
+
+
+h2, h2.titulo {
   font-size: 24px;
   color: #00A8A8;
   margin-bottom: 20px;
   text-align: center;
-  margin-top: 50px;
+  margin-top: 10px;
 }
+
 
 .coluna-esquerda,
 .coluna-direita {
@@ -62,61 +78,10 @@ h2 {
   text-align: center;
 }
 
-.label {
-  font-weight: 500;
-  font-size: 15px;
-}
-
-.radio-grupo {
-  display: flex;
-  gap: 20px;
-}
-
-.radio-grupo label {
-  font-size: 14px;
-}
-
-.add-convenio {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 14px;
-  text-decoration: none;
-  color: rgb(0, 168, 168);
-  font-weight: 500;
-}
-.icon {
-  width: 18px;
-  height: 18px;
-  color: rgb(0, 168, 168);
-}
-
-.card-convenio {
-  background-color: #fff;
-  border: 1px solid #ddd;
-  padding: 16px 20px;
-  border-radius: 10px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-  font-size: 14px;
-}
-
+.campo,
 .btn-agendar {
-  margin-top: 10px;
-  padding: 14px 0;
-  width: 250px; 
-  background-color: rgb(0, 168, 168);
-  color: #fff;
-  font-weight: 500;
-  font-size: 16px;
-  border: none;
-  border-radius: 12px;
-  cursor: pointer;
-  font-family: 'Poppins', sans-serif;
-}
-
-
-.btn-agendar:hover {
-  background-color: rgb(0, 168, 168);
+  width: 100%;
+  max-width: 320px; 
 }
 
 .campo {
@@ -124,7 +89,6 @@ h2 {
   flex-direction: column;
   gap: 8px;
   font-family: 'Poppins', sans-serif;
-
 }
 
 .campo label {
@@ -140,18 +104,50 @@ input[type="time"] {
   border-radius: 10px;
   padding: 12px;
   font-size: 14px;
-  width: 250px; 
-  max-width: 100%;
+  width: 100%;  
+  box-sizing: border-box;
 }
 
-#campo-convenio select {
-  background-color: #f0f0f0;
+
+.btn-agendar {
+    display: block;
+  margin: 10px auto 0 auto;
+  width: 260px;
+  margin-top: 20px;
+  padding: 14px 0;
+  background-color: rgb(0, 168, 168);
+  color: #fff;
+  font-weight: 500;
+  font-size: 16px;
   border: none;
-  border-radius: 10px;
-  padding: 12px;
-  font-size: 14px;
-  width: 100%;
+  border-radius: 12px;
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+  align-self: center; 
+  width: 260px;      
 }
+
+.btn-agendar:hover {
+  background-color: rgb(0, 150, 150);
+}
+
+.label {
+  font-weight: 500;
+  font-size: 15px;
+}
+
+.radio-grupo {
+  display: flex;
+  gap: 20px;
+}
+
+.radio-grupo label { font-size: 14px; }
+
+.add-convenio { display: flex; align-items: center; gap: 6px; font-size: 14px; text-decoration: none; color: rgb(0, 168, 168); font-weight: 500; }
+
+.icon { width: 18px; height: 18px; color: rgb(0, 168, 168); }
+
+.card-convenio { background-color: #fff; border: 1px solid #ddd; padding: 16px 20px; border-radius: 10px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); font-size: 14px; }
 
 /* ====== ESTILO DA TABELA DE AGENDAMENTOS ====== */
 #tabela-agendamentos {
@@ -164,31 +160,15 @@ input[type="time"] {
   box-shadow: 0 2px 8px rgba(0,168,168,0.08);
 }
 
-#tabela-agendamentos th, #tabela-agendamentos td {
-  padding: 14px 10px;
-  text-align: left;
-}
+#tabela-agendamentos th, #tabela-agendamentos td { padding: 14px 10px; text-align: left; }
 
-#tabela-agendamentos th {
-  background-color: #00A8A8;
-  color: #fff;
-  font-weight: 600;
-  font-size: 15px;
-  border-bottom: 2px solid #e0e0e0;
-}
+#tabela-agendamentos th { background-color: #00A8A8; color: #fff; font-weight: 600; font-size: 15px; border-bottom: 2px solid #e0e0e0; }
 
-#tabela-agendamentos tr {
-  border-bottom: 1px solid #e0e0e0;
-}
+#tabela-agendamentos tr { border-bottom: 1px solid #e0e0e0; }
 
-#tabela-agendamentos tr:last-child {
-  border-bottom: none;
-}
+#tabela-agendamentos tr:last-child { border-bottom: none; }
 
-#tabela-agendamentos td {
-  font-size: 14px;
-  color: #333;
-}
+#tabela-agendamentos td { font-size: 14px; color: #333; }
 
 #tabela-agendamentos button {
   background-color: #00A8A8;
@@ -201,19 +181,10 @@ input[type="time"] {
   margin-right: 6px;
   transition: background 0.2s;
 }
-
-#tabela-agendamentos button:hover {
-  background-color: #0e8f8f;
-}
+#tabela-agendamentos button:hover { background-color: #0e8f8f; }
 
 /* Responsivo para tabela */
 @media (max-width: 700px) {
-  #tabela-agendamentos th, #tabela-agendamentos td {
-    padding: 10px 4px;
-    font-size: 12px;
-  }
-  #tabela-agendamentos button {
-    padding: 5px 8px;
-    font-size: 11px;
-  }
+  #tabela-agendamentos th, #tabela-agendamentos td { padding: 10px 4px; font-size: 12px; }
+  #tabela-agendamentos button { padding: 5px 8px; font-size: 11px; }
 }

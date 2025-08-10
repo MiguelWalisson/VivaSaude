@@ -45,10 +45,6 @@
     .topbar:hover {
       top: 0 !important;
     }
-
-    .logo img {
-      height: 50px;
-    }
     .logo strong {
       font-size: 24px;
       font-weight: 600;
@@ -62,18 +58,29 @@
       font-weight: 500;
     }
 
-    .topbar nav a.botao-paciente {
-      background-color: white;
-      color: #00c9a7;
-      padding: 8px 16px;
-      border-radius: 20px;
-      font-weight: 600;
-      transition: background 0.3s;
-    }
+.topbar nav button.botao-paciente {
+  background-color: white;
+  color: #00c9a7;
+  padding: 10px 20px; /* Mais espaço interno */
+  margin-left: 15px; /* Afastar do elemento anterior */
+  border: none;
+  border-radius: 20px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 1rem;
+  transition: background 0.3s, transform 0.2s;
+}
 
-    .topbar nav a.botao-paciente:hover {
-      background-color: #f0f0f0;
-    }
+.topbar nav button.botao-paciente:hover {
+  background-color: #f0f0f0;
+  transform: scale(1.05);
+}
+
+.topbar nav button.botao-paciente:active {
+  transform: scale(0.98);
+}
+
 
     .hero {
       padding-top: 230px;
@@ -111,7 +118,6 @@
     .btn:hover {
       background-color: #f0f0f0;
     }
-
     .section {
       max-width: 900px;
       margin: 80px auto;
