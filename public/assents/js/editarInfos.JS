@@ -1,15 +1,35 @@
 'use strict'
 
-const url = 'http://localhost:8080/pacientes';
-let usuario = null;
 
+let usuario = null;
+window.addEventListener('DOMContentLoaded',fetchUsuario);
 async function fetchUsuario() {
   try {
+    const token = localStorage.getItem('acessToken');
+    if(!token){
+      console.log("Nenhum token JWT encontrado!")
+      return null;
+    }
   
      
-    const res = await fetch(url + `/1`); 
+    const response = await fetch('/api/auth/me',{
+      method:'GET',
+           
+            headers:{
+                'Authorization':`Bearer ${token}`,
+                'Content-Type' : 'application/json'
+                }
 
-    if(!res.ok) throw new Error('Erro na requisição' + res.status);
+    }); 
+
+    if(response.status === 400 || response.status === 403) {
+      console.log('Token inválido ou não autorizado!')
+      return null;
+    }
+    if(!response.ok){
+      console.log("Erro ao buscar usuario!")
+      return null;
+    }
     usuario = await res.json();
     preencherFormulario(usuario);
     } catch (e) {
@@ -76,7 +96,7 @@ form.addEventListener('submit', async function(e) {
     }, 2000);
   }
 });
-window.addEventListener('DOMContentLoaded',fetchUsuario);
+
 
 
  

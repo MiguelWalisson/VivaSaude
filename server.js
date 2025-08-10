@@ -4,7 +4,7 @@ const path = require('path');
 const { createProxyMiddleware } = require('http-proxy-middleware');
 
 const app = express();
-const PORT = 5500; // porta do proxy/frontend
+const PORT = 3000; // porta do proxy/frontend
 
 // 1) Serve arquivos estáticos da pasta "public"
 app.use(express.static(path.join(__dirname, 'public')));

@@ -131,24 +131,6 @@
       <div class="mensagem" id="mensagem"></div>
     </form>
   </div>
-
-  <script>
-
-    window.onload = function() {
-      for (const campo in dadosUsuario) {
-        if (document.getElementById(campo)) {
-          document.getElementById(campo).value = dadosUsuario[campo];
-        }
-      }
-    };
-
-    document.getElementById('formEditar').addEventListener('submit', function(e) {
-      e.preventDefault();
-      document.getElementById('mensagem').textContent = "Informações salvas com sucesso!";
-      setTimeout(() => {
-        document.getElementById('mensagem').textContent = "";
-      }, 2000);
-    });
-  </script>
+  <script src="/assents/js/editarInfos.JS"></script>
 </body>
 </html>

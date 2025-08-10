@@ -84,12 +84,12 @@ async function preencherCadastro (event){
         senhaConfirm: senhaConfirm
     };
 console.log('Enviando dados para API:', DadosPaciente);
-    const responsePaciente = await fetch('http://localhost:8080/pacientes',{
+    const responsePaciente = await fetch('/api/pacientes',{
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json',
-        credentials: 'include'
+            'Content-Type': 'application/json'
         },
+        credentials: 'include',
         body: JSON.stringify(DadosPaciente)
     })
      if (responsePaciente.ok){
