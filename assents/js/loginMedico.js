@@ -19,7 +19,7 @@ async function loginMedico(event){
             method:'POST',
             headers: {"Content-Type": "application/json"},
             credentials: 'include',
-            body: JSON.stringify({email,senha,tipo: "medico"})
+            body: JSON.stringify({email,senha,tipo})
         });
         if(response.ok){
             const medico = await response.json();

@@ -69,7 +69,7 @@ async function preencherCadastro (event){
     const endereco = document.getElementById('endereco').value;
     const email = document.getElementById('email').value;
     const senha = document.getElementById('Senha').value;
-    const senhaConfirm = document.getElementById('Confirmar Senha').value;
+    const senhaConfirm = document.getElementById('ConfirmarSenha').value;
     
     const DadosPaciente = {
         nome: nome,
