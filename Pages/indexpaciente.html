@@ -246,32 +246,6 @@
       font-size: 16px;
       margin-top: 40px;
     }
-nav {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
-.user-info {
-  margin-left: auto; 
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 0.5rem 1rem;
-  background-color: rgba(255, 255, 255, 0.2);
-  border-radius: 20px;
-  transition: var(--transition);
-}
-
-    .user-info:hover {
-      background-color: rgba(255, 255, 255, 0.3);
-    }
-
-    .user-info i {
-      font-size: 1.2rem;
-    }
-
-
 
     @media (max-width: 768px) {
       .topbar {
@@ -314,10 +288,6 @@ nav {
       <a href="#">Contato</a>
       <a href="#">Conheça nossos médicos</a>
       <button onclick="window.location.href='/Pages/telaPaciente.html?tipo=paciente'" class="botao-paciente">Área Paciente</button>
-    <div class="user-info">
-            <i class="fas fa-user-circle"></i>
-            <span>Olá, <strong>Maria Ramalho</strong> </span>
-          </div>
     </nav>
   </header>
 
@@ -477,6 +447,20 @@ nav {
         }
       });
     });
+
+    //Opções dentro da div userInfo
+    const userInfo = document.getElementById('user-info');
+
+  userInfo.addEventListener('click', () => {
+    userInfo.classList.toggle('active');
+  });
+
+  // Para fechar o menu ao clicar fora
+  document.addEventListener('click', (event) => {
+    if (!userInfo.contains(event.target)) {
+      userInfo.classList.remove('active');
+    }
+  });
   </script>
 </body>
 </html>
