@@ -301,22 +301,5 @@ html {
   color: #00a8a8;
   font-style: italic;
 }
-    .user-info {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-left: auto;
-      padding: 0.5rem 1rem;
-      background-color: rgba(255, 255, 255, 0.2);
-      border-radius: 20px;
-      transition: var(--transition);
-    }
 
-    .user-info:hover {
-      background-color: rgba(255, 255, 255, 0.3);
-    }
-
-    .user-info i {
-      font-size: 1.2rem;
-    }
 
