@@ -1,0 +1,52 @@
+ * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background-color: #fff;
+    }
+
+    .agenda-container {
+      padding: 60px 100px;
+    }
+
+    h2.titulo-centralizado {
+      text-align: center;
+      color: #00a8a8;
+      font-size: 26px;
+      margin-bottom: 30px;
+    }
+
+    #calendar {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .fc-button {
+      background-color: #00a8a8 !important;
+      border: none !important;
+      color: white !important;
+      border-radius: 5px !important;
+      padding: 5px 10px !important;
+      
+    }
+
+    .fc-toolbar-title {
+      font-size: 20px;
+      color: #007f7f;
+    }
+
+    .fc-event {
+      background-color: #007f7f !important;
+      border: none !important;
+      color: white !important;
+      font-size: 14px;
+      
+    }
+
+    .fc-daygrid-event-dot {
+      border-color: #007f7f !important;
+    }
