@@ -1,0 +1,25 @@
+{
+  "name": "vivasaude",
+  "version": "1.0.0",
+  "description": "Sistema de **gerenciamento para clínica médica** desenvolvido como Trabalho de Conclusão de Curso (TCC).  \r O **VivaSaúde** tem como objetivo facilitar o controle de pacientes, médicos, agendas e acessos, garantindo segurança e eficiência no gerenciamento de dados.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MiguelWalisson/VivaSaude.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MiguelWalisson/VivaSaude/issues"
+  },
+  "homepage": "https://github.com/MiguelWalisson/VivaSaude#readme",
+  "dependencies": {
+    "express": "^5.1.0",
+    "http-proxy-middleware": "^3.0.5"
+  }
+}
