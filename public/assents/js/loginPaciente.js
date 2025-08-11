@@ -23,7 +23,7 @@ async function loginPaciente(event){
         if(response.ok){
             const json = await response.json();
             const token = json.token;
-            console.log("Paciente logado:", json);
+            console.log("Paciente logado:", token);
             if(!token) throw new Error("Token não recebido!");
             localStorage.setItem('acessToken', token);
             

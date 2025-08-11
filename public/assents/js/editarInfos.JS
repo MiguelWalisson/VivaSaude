@@ -30,10 +30,10 @@ async function fetchUsuario() {
       console.log("Erro ao buscar usuario!")
       return null;
     }
-    usuario = await res.json();
+    usuario = await response.json();
     preencherFormulario(usuario);
-    } catch (e) {
-    console.log = ('Erro ao buscar usuario na API' + e);
+    } catch (err) {
+    console.log = ('Erro ao buscar usuario na API' + err);
     alert('Erro ao carregar dados do paciente!');
    
   }
@@ -54,9 +54,12 @@ async function atualizarUsuario(dados) {
       throw new Error('Usuário não está carregado ou ID inválido.');
 
     }
-    const res = await fetch(`${url}/usuario/${usuario.id}`,{
+    const res = await fetch('/api/pacientes',{
       method: 'PUT',
-      headers: {'Content-Type':'application/json'},
+      headers: {
+        'Authorization':`Bearer ${token}`,
+        'Content-Type':'application/json'
+      },
       body: JSON.stringify(dados),
     });
     if(!res.ok){
