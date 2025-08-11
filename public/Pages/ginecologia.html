@@ -1,114 +1,158 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Ginecologia - Viva Saúde</title>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Ginecologia - Viva Saúde</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Poppins', sans-serif;
-    }
+  body {
+    font-family: 'Poppins', sans-serif;
+    background-color: white;
+    color: #222;
+  }
 
-    body {
-      background-color: #f5f5f5;
-      color: #333;
-    }
-
-    header {
-      background-color: rgb(0, 168, 168);
+  /* Cabeçalho */
+    .topbar {
+      background: rgb(0, 168, 168);
       color: white;
-      padding: 15px 30px;
+      padding: 20px 40px;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      width: 100%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+      transition: top 1.0s ease-in-out;
+      height: 85px;
     }
 
-    header .logo {
-      font-size: 1.2em;
-      font-weight: bold;
+    .topbar.hidden {
+      top: -100px;
     }
 
-    header nav a {
+    .topbar:hover {
+      top: 0 !important;
+    }
+    .logo strong {
+      font-size: 24px;
+      font-weight: 600;
+      color: #ffff;
+    } 
+
+    .topbar nav a {
+      margin-left: 30px;
       color: white;
       text-decoration: none;
       font-weight: 500;
     }
+  /* Imagem com overlay azul e texto */
+  .imagem-container {
+    position: relative;
+    width: 100%;
+    height: 300px;
+    overflow: hidden;
+    border-bottom: 2px solid #00A8A8;
+    margin-top: 80px;
+  }
 
-    .banner {
-      position: relative;
-      height: 250px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
+  .imagem-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    filter: brightness(0.45) saturate(1.2) contrast(0.9);
+
+  }
+
+  .imagem-container::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 168, 168, 0.1);
+    pointer-events: none;
+  }
+
+  .titulo-imagem {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-weight: 700;
+    font-size: 1.5rem;
+    z-index: 2;
+  }
+
+  /* Conteúdo texto */
+  .texto-container {
+    max-width: 900px;
+    margin: 25px auto 50px;
+    padding: 0 20px;
+    font-size: 0.875rem;
+    line-height: 1.3;
+  }
+
+  .texto-container ul {
+    list-style: disc inside;
+    margin: 10px 0 15px 0;
+  }
+
+  /* Responsividade */
+  @media (max-width: 600px) {
+    header {
+      padding: 12px 15px;
+      font-size: 14px;
     }
 
-    .banner img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      opacity: 0.3;
-      position: absolute;
-      top: 0;
-      left: 0;
-      z-index: 0;
+    .imagem-container {
+      height: 140px;
     }
 
-    .overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 168, 168, 0.6);
-      z-index: 1;
+    .titulo-imagem {
+      font-size: 1.2rem;
     }
 
-    .banner h1 {
-      color: white;
-      font-size: 2em;
-      z-index: 2;
-      position: relative;
-      text-align: center;
+    .texto-container {
+      font-size: 0.8rem;
+      margin: 20px 10px 40px;
     }
-
-    .content {
-      background-color: white;
-      padding: 40px 30px;
-      max-width: 900px;
-      margin: auto;
-      line-height: 1.6;
-      font-size: 1em;
-    }
-  </style>
+  }
+</style>
 </head>
 <body>
-  <header>
-    <div class="logo">Viva Saúde</div>
-    <nav><a href="#">Início</a></nav>
-  </header>
-  <section class="banner">
-    <img src="/assents/images/ginecologia.png" alt="Ginecologia">
-    <div class="overlay"></div>
-    <h1>Ginecologia</h1>
-  </section>
 
-  <section class="content">
-    <p><strong>O que faz um(a) ginecologista?</strong><br>
+  <header class="topbar">
+    <div class="logo">
+      <strong>Viva Saúde</strong>
+    </div>
+  <nav><a href="/index.html">Início</a></nav>
+</header>
+
+<section class="imagem-container">
+  <img src="/public/assents/images/ginecologia.png" alt="Imagem de ginecologia" />
+  <h1 class="titulo-imagem">Ginecologia</h1>
+</section>
+
+<section class="texto-container">
+  <p><strong>O que faz um(a) ginecologista?</strong><br>
     O ginecologista realiza exames preventivos como o Papanicolau, trata infecções ginecológicas (como candidíase, HPV e vaginose) e acompanha irregularidades menstruais, cólicas intensas e TPM forte.</p>
 
-    <p>Também orienta sobre métodos contraceptivos (pílula, DIU, injeção), investiga dores, corrimentos e sangramentos anormais, além de diagnosticar e tratar miomas, cistos, endometriose e outras condições. Quando também é obstetra, acompanha a mulher durante a gravidez.</p>
+  <p>Também orienta sobre métodos contraceptivos (pílula, DIU, injeção), investiga dores, corrimentos e sangramentos anormais, além de diagnosticar e tratar miomas, cistos, endometriose e outras condições. Quando também é obstetra, acompanha a mulher durante a gravidez.</p>
 
     <p><strong>Quando procurar um ginecologista?</strong><br>
     É importante ir ao ginecologista após a primeira menstruação, ao iniciar a vida sexual, ou pelo menos uma vez por ano para check-up.</p>
 
     <p>Procure também em caso de alterações no ciclo, dores, desconfortos, corrimentos ou qualquer dúvida sobre o seu corpo.</p>
-  </section>
+
 
 </body>
 </html>

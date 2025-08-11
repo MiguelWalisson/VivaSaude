@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1.0" />
   <title>Cadastro de Paciente</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/assents/css/cadastroPaciente.css" />
+  <link rel="stylesheet" href="/public/assents/css/cadastroPaciente.css" />
 </head>
 
 <body>
@@ -68,9 +68,15 @@
         </div>
       </div>
       <button id = "btcadastro">Cadastrar</button>
+      <p class="login-link">
+  Já tem uma conta?
+  <button class="link-btn" onclick="window.location.href='/public/Pages/loginPaciente.html?tipo=paciente'">
+    Faça login aqui!
+  </button>
+</p>
     </form>
    </main>
-   <p>Já tem uma conta? <button  onclick= "window.location.href ='/Pages/loginPaciente.html?tipo=paciente'">Faça login aqui!</button></p>
-  <script src="/assents/js/cadastroPaciente.js" defer></script>
+
+  <script src="/public/assents/js/cadastroPaciente.js" defer></script>
 </body>
 </html>

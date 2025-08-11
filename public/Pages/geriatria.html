@@ -1,127 +1,149 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Geriatria - Viva Saúde</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-  <style>
-  body {
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Geriatria - Viva Saúde</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
+  * {
     margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
     font-family: 'Poppins', sans-serif;
-    position: relative;
-    min-height: 100vh;
-    background: url('/assents/images/geriatria.png') no-repeat center center/cover;
-    color: #333;
+    background-color: white;
+    color: #222;
   }
 
-  /* Camada clara sobre a imagem de fundo */
-  body::before {
-    content: "";
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(255, 255, 255, 0.4); /* CLAREIA o fundo */
-    z-index: -1;
-  }
-  .logo strong {
-    font-size: 24px;
-    font-weight: 600;
-    color: #ffff;
-  }
-
-  header {
-     background-color: rgb(0, 168, 168);      
-    padding: 20px 40px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    color: white;
-    font-weight: 600;
-  }
-
-  nav a {
-    color: white;
-    margin-left: 30px;
-    text-decoration: none;
-    font-weight: 500;
-    transition: color 0.2s;
-  }
-
-  nav a:hover {
-    color: #e0f7fa;
-  }
-
-  .content {
-    background-color: rgba(255, 255, 255, 0.97); /* Mais opaco */
-    max-width: 900px;
-    margin: 80px auto;
-    padding: 40px 70px;
-    border-radius: 16px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.08);
-    line-height: 1.8;
-  }
-
-  h1 {
-    text-align: center;
-    color: #00796b;
-    font-size: 32px;
-    margin-bottom: 20px;
-    font-weight: 700;
-  }
-
-  ul {
-    padding-left: 20px;
-  }
-
-  p {
-    margin-bottom: 16px;
-    font-size: 17px;
-  }
-
-  li {
-    margin-bottom: 8px;
-    font-size: 16px;
-  }
-
-  strong {
-    color: #00695c;
-  }
-
-  @media (max-width: 768px) {
-    .content {
-      margin: 40px 15px;
-      padding: 30px 20px;
+  /* Cabeçalho */
+    .topbar {
+      background: rgb(0, 168, 168);
+      color: white;
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+      transition: top 1.0s ease-in-out;
+      height: 85px;
     }
 
-    nav {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      align-items: flex-end;
+    .topbar.hidden {
+      top: -100px;
+    }
+
+    .topbar:hover {
+      top: 0 !important;
+    }
+    .logo strong {
+      font-size: 24px;
+      font-weight: 600;
+      color: #ffff;
+    } 
+
+    .topbar nav a {
+      margin-left: 30px;
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+    }
+  /* Imagem com overlay azul e texto */
+  .imagem-container {
+    position: relative;
+    width: 100%;
+    height: 300px;
+    overflow: hidden;
+    border-bottom: 2px solid #00A8A8;
+    margin-top: 80px;
+  }
+
+  .imagem-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    filter: brightness(0.45) saturate(1.2) contrast(0.9);
+
+  }
+
+  .imagem-container::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 168, 168, 0.1);
+    pointer-events: none;
+  }
+
+  .titulo-imagem {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-weight: 700;
+    font-size: 1.5rem;
+    z-index: 2;
+  }
+
+  /* Conteúdo texto */
+  .texto-container {
+    max-width: 900px;
+    margin: 25px auto 50px;
+    padding: 0 20px;
+    font-size: 0.875rem;
+    line-height: 1.3;
+  }
+
+  .texto-container ul {
+    list-style: disc inside;
+    margin: 10px 0 15px 0;
+  }
+
+  /* Responsividade */
+  @media (max-width: 600px) {
+    header {
+      padding: 12px 15px;
+      font-size: 14px;
+    }
+
+    .imagem-container {
+      height: 140px;
+    }
+
+    .titulo-imagem {
+      font-size: 1.2rem;
+    }
+
+    .texto-container {
+      font-size: 0.8rem;
+      margin: 20px 10px 40px;
     }
   }
 </style>
-
 </head>
 <body>
-  <header>
-    <div class="logo"><strong>Viva Saúde</strong></div>
-    <nav>
-      <a href="#servicos">Serviços</a>
-      <a href="#sobre">Sobre Nós</a>
-      <a href="#">Contato</a>
-      <a href="#">Conheça nossos médicos</a>
-      <a href="/Pages/loginMedico.html" class="botao-paciente">Sou Médico</a>
-      <a href="/Pages/loginPaciente.html" class="botao-paciente">Sou Paciente</a>
-    </nav>
-  </header>
 
-  <div class="content">
-    <h1>Geriatria</h1>
-    <p>Geriatria é a especialidade médica que cuida da saúde das pessoas idosas, geralmente com 60 anos ou mais. O foco não é só tratar doenças, mas promover qualidade de vida, autonomia e envelhecimento saudável.</p>
+  <header class="topbar">
+    <div class="logo">
+      <strong>Viva Saúde</strong>
+    </div>
+  <nav><a href="/index.html">Início</a></nav>
+</header>
+
+<section class="imagem-container">
+  <img src="/public/assents/images/geriatria.png" alt="Imagem de geriatria" />
+  <h1 class="titulo-imagem">Geriatria</h1>
+</section>
+
+<section class="texto-container">
+  <p>Geriatria é a especialidade médica que cuida da saúde das pessoas idosas, geralmente com 60 anos ou mais. O foco não é só tratar doenças, mas promover qualidade de vida, autonomia e envelhecimento saudável.</p>
 
     <p><strong>O que o médico geriatra faz:</strong></p>
     <ul>
@@ -141,7 +163,7 @@
       <li>Ajuda em decisões sobre cuidados paliativos, quando necessário.</li>
     </ul>
 
-    <p><strong>Em resumo:</strong> o geriatra é o médico que acompanha o idoso de forma integral, ajudando a manter sua saúde, funcionalidade e bem-estar pelo maior tempo possível.</p>
-  </div>
+    <p><strong>Em resumo:</strong> o geriatra é o médico que acompanha o idoso de forma integral, ajudando a manter sua saúde, funcionalidade e bem-estar pelo maior tempo possível.</p>
+
 </body>
 </html>
