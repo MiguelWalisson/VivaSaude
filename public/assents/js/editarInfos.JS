@@ -6,6 +6,7 @@ window.addEventListener('DOMContentLoaded',fetchUsuario);
 async function fetchUsuario() {
   try {
     const token = localStorage.getItem('acessToken');
+    
     if(!token){
       console.log("Nenhum token JWT encontrado!")
       return null;
@@ -16,11 +17,14 @@ async function fetchUsuario() {
       method:'GET',
            
             headers:{
-                'Authorization':`Bearer ${token}`,
-                'Content-Type' : 'application/json'
+                'Content-Type' : 'application/json',
+                'Authorization':`Bearer ${token}`
                 }
 
     }); 
+    if(response.ok){
+      console.log('Dados do paciente carregados com sucesso', response)
+    }
 
     if(response.status === 400 || response.status === 403) {
       console.log('Token inválido ou não autorizado!')
@@ -47,18 +51,27 @@ function preencherFormulario(dados){
   document.getElementById('cep').value = dados.cep || '';
   document.getElementById('endereco').value = dados.endereco || '';
   document.getElementById('email').value = dados.email || '';
+
+  document.getElementById('cpf').readOnly = true;
+  document.getElementById('cpf').classList.add('bloqueado');
+
+  document.getElementById('data').readOnly = true;
+  document.getElementById('data').classList.add('bloqueado');
 }
 async function atualizarUsuario(dados) {
   try{
-    if(!usuario || !usuario.id){
+    const token = localStorage.getItem('acessToken');
+    const id = localStorage.getItem('idPaciente');
+    console.log(id);
+    if(!id){
       throw new Error('Usuário não está carregado ou ID inválido.');
 
     }
-    const res = await fetch('/api/pacientes',{
+    const res = await fetch(`/api/pacientes/${id}`,{
       method: 'PUT',
       headers: {
-        'Authorization':`Bearer ${token}`,
-        'Content-Type':'application/json'
+        'Content-Type':'application/json',
+        'Authorization':`Bearer ${token}`
       },
       body: JSON.stringify(dados),
     });
@@ -77,7 +90,7 @@ async function atualizarUsuario(dados) {
 const form = document.getElementById('formEditar');
 const mensagem = document.getElementById('mensagem');
 
-form.addEventListener('submit', async function(e) {
+form.addEventListener('submit', async function(e){
   e.preventDefault();
 
   const dados = {

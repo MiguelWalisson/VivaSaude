@@ -7,8 +7,6 @@
   <link rel="stylesheet" href="/assents/css/AgendarConsulta.css">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
   <script src="https://unpkg.com/lucide@latest"></script>
-</head>
-<body>
   <header class="cabecalho">
     <h1>Clínica Viva Saúde</h1>
     <nav>
@@ -20,11 +18,13 @@
 
   <main class="container">
     <div class="conteudo">
+    <form id="consultaForm">
 
+    
       <div class="coluna-direita">
         <div class="campo">
           <label>Especialidade da consulta</label>
-          <select name="especialidade" id="especialidade">
+          <select name="especialidade" id="selectEspecialidade">
             <option value="" disabled selected>Selecione</option>
             <option value="Psicologia">Psicologia</option>
             <option value="Geriatria">Geriatria</option>
@@ -35,32 +35,30 @@
 
         <div class="campo">
           <label>Data</label>
-          <input type="date" id="dataConsulta">
+          <input type="date" id="inputDataConsulta">
         </div>
 
         <div class="campo">
           <label>Horário</label>
-          <input type="time" id="horaConsulta">
+          <input type="time" id="horario">
         </div>
 
         <div class="campo">
           <label>Médicos disponíveis</label>
-         <select id="medicoSelect" name="medicos-disponiveis">
+         <select id="selectMedicos" name="medicos-disponiveis">
   <option value="" disabled selected>Selecione</option>
-  <option value="Dr-Joao">Dr. João</option>
-  <option value="Dr-Marluce">Dr Marluce</option>
+  <option value=""></option>
+  <option value=""></option>
 </select>
 
         </div>
               <div class="coluna-esquerda">
-
-
-        <button class="agendarBtn" type="button">Agendar</button>
+                <button class="agendarBtn" type="button">Agendar</button>
       </div>
-
       </div>
     </div>
+    </form>
   </main>
   <script src = "/assents/js/agendarConsulta.js"></script>
-</body>
+  </body>
 </html>

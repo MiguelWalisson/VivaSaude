@@ -84,6 +84,7 @@ async function preencherCadastro (event){
         senhaConfirm: senhaConfirm
     };
 console.log('Enviando dados para API:', DadosPaciente);
+    const id = localStorage.getItem('idPaciente');
     const responsePaciente = await fetch('/api/pacientes',{
         method: 'POST',
         headers: {

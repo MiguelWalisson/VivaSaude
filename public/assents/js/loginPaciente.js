@@ -13,7 +13,6 @@ async function loginPaciente(event){
          console.log("Post para login", email, senha, tipo)
         const response = await fetch(url, {
             method: 'POST',
-            credentials: 'include',
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify({email, senha, tipo}),
             }
@@ -21,18 +20,26 @@ async function loginPaciente(event){
     );
     
         if(response.ok){
-            const json = await response.json();
-            const token = json.token;
-            console.log("Paciente logado:", token);
-            if(!token) throw new Error("Token não recebido!");
-            localStorage.setItem('acessToken', token);
+            const data = await response.json();
+            localStorage.setItem('acessToken', data.token);
+             if (tipo.toLowerCase() === 'medico') {
+            localStorage.setItem('idMedico', data.idMedico);
+            } else if (tipo.toLowerCase() === 'paciente') {
+            localStorage.setItem('idPaciente', data.idPaciente);
+            }
+
+            console.log('Login bem-sucedido! Token e ID salvos.');
+            if(!data) throw new Error("Token não recebido!");
+        
+            
+            
             
             mensagem.style.color = 'green';
-            mensagem.textContent = `Bem-vindo(a), ${json.nome}`;
+            mensagem.textContent = `Bem-vindo(a), ${data.nome}`;
             setTimeout(() =>{
                 window.location.href = "/Pages/indexpaciente.html";
             }, 1500);
-            return token;
+        
         }
         else if (response.status ===  401)
         {
