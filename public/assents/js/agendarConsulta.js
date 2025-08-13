@@ -2,7 +2,7 @@
 
 document.addEventListener('DOMContentLoaded', () => {
   async function agendarConsulta(dadosConsulta) {
-  const token = localStorage.getItem('accessToken');
+  const token = localStorage.getItem('acessToken');
   if (!token) {
     console.log("nenhum token encontrado!");
     alert("Você precisa estar logado para agendar consulta");
@@ -29,21 +29,23 @@ document.addEventListener('DOMContentLoaded', () => {
   } catch (error) {
     console.error('Erro na requisição:', error);
   }
+  
 }
 
-
-async function carregarMedicosDisponiveis(especialidade, dataConsulta) {
-  const token = localStorage.getItem('accessToken');
+async function carregarMedicosDisponiveis() {
+  const token = localStorage.getItem('acessToken');
   if (!token) {
     console.log("nenhum token encontrado!");
     alert("Você precisa estar logado");
     return;
   }
 
-  const url = `/api/medicos/disponiveis?especialidade=${encodeURIComponent(especialidade)}&data=${encodeURIComponent(dataConsulta)}`;
+  const url = `/api/medicos`;
 
   try {
+    alert('aqui')
     const response = await fetch(url, {
+      method: 'GET',
       headers: {
         'Authorization': `Bearer ${token}`,
       },
@@ -53,6 +55,7 @@ async function carregarMedicosDisponiveis(especialidade, dataConsulta) {
     selectMedicos.innerHTML = '';
 
     if (response.ok) {
+      console.log('Buscando médicos disponíveis...');
       const medicos = await response.json();
 
       if (medicos.length === 0) {
@@ -64,6 +67,7 @@ async function carregarMedicosDisponiveis(especialidade, dataConsulta) {
       }
 
       medicos.forEach(medico => {
+        console.log(medico);
         const option = document.createElement('option');
         option.value = medico.id;
         option.textContent = medico.nome;
@@ -76,6 +80,8 @@ async function carregarMedicosDisponiveis(especialidade, dataConsulta) {
     console.error('Erro na requisição:', error);
   }
 }
+
+carregarMedicosDisponiveis();
 
 // Eventos para carregar médicos quando especialidade ou data mudarem
 document.addEventListener('DOMContentLoaded', () => {
@@ -94,9 +100,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Envio do formulário
-  document.getElementById('consultaForm').addEventListener('submit', (e) => {
-    e.preventDefault();
+
+  document.getElementById('agendar').addEventListener('click', (e) => {
+    
+    alert('Botão Agendar clicado');
+    console.log('Botão Agendar clicado');
 
     const dadosConsulta = {
       paciente: document.getElementById('paciente').value,
@@ -104,11 +112,19 @@ document.addEventListener('DOMContentLoaded', () => {
       horario: document.getElementById('horario').value,
       medico: document.getElementById('selectMedicos').value,
       especialidade: document.getElementById('selectEspecialidade').value,
-      status: document.getElementById('status').value
+      status: document.getElementById('status').value,
+      
+    
     };
-
-    agendarConsulta(dadosConsulta);
+    console.log('Dados da consulta:', dadosConsulta);
+    salvarConsultaLocal(dadosConsulta);
   });
 });
 
+function salvarConsultaLocal(dadosConsulta) {
+  const consultas = JSON.parse(localStorage.getItem('consultas')) || [];
+  consultas.push(dadosConsulta);
+  localStorage.setItem('consultas', JSON.stringify(consultas));
+  console.log('Dados da consulta salvos no localStorage:', dadosConsulta);
+}
 });

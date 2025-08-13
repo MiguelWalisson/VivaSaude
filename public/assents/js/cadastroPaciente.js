@@ -98,7 +98,7 @@ console.log('Enviando dados para API:', DadosPaciente);
             alert('Paciente Cadastrado!');
             document.getElementById('formcadastroPaciente').reset();
             setTimeout(() =>{
-                window.location.href = "/Pages/indexpaciente.html";
+                window.location.href = "/Pages/loginPaciente.html?tipo=paciente";
 
             }, 1500);
             return;

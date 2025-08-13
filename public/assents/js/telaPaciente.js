@@ -44,6 +44,7 @@ function nomePacienteTitulo(usuario){
             throw new Error('Usuário não carregado!')
         }
         document.getElementById('pacienteNome').innerHTML = usuario.nome || '';
+        document.getElementById('pacienteNome2').innerHTML = usuario.nome || '';
         console.log('Nome do paciente exibido', usuario.nome)
 
     }catch(e){
