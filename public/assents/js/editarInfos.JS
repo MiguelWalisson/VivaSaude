@@ -106,10 +106,16 @@ form.addEventListener('submit', async function(e){
   const atualizado = await atualizarUsuario(dados);
 
   if(atualizado) {
-    mensagem.textContent = 'Informações salvas com sucesso!';
-    setTimeout(() => {
-      mensagem.textContent = '';
-    }, 2000);
+     Swal.fire({
+        icon: 'success',
+        title: 'Sucesso!',
+        text: 'Suas informações foram alteradas.'
+        
+});
+    setTimeout(() =>{
+                window.location.href = "/Pages/telaPaciente.html?tipo=paciente";
+
+            }, 1500);
   }
 });
 

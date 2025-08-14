@@ -7,12 +7,14 @@
   <link rel="stylesheet" href="/assents/css/AgendarConsulta.css">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
   <script src="https://unpkg.com/lucide@latest"></script>
+   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  
   <header class="cabecalho">
     <h1>Clínica Viva Saúde</h1>
     <nav>
-      <a href="telaPaciente.html">Voltar</a>
-      <a href="consultasFuturas.html">Consultas Futuras</a>
-      <a href="historicoMedico.html">Histórico Médico</a>
+      <a href="telaPaciente.html?tipo=paciente">Voltar</a>
+      <a href="consultasFuturas.html?tipo=paciente">Consultas Futuras</a>
+      <a href="historicoMedico.html?tipo=paciente">Histórico Médico</a>
     </nav>
   </header>
 
@@ -52,12 +54,13 @@
 </select>
 
         </div>
-              <div class="coluna-esquerda">
-                <button id="agendar" class="agendarBtn">Agendar</button>
-      </div>
       </div>
     </div>
-    </form>
+    <div class="coluna-esquerda">
+      <button id="agendar" class="agendarBtn">Agendar</button>
+  </div>
+  <p id="mensagem"></p>
+  </form>
   </main>
   <script src = "/assents/js/agendarConsulta.js"></script>
   </body>

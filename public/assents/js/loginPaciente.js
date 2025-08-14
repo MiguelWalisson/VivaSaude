@@ -34,8 +34,10 @@ async function loginPaciente(event){
             
             
             
-            mensagem.style.color = 'green';
-            mensagem.textContent = `Bem-vindo(a), ${data.nome}`;
+             Swal.fire({
+        icon: 'success',
+        title: 'Login bem-sucedido!',
+});
             setTimeout(() =>{
                 window.location.href = "/Pages/indexpaciente.html";
             }, 1500);

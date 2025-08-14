@@ -95,7 +95,11 @@ console.log('Enviando dados para API:', DadosPaciente);
     })
      if (responsePaciente.ok){
             
-            alert('Paciente Cadastrado!');
+            Swal.fire({
+        icon: 'success',
+        title: 'Paciente Cadastrado!',
+        text: 'Você foi cadastrado em nosso sistema.'
+});
             document.getElementById('formcadastroPaciente').reset();
             setTimeout(() =>{
                 window.location.href = "/Pages/loginPaciente.html?tipo=paciente";

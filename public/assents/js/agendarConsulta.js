@@ -1,130 +1,80 @@
-'use strict';
-
 document.addEventListener('DOMContentLoaded', () => {
-  async function agendarConsulta(dadosConsulta) {
-  const token = localStorage.getItem('acessToken');
-  if (!token) {
-    console.log("nenhum token encontrado!");
-    alert("Você precisa estar logado para agendar consulta");
-    return;
-  }
+  const token = localStorage.getItem('acessToken'); 
+  console.log("Token recebido: ", token);
 
-  try {
-    const response = await fetch('/api/consultas', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`,
-      },
-      body: JSON.stringify(dadosConsulta),
-    });
+  const medicos = [
+    { nome: "Dr. João Carvalho", cpf: "12345", especialidade: "Psicologia", crm: "123456" },
+    { nome: "Dra. Marina Silva", cpf: "123456", especialidade: "Geriatria", crm: "123456" },
+    { nome: "Dr. Lucas Almeida", cpf: "1234567", especialidade: "Nutrição", crm: "123456" },
+    { nome: "Dra. Fernanda Costa", cpf: "12345678", especialidade: "Ginecologia", crm: "123456" }
+  ];
 
-    if (response.ok) {
-      const consultaAgendada = await response.json();
-      document.getElementById('mensagem').textContent = "Consulta agendada com sucesso!";
-      console.log('Consulta agendada:', consultaAgendada);
-    } else {
-      console.error('Erro ao agendar consulta:', response.status);
-    }
-  } catch (error) {
-    console.error('Erro na requisição:', error);
-  }
-  
-}
+  localStorage.setItem('medicos', JSON.stringify(medicos));
 
-async function carregarMedicosDisponiveis() {
-  const token = localStorage.getItem('acessToken');
-  if (!token) {
-    console.log("nenhum token encontrado!");
-    alert("Você precisa estar logado");
-    return;
-  }
-
-  const url = `/api/medicos`;
-
-  try {
-    alert('aqui')
-    const response = await fetch(url, {
-      method: 'GET',
-      headers: {
-        'Authorization': `Bearer ${token}`,
-      },
-    });
+  function carregarMedicosPorEspecialidade() {
+    const especialidadeSelecionada = document.getElementById('selectEspecialidade').value;
+    const todosMedicos = JSON.parse(localStorage.getItem('medicos')) || [];
+    const medicosFiltrados = todosMedicos.filter(m => m.especialidade === especialidadeSelecionada);
 
     const selectMedicos = document.getElementById('selectMedicos');
     selectMedicos.innerHTML = '';
 
-    if (response.ok) {
-      console.log('Buscando médicos disponíveis...');
-      const medicos = await response.json();
-
-      if (medicos.length === 0) {
-        const option = document.createElement('option');
-        option.value = '';
-        option.textContent = 'Nenhum médico disponível';
-        selectMedicos.appendChild(option);
-        return;
-      }
-
-      medicos.forEach(medico => {
-        console.log(medico);
-        const option = document.createElement('option');
-        option.value = medico.id;
-        option.textContent = medico.nome;
-        selectMedicos.appendChild(option);
-      });
-    } else {
-      console.error('Erro ao buscar médicos disponíveis', response.status);
+    if (medicosFiltrados.length === 0) {
+      const option = document.createElement('option');
+      option.value = '';
+      option.textContent = 'Nenhum médico disponível';
+      selectMedicos.appendChild(option);
+      return;
     }
-  } catch (error) {
-    console.error('Erro na requisição:', error);
+
+    medicosFiltrados.forEach(medico => {
+      const option = document.createElement('option');
+      option.value = medico.cpf;
+      option.textContent = medico.nome;
+      option.dataset.nome = medico.nome;
+      selectMedicos.appendChild(option);
+    });
   }
-}
 
-carregarMedicosDisponiveis();
-
-// Eventos para carregar médicos quando especialidade ou data mudarem
-document.addEventListener('DOMContentLoaded', () => {
-  const selectEspecialidade = document.getElementById('selectEspecialidade');
-  const inputDataConsulta = document.getElementById('inputDataConsulta');
-
-  selectEspecialidade.addEventListener('change', () => {
-    if (selectEspecialidade.value && inputDataConsulta.value) {
-      carregarMedicosDisponiveis(selectEspecialidade.value, inputDataConsulta.value);
-    }
-  });
-
-  inputDataConsulta.addEventListener('change', () => {
-    if (selectEspecialidade.value && inputDataConsulta.value) {
-      carregarMedicosDisponiveis(selectEspecialidade.value, inputDataConsulta.value);
-    }
-  });
-
+  // Atualiza lista de médicos sempre que a especialidade muda
+  document.getElementById('selectEspecialidade').addEventListener('change', carregarMedicosPorEspecialidade);
 
   document.getElementById('agendar').addEventListener('click', (e) => {
-    
-    alert('Botão Agendar clicado');
-    console.log('Botão Agendar clicado');
+    e.preventDefault();
+
+    const selectMedico = document.getElementById('selectMedicos');
+    const medicoNome = selectMedico.selectedOptions[0]?.dataset.nome || '';
+    const especialidade = document.getElementById('selectEspecialidade').value;
+
+    const medicos = JSON.parse(localStorage.getItem('medicos')) || [];
+    const medicoSelecionado = medicos.find(m => m.nome === medicoNome && m.especialidade === especialidade);
+
+    if (!medicoSelecionado) {
+      alert('Selecione um médico válido!');
+      return;
+    }
 
     const dadosConsulta = {
-      paciente: document.getElementById('paciente').value,
-      data: document.getElementById('inputDataConsulta').value,
-      horario: document.getElementById('horario').value,
-      medico: document.getElementById('selectMedicos').value,
-      especialidade: document.getElementById('selectEspecialidade').value,
-      status: document.getElementById('status').value,
-      
-    
+      dataConsulta: document.getElementById('inputDataConsulta').value,
+      horaConsulta: document.getElementById('horario').value + ':00',
+      especialidade,
+      convenio: '',
+      descConsulta: '',
+      medico: {
+        cpf: medicoSelecionado.cpf,
+        nome: medicoSelecionado.nome
+      }
     };
-    console.log('Dados da consulta:', dadosConsulta);
-    salvarConsultaLocal(dadosConsulta);
-  });
-});
 
-function salvarConsultaLocal(dadosConsulta) {
-  const consultas = JSON.parse(localStorage.getItem('consultas')) || [];
-  consultas.push(dadosConsulta);
-  localStorage.setItem('consultas', JSON.stringify(consultas));
-  console.log('Dados da consulta salvos no localStorage:', dadosConsulta);
-}
+    salvarConsultaLocal(dadosConsulta);
+    console.log('Consulta salva localmente:', dadosConsulta);
+  });
+
+  function salvarConsultaLocal(dadosConsulta) {
+    const consultas = JSON.parse(localStorage.getItem('consultas')) || [];
+    consultas.push(dadosConsulta);
+    localStorage.setItem('consultas', JSON.stringify(consultas));
+    console.log('Dados da consulta salvos no localStorage:', dadosConsulta);
+  }
+
 });
